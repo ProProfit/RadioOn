@@ -9,6 +9,7 @@
 	<meta name="author" content="ahmed noor">
 	<title>Audio Player</title>
 	<link rel="stylesheet" href="css/style.css">
+	<!-- <link id="styleSheet" rel="stylesheet" href="https://proprofit.github.io/RadioOn/css/style.css"> -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -108,5 +109,25 @@
 	</div>
 	<script src="js/main.js"></script>
 </body>
-
+<script>
+	(function() {
+		var switchThemeBtn = document.getElementById('changeTheme'),
+			styleTag = document.getElementById('styleSheet'),
+			cssFiles = [
+				"https://proprofit.github.io/RadioOn/css/style.css",
+				"https://proprofit.github.io/RadioOn/css/white.css",
+				"https://ahmednooor.github.io/textonome/css/material.css"
+			],
+			index = 0;
+		switchThemeBtn.onclick = function() {
+			if (index < (cssFiles.length - 1)) {
+				index += 1;
+				styleTag.href = cssFiles[index];
+			} else {
+				index = 0;
+				styleTag.href = cssFiles[index];
+			}
+		};
+	})();
+</script> 
 </html>
