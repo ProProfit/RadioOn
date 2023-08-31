@@ -1,2 +1,137 @@
+@import 'fonts',	'reset', 'media'
+
+$b: #2E3440
+$base-bg: #ECEFF4
+
 body
-	background: red
+	position: relative
+	font-family: 'Anonymous Pro', monospace
+	margin: 0 auto
+	background-color: $base-bg
+	overflow-y: scroll
+	color: $b
+
+#changeTheme
+	position: absolute
+	top: 0
+	right: 0
+	margin: 20px 20px 0 0
+	cursor: pointer
+
+html
+	font-size: 18PX
+
+.title-log
+	font-family: 'Tripleled ST', sans-serif
+	font-size: 30px
+	margin: 40px
+
+.container
+	max-width: 480px
+	padding: 20px
+	margin: 0 auto
+
+.header
+	text-align: center
+
+.monogram
+	font-size: 24px
+	font-weight: bold
+
+.listHeading
+	font-size: 18px
+	font-weight: bold
+	margin-bottom: 5px
+
+.activeTrack
+	color: #007BFF
+	font-weight: bold
+
+.control
+	display: flex
+	justify-content: space-between
+.text-controls
+	user-select: none
+	cursor: default
+	span
+		color: $b
+		font-size: 0.9rem
+		padding: 1px 0
+
+.txt-btn
+	&::before
+		content: '['
+	&::after
+		content: ']'
+	&:hover
+		cursor: pointer
+		&::before
+			content: '['
+		&::after
+			content: ']'
+
+.Audio-Title
+	margin-top: 20px
+
+.Audio_TItle_Station
+	display: flex
+	align-items: center
+
+#currentTitle
+	margin-left: 15px
+	font-size: 1rem
+
+audio#audioPlayer
+	width: 100%
+	display: none
+
+.playList-container
+	display: grid
+	grid-template-columns: repeat(2, 1fr)
+	justify-items: start
+	margin: 20px o
+
+#playlist
+	display: inline-block
+	margin-top: 80px
+
+	h2
+		display: block
+		font-size: 1rem
+		margin: 10px auto
+		&:before
+			content: '['
+		&:after
+			content: ']'
+	a
+		display: block
+		font-size: 1rem
+		margin: 10px auto
+		color: $b
+		text-decoration: none
+		&:focus
+			&:before
+				content: '♫ '
+		&:hover
+			&:before
+				content: '♫ '
+				color: #4C566A
+
+// &.activeTrack
+//  background-color: white
+//  color: black
+//   &:before 
+//     content: "♫ "
+
+input[type=range]#trackProgressBar
+	-webkit-appearance: none
+	margin: 18px 0
+	width: 100%
+	margin-top: 8px
+	border-bottom: dashed 1px #e5e9f0
+	&:focus
+		outline: none
+		border: none
+	&:focus
+		&::-ms-fill-lower, &::-ms-fill-upper
+			background: white

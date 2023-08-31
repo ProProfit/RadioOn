@@ -9,7 +9,8 @@
 	<meta name="author" content="ahmed noor">
 	<title>Audio Player</title>
 	<!-- <link rel="stylesheet" href="css/style.css"> -->
-	<link id="styleSheet" rel="stylesheet" href="https://proprofit.github.io/RadioOn/css/style.css">
+	<!-- <link rel="stylesheet" href="css/white.css"> -->
+	<link id="styleSheet" rel="stylesheet" href="css/style.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -51,19 +52,19 @@
 				<h2>More FM</h2>
 				<ul>
 					<li>
-						<a href="https://cast.more.fm/more256" data-title="More_mf">More Mf</a>
+						<a href="https://cast.more.fm/more256" data-title="More_mf">More FM</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/rnb" data-title="RnB">More RnB</a>
+						<a href="https://cast.more.fm/rnb" data-title="RnB">RnB</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/rock" data-title="Rock">More Rock</a>
+						<a href="https://cast.more.fm/rock" data-title="Rock">Rock</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/acoustic" data-title="Acoustice">More acoustic</a>
+						<a href="https://cast.more.fm/acoustic" data-title="Acoustice">Acoustic</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/classic" data-title="classic">More classic</a>
+						<a href="https://cast.more.fm/classic" data-title="classic">Classic</a>
 					</li>
 					<li>
 						<a href="https://cast.more.fm/music" data-title="Music">Music</a>
@@ -89,7 +90,10 @@
 						<a href="https://online.hitfm.ua/HitFM_HD" data-title="Hit-FM">Hit-FM</a>
 					</li>
 					<li>
-						<a href="https://online.radioroks.ua/RadioROKS_HD" data-title="RadioROKS">RadioROKS</a>
+						<a href="https://online.radioroks.ua/RadioROKS_HD" data-title="Radio ROKS">Radio ROKS</a>
+					</li>
+					<li>
+						<a href="https://cast.radiogroup.com.ua/avtoradio" data-title="Avtoradio">Avtoradio</a>
 					</li>
 
 				</ul>
@@ -98,7 +102,7 @@
 				<h2>Ukreine Mix</h2>
 				<ul>
 					<li>
-						<a href="https://cast.more.fm/more256" data-title="More_mf">Lux fm</a>
+						<a href="https://cast.more.fm/more256" data-title="Lux_fm">Lux fm</a>
 					</li>
 
 				</ul>
@@ -114,9 +118,10 @@
 		var switchThemeBtn = document.getElementById('changeTheme'),
 			styleTag = document.getElementById('styleSheet'),
 			cssFiles = [
-				"https://proprofit.github.io/RadioOn/css/style.css",
-				"https://proprofit.github.io/RadioOn/css/white.css",
-				"https://ahmednooor.github.io/textonome/css/material.css"
+				"css/style.css",
+				"css/white.css",
+				// "https://proprofit.github.io/RadioOn/css/style.css",
+				// "https://proprofit.github.io/RadioOn/css/white.css",
 			],
 			index = 0;
 		switchThemeBtn.onclick = function() {

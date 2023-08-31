@@ -19,7 +19,6 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -150,6 +149,7 @@ html {
   content: "]";
 }
 .txt-btn:hover {
+  font-weight: 700;
   cursor: pointer;
 }
 .txt-btn:hover::before {
@@ -212,24 +212,25 @@ audio#audioPlayer {
   text-decoration: none;
 }
 #playlist a:focus:before {
-  content: "♫ ";
+  content: "• ";
 }
 #playlist a:hover:before {
-  content: "♫ ";
+  content: "• ";
   color: #d8dee9;
 }
 
-input[type=range]#trackProgressBar {
+input[type=range]#volumeRange {
   -webkit-appearance: none;
-  margin: 18px 0;
+     -moz-appearance: none;
+          appearance: none;
   width: 100%;
-  margin-top: 8px;
-  border-bottom: dashed 1px #e5e9f0;
+  background: none;
 }
-input[type=range]#trackProgressBar:focus {
-  outline: none;
-  border: none;
+input[type=range]#volumeRange:before {
+  color: #eceff4;
+  content: "[";
 }
-input[type=range]#trackProgressBar:focus::-ms-fill-lower, input[type=range]#trackProgressBar:focus::-ms-fill-upper {
-  background: white;
+input[type=range]#volumeRange:after {
+  color: #eceff4;
+  content: "]";
 }
