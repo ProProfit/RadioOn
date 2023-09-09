@@ -2,7 +2,6 @@ var audioPlayer = document.getElementById('audioPlayer');
 var currentTitleElement = document.getElementById('currentTitle');
 var volumeRange = document.getElementById('volumeRange');
 var audioElement = document.getElementById('audioPlayer');
-// Флаг, указывающий, что аудио готово к воспроизведению
 var isAudioReady = false;
 
 function playTrack(trackSource, trackTitle) {
@@ -52,7 +51,6 @@ $(document).ready(function () {
 		// Скрыть элемент <audio>
 		audioElement.style.display = 'none';
 
-		getCurrentSongInfo();
 });
 $('#playlist a').on('click', function () {
   // Получите значение data-stream выбранной радиостанции
@@ -76,24 +74,31 @@ function getCurrentSongInfo(selectedStation) {
 		success: function (response) {
 				if (response && Object.keys(response).length > 0) {
 						const titleAPI = response[Object.keys(response)[0]].title;
-						updateCurrentSong(titleAPI);
+						const decodedTitleAPI = decodeURIComponent(titleAPI); // Декодируем текст
+						const utf8TitleAPI = decodeUtf8(decodedTitleAPI); // Декодируем в формат UTF-8
+						updateCurrentSong(utf8TitleAPI);
 				} else {
-						updateCurrentSong('Нет данных о песне');
+						updateCurrentSong('No data');
 				}
 		},
 		error: function (error) {
-				console.error('Произошла ошибка при получении данных: ', error);
-				updateCurrentSong('Ошибка при получении данных');
+				console.error('An error occurred while receiving data: ', error);
+				updateCurrentSong('Error while receiving data');
 		}
 });
 }
 
 function updateCurrentSong(titleAPI) {
 		const currentSongElement = document.getElementById('currentSong');
-		currentSongElement.textContent = 'Играет: ' + titleAPI;
+		currentSongElement.textContent = 'Now playing: ' + titleAPI;
 }
 
 // Вызывать при загрузке страницы
 document.addEventListener('DOMContentLoaded', function () {
 		getCurrentSongInfo();
 });
+
+// Функция для декодирования строки UTF-8
+function decodeUtf8(encodedString) {
+  return decodeURIComponent(escape(encodedString));
+}
