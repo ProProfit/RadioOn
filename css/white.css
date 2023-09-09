@@ -70,33 +70,33 @@ table {
 
 body {
   position: relative;
-  font-family: "Anonymous Pro", monospace;
+  font-family: "Iosevka Web", sans-serif;
   margin: 0 auto;
-  background-color: #ECEFF4;
+  background-color: #eceff4;
   overflow-y: scroll;
-  color: #2E3440;
+  color: #2e3440;
 }
 
 #changeTheme {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 20px 20px 0 0;
+  margin: 0 20px;
   cursor: pointer;
 }
 
 html {
-  font-size: 18PX;
+  font-size: 16PX;
 }
 
-.title-log {
-  font-family: "Tripleled ST", sans-serif;
-  font-size: 30px;
-  margin: 40px;
+.title-logo {
+  font-family: "Zado Bold", sans-serif;
+  font-size: 40px;
+  margin: 20px;
 }
 
 .container {
-  max-width: 480px;
+  max-width: 600px;
   padding: 20px;
   margin: 0 auto;
 }
@@ -138,9 +138,25 @@ html {
   cursor: default;
 }
 .text-controls span {
-  color: #2E3440;
+  color: #2e3440;
   font-size: 0.9rem;
   padding: 1px 0;
+}
+
+#volumeControl {
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+#volumeControl #val_lvl {
+  width: 60%;
 }
 
 .txt-btn::before {
@@ -150,6 +166,7 @@ html {
   content: "]";
 }
 .txt-btn:hover {
+  font-weight: 700;
   cursor: pointer;
 }
 .txt-btn:hover::before {
@@ -161,6 +178,8 @@ html {
 
 .Audio-Title {
   margin-top: 20px;
+  border: 1px solid lemonchiffon;
+  padding: 15px 8px;
 }
 
 .Audio_TItle_Station {
@@ -208,28 +227,50 @@ audio#audioPlayer {
   display: block;
   font-size: 1rem;
   margin: 10px auto;
-  color: #2E3440;
+  color: #2e3440;
   text-decoration: none;
 }
 #playlist a:focus:before {
-  content: "♫ ";
+  content: "• ";
 }
 #playlist a:hover:before {
-  content: "♫ ";
-  color: #4C566A;
+  content: "• ";
+  color: #d8dee9;
 }
 
-input[type=range]#trackProgressBar {
+input[type=range]#volumeRange {
   -webkit-appearance: none;
-  margin: 18px 0;
-  width: 100%;
-  margin-top: 8px;
-  border-bottom: dashed 1px #e5e9f0;
+  width: 65%;
+  background: none;
+  margin-right: 10px;
 }
-input[type=range]#trackProgressBar:focus {
-  outline: none;
+input[type=range]#volumeRange::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: 2px;
+  background: none;
   border: none;
+  border-radius: 3px;
 }
-input[type=range]#trackProgressBar:focus::-ms-fill-lower, input[type=range]#trackProgressBar:focus::-ms-fill-upper {
-  background: white;
+input[type=range]#volumeRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 14px;
+  width: 8px;
+  border-radius: 5%;
+  background: #2e3440;
+  margin-top: -5px;
+}
+input[type=range]#volumeRange:focus {
+  outline: none;
+}
+input[type=range]#volumeRange:focus::-webkit-slider-runnable-track {
+  background: none;
+}
+input[type=range]#volumeRange:before {
+  color: #2e3440;
+  content: "[";
+}
+input[type=range]#volumeRange:after {
+  color: #2e3440;
+  content: "]";
 }

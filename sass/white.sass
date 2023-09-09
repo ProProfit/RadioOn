@@ -1,33 +1,33 @@
-@import 'fonts',	'reset', 'media'
+@import 'fonts', 'reset', 'media'
 
-$b: #2E3440
-$base-bg: #ECEFF4
+$base-bg: #eceff4
+$w: #2e3440
 
 body
 	position: relative
-	font-family: 'Anonymous Pro', monospace
+	font-family: 'Iosevka Web', sans-serif
 	margin: 0 auto
 	background-color: $base-bg
 	overflow-y: scroll
-	color: $b
+	color: $w
 
 #changeTheme
 	position: absolute
 	top: 0
 	right: 0
-	margin: 20px 20px 0 0
+	margin: 0 20px
 	cursor: pointer
 
 html
-	font-size: 18PX
+	font-size: 16PX
 
-.title-log
-	font-family: 'Tripleled ST', sans-serif
-	font-size: 30px
-	margin: 40px
+.title-logo
+	font-family: 'Zado Bold', sans-serif
+	font-size: 40px
+	margin: 20px
 
 .container
-	max-width: 480px
+	max-width: 600px
 	padding: 20px
 	margin: 0 auto
 
@@ -54,16 +54,23 @@ html
 	user-select: none
 	cursor: default
 	span
-		color: $b
+		color: $w
 		font-size: 0.9rem
 		padding: 1px 0
-
+#volumeControl
+	width: 60%
+	display: flex
+	justify-content: space-between
+	align-items: center
+	#val_lvl
+		width: 60%
 .txt-btn
 	&::before
 		content: '['
 	&::after
 		content: ']'
 	&:hover
+		font-weight: 700
 		cursor: pointer
 		&::before
 			content: '['
@@ -72,6 +79,8 @@ html
 
 .Audio-Title
 	margin-top: 20px
+	border: 1px solid lemonchiffon
+	padding: 15px 8px
 
 .Audio_TItle_Station
 	display: flex
@@ -107,15 +116,15 @@ audio#audioPlayer
 		display: block
 		font-size: 1rem
 		margin: 10px auto
-		color: $b
+		color: $w
 		text-decoration: none
 		&:focus
 			&:before
-				content: '♫ '
+				content: '• '
 		&:hover
 			&:before
-				content: '♫ '
-				color: #4C566A
+				content: '• '
+				color: #d8dee9
 
 // &.activeTrack
 //  background-color: white
@@ -123,15 +132,35 @@ audio#audioPlayer
 //   &:before 
 //     content: "♫ "
 
-input[type=range]#trackProgressBar
+
+input[type=range]#volumeRange
 	-webkit-appearance: none
-	margin: 18px 0
-	width: 100%
-	margin-top: 8px
-	border-bottom: dashed 1px #e5e9f0
+	width: 65%
+	background: none
+	margin-right: 10px
+
+	&::-webkit-slider-runnable-track
+		-webkit-appearance: none
+		height: 2px
+		background: none
+		border: none
+		border-radius: 3px
+
+	&::-webkit-slider-thumb
+		-webkit-appearance: none
+		border: none
+		height: 14px
+		width: 8px
+		border-radius: 5%
+		background: $w
+		margin-top: -5px
 	&:focus
 		outline: none
-		border: none
-	&:focus
-		&::-ms-fill-lower, &::-ms-fill-upper
-			background: white
+		&::-webkit-slider-runnable-track
+			background: none
+	&:before
+		color: $w
+		content: '['
+	&:after
+		color: $w
+		content: ']'
