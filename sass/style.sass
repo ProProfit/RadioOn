@@ -132,11 +132,32 @@ audio#audioPlayer
 //   &:before 
 //     content: "♫ "
 
+
 input[type=range]#volumeRange
-	appearance: none
+	-webkit-appearance: none
 	width: 65%
 	background: none
 	margin-right: 10px
+
+	&::-webkit-slider-runnable-track
+		-webkit-appearance: none
+		height: 2px
+		background: none
+		border: none
+		border-radius: 3px
+
+	&::-webkit-slider-thumb
+		-webkit-appearance: none
+		border: none
+		height: 14px
+		width: 8px
+		border-radius: 5%
+		background: $w
+		margin-top: -5px
+	&:focus
+		outline: none
+		&::-webkit-slider-runnable-track
+			background: none
 	&:before
 		color: $w
 		content: '['

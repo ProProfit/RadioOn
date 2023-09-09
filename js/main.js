@@ -5,13 +5,12 @@ var volumeRange = document.getElementById('volumeRange');
 var audioElement = document.getElementById('audioPlayer');
 
 function playTrack(trackSource, trackTitle) {
-    audioPlayer.setAttribute('src', trackSource);
+	audioPlayer.pause(); // Пауза аудиоплеера
+	audioPlayer.setAttribute('src', ''); // Очистить текущий источник
     currentTitle.innerHTML = trackTitle;
-    audioPlayer.play();
+		currentTitle.innerHTML = title; // Обновляем содержимое currentTitle
 
-    $.get('https://api.example.com/data', function(response) {
-        console.log('Data:', response);
-    });
+    audioPlayer.play();
 }
 
 $(document).on('click', '#playlist a', function(e) {
@@ -49,8 +48,11 @@ audioElement.style.display = 'none';
 
 // Обновленный код для вывода значения API в строке Play Now
 function updatePlayNowTitle(title) {
-    var audioTitlePlay = document.querySelector('.Audio-Title-Play');
-    audioTitlePlay.innerHTML = 'Play Now: ' + title;
+	var audioTitlePlayAPI = document.querySelector('#Audio-Title-Play-title-API');
+    
+	if (audioTitlePlayAPI) {
+			audioTitlePlayAPI.innerHTML = 'Play Now: ' + title; // Обновляем содержимое div с полученным значением
+	}
 }
 
 $(document).on('click', '#playlist a', function(e) {
@@ -61,15 +63,17 @@ $(document).on('click', '#playlist a', function(e) {
 });
 
 function playTrack(trackSource, stream) {
-    audioPlayer.setAttribute('src', trackSource);
-    audioPlayer.play();
+		audioPlayer.pause(); // Пауза аудиоплеера
+    audioPlayer.setAttribute('src', '');
 
     $.get('https://api.more.fm/api/get-icecast?stream=' + stream, function(response) {
         console.log('Data:', response);
-        if (response.title) {
-            updatePlayNowTitle(response.title); // Обновляем заголовок с полученным значением
-        } else {
-            updatePlayNowTitle(''); // Если нет заголовка, то очищаем заголовок
-        }
+				if (response.title) {
+					updatePlayNowTitle(response.title); // Обновляем заголовок с полученным значением
+					audioPlayer.setAttribute('src', trackSource); // Устанавливаем новый источник
+					audioPlayer.play(); // Начинаем воспроизведение после установки нового источника
+			} else {
+					updatePlayNowTitle(''); // Если нет заголовка, то очищаем заголовок
+			}
     });
 }
