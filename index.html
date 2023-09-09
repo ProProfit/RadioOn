@@ -11,6 +11,7 @@
 	<!-- <link rel="stylesheet" href="css/style.css"> -->
 	<!-- <link rel="stylesheet" href="css/white.css"> -->
 	<link id="styleSheet" rel="stylesheet" href="css/style.css">
+	<link href="https://pvinis.github.io/iosevka-webfont/3.4.1/iosevka.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -31,7 +32,8 @@
 				<span id="stopBtn" class="txt-btn">Stop</span>
 			</div>
 			<div id="volumeControl">
-				<input type="range" id="volumeRange" min="0" max="1" step="0.1" value="1">
+				<input type="range" id="volumeRange" min="0" max="100" step="1" value="50">
+				<div>Value: <span id="val_lvl"></span></div>
 			</div>
 		</div>
 		<div class="Audio-Title">
@@ -40,6 +42,7 @@
 		<div id="currentTitle"></div>
 	</div>
 			<div class="Audio-Title-Play">Play Now:</div>
+			<div id="Audio-Title-Play-title-API"></div>
 			<audio id="audioPlayer" controls src="" autoplay="false" preload="auto" controls="true"
 				contenteditable="true"></audio>
 
@@ -52,31 +55,31 @@
 				<h2>More FM</h2>
 				<ul>
 					<li>
-						<a href="https://cast.more.fm/more256" data-title="More_mf">More FM</a>
+						<a href="https://cast.more.fm/more256" data-title="More FM" data-stream="more256">More FM</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/rnb" data-title="RnB">RnB</a>
+						<a href="https://cast.more.fm/rnb" data-title="RnB" data-stream="rnb">RnB</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/rock" data-title="Rock">Rock</a>
+						<a href="https://cast.more.fm/rock" data-title="Rock" data-stream="rock">Rock</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/acoustic" data-title="Acoustice">Acoustic</a>
+						<a href="https://cast.more.fm/acoustic" data-title="Acoustice" data-stream="acoustic">Acoustic</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/classic" data-title="classic">Classic</a>
+						<a href="https://cast.more.fm/classic" data-title="classic" data-stream="classic">Classic</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/music" data-title="Music">Music</a>
+						<a href="https://cast.more.fm/music" data-title="Music" data-stream="music">Music</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/lounge" data-title="Lounge">Lounge</a>
+						<a href="https://cast.more.fm/lounge" data-title="Lounge" data-stream="lounge">Lounge</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/jazz" data-title="Jazz">Jazz</a>
+						<a href="https://cast.more.fm/jazz" data-title="Jazz" data-stream="jazz">Jazz</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/oe" data-title="OE">OE</a>
+						<a href="https://cast.more.fm/oe" data-title="OE" data-stream="oe">OE</a>
 					</li>
 					<!-- <li>
 				<a href="https://cast.more.fm/depeche" data-title="Nebula-Sample-Astronaut-Ape">More depeche</a>
@@ -151,5 +154,17 @@
 			}
 		};
 	})();
+	$(document).on('input', '#volumeRange', function() {
+        var volumeValue = parseInt(this.value); // Получите значение ползунка как целое число
+        if (volumeValue >= 0 && volumeValue <= 100) {
+            audioPlayer.volume = volumeValue / 100; // Установите громкость
+        }
+        // Теперь вы можете обновить значение на странице
+        var output = document.getElementById("val_lvl");
+        output.innerHTML = volumeValue;
+    });
+
+    // Скрыть элемент <audio>
+    audioElement.style.display = 'none';
 </script> 
 </html>
