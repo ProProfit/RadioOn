@@ -15,7 +15,7 @@ body
 	position: absolute
 	top: 0
 	right: 0
-	margin: 20px 20px 0 0
+	margin: 0 20px
 	cursor: pointer
 
 html
@@ -23,8 +23,8 @@ html
 
 .title-logo
 	font-family: 'Zado Bold', sans-serif
-	font-size: 30px
-	margin: 40px
+	font-size: 40px
+	margin: 20px
 
 .container
 	max-width: 600px
@@ -57,7 +57,13 @@ html
 		color: $w
 		font-size: 0.9rem
 		padding: 1px 0
-
+#volumeControl
+	width: 60%
+	display: flex
+	justify-content: space-between
+	align-items: center
+	#val_lvl
+		width: 60%
 .txt-btn
 	&::before
 		content: '['
@@ -127,10 +133,30 @@ audio#audioPlayer
 //     content: "♫ "
 
 input[type=range]#volumeRange
-	appearance: none
-	width: 100%
+	-webkit-appearance: none
+	width: 65%
 	background: none
-	// border-bottom: dashed 1px #e5e9f0
+	margin-right: 10px
+
+	&::-webkit-slider-runnable-track
+		-webkit-appearance: none
+		height: 2px
+		background: none
+		border: none
+		border-radius: 3px
+
+	&::-webkit-slider-thumb
+		-webkit-appearance: none
+		border: none
+		height: 14px
+		width: 8px
+		border-radius: 5%
+		background: $w
+		margin-top: -5px
+	&:focus
+		outline: none
+		&::-webkit-slider-runnable-track
+			background: none
 	&:before
 		color: $w
 		content: '['

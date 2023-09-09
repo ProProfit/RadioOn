@@ -81,7 +81,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 20px 20px 0 0;
+  margin: 0 20px;
   cursor: pointer;
 }
 
@@ -91,8 +91,8 @@ html {
 
 .title-logo {
   font-family: "Zado Bold", sans-serif;
-  font-size: 30px;
-  margin: 40px;
+  font-size: 40px;
+  margin: 20px;
 }
 
 .container {
@@ -141,6 +141,22 @@ html {
   color: #eceff4;
   font-size: 0.9rem;
   padding: 1px 0;
+}
+
+#volumeControl {
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+#volumeControl #val_lvl {
+  width: 60%;
 }
 
 .txt-btn::before {
@@ -224,9 +240,30 @@ audio#audioPlayer {
 
 input[type=range]#volumeRange {
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  width: 100%;
+  width: 65%;
+  background: none;
+  margin-right: 10px;
+}
+input[type=range]#volumeRange::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: 2px;
+  background: none;
+  border: none;
+  border-radius: 3px;
+}
+input[type=range]#volumeRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 14px;
+  width: 8px;
+  border-radius: 5%;
+  background: #eceff4;
+  margin-top: -5px;
+}
+input[type=range]#volumeRange:focus {
+  outline: none;
+}
+input[type=range]#volumeRange:focus::-webkit-slider-runnable-track {
   background: none;
 }
 input[type=range]#volumeRange:before {
