@@ -68,6 +68,11 @@ table {
           box-sizing: border-box;
 }
 
+@media (max-width: 720px) {
+  #changeTheme {
+    font-size: 10px;
+  }
+}
 body {
   position: relative;
   font-family: "Iosevka Web", sans-serif;
