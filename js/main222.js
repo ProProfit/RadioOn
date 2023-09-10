@@ -1,75 +1,110 @@
-// Ваш существующий код
 var audioPlayer = document.getElementById('audioPlayer');
-var currentTitle = document.getElementById('currentTitle');
+var currentTitleElement = document.getElementById('currentTitle');
 var volumeRange = document.getElementById('volumeRange');
 var audioElement = document.getElementById('audioPlayer');
+var isAudioReady = false;
 
 function playTrack(trackSource, trackTitle) {
+    audioPlayer.pause(); // Пауза текущей станции (если она воспроизводится)
     audioPlayer.setAttribute('src', trackSource);
-    currentTitle.innerHTML = trackTitle;
-    audioPlayer.play();
+    currentTitleElement.innerHTML = trackTitle;
 
-    $.get('https://api.example.com/data', function(response) {
-        console.log('Data:', response);
-    });
-}
-
-$(document).on('click', '#playlist a', function(e) {
-    e.preventDefault();
-    var trackSource = $(this).attr('href');
-    var trackTitle = $(this).data('title');
-    playTrack(trackSource, trackTitle);
-});
-
-$(document).on('click', '#playBtn', function() {
-    audioPlayer.play();
-});
-
-$(document).on('click', '#pauseBtn', function() {
-    audioPlayer.pause();
-});
-
-$(document).on('click', '#stopBtn', function() {
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
-});
-
-$(document).on('input', '#volumeRange', function() {
-    var volumeValue = parseInt(this.value); // Получите значение ползунка как целое число
-    if (volumeValue >= 0 && volumeValue <= 100) {
-        audioPlayer.volume = volumeValue / 100; // Установите громкость
+    // Проверяем, готово ли аудио к воспроизведению
+    if (isAudioReady) {
+        audioPlayer.play();
+    } else {
+        // Если аудио еще не готово, добавляем обработчик события canplay
+        audioPlayer.addEventListener('canplay', function () {
+            isAudioReady = true;
+            audioPlayer.play(); // Теперь, когда аудио готово, проигрываем его
+        }, { once: true }); // { once: true } чтобы событие выполнилось только один раз
     }
-    // Теперь вы можете обновить значение на странице
-    var output = document.getElementById("val_lvl");
-    output.innerHTML = volumeValue;
-});
-
-// Скрыть элемент <audio>
-audioElement.style.display = 'none';
-
-// Обновленный код для вывода значения API в строке Play Now
-function updatePlayNowTitle(title) {
-    var audioTitlePlay = document.querySelector('.Audio-Title-Play');
-    audioTitlePlay.innerHTML = 'Play Now: ' + title;
 }
 
-$(document).on('click', '#playlist a', function(e) {
-    e.preventDefault();
-    var trackSource = $(this).attr('href');
-    var stream = $(this).data('stream'); // Извлекаем значение атрибута data-stream
-    playTrack(trackSource, stream); // Передаем stream в функцию playTrack
+$(document).ready(function () {
+    $(document).on('click', '#playlist a', function (e) {
+        e.preventDefault();
+        var trackSource = $(this).attr('href');
+        var trackTitle = $(this).data('title');
+        playTrack(trackSource, trackTitle);
+    });
+
+    $(document).on('click', '#playBtn', function () {
+        audioPlayer.play();
+    });
+
+    $(document).on('click', '#pauseBtn', function () {
+        audioPlayer.pause();
+    });
+
+    $(document).on('click', '#stopBtn', function () {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+    });
+
+    $(document).on('input', '#volumeRange', function () {
+        audioPlayer.volume = parseFloat(volumeRange.value) / 100;
+        var output = document.getElementById('val_lvl');
+        output.innerHTML = volumeRange.value;
+    });
+
+    // Скрыть элемент <audio>
+    audioElement.style.display = 'none';
+
+    $('#playlist a').on('click', function () {
+        // Получите значение data-stream выбранной радиостанции
+        const selectedStation = $(this).data('stream');
+
+        // Вызовите getCurrentSongInfo с выбранной станцией
+        getCurrentSongInfo(selectedStation);
+
+        // Устанавливаем интервал обновления данных каждые 60 секунд
+        const updateInterval = 60000; // 60 секунд
+        setInterval(() => {
+            getCurrentSongInfo(selectedStation);
+        }, updateInterval);
+    });
 });
 
-function playTrack(trackSource, stream) {
-    audioPlayer.setAttribute('src', trackSource);
-    audioPlayer.play();
+function getCurrentSongInfo(selectedStation) {
+    // Здесь замените URL на конечную точку вашего API радиостанции
+    const apiUrl = `https://api.more.fm/api/get-icecast?stream=${selectedStation}`;
 
-    $.get('https://api.more.fm/api/get-icecast?stream=' + stream, function(response) {
-        console.log('Data:', response);
-        if (response.title) {
-            updatePlayNowTitle(response.title); // Обновляем заголовок с полученным значением
-        } else {
-            updatePlayNowTitle(''); // Если нет заголовка, то очищаем заголовок
+    // Остальной код getCurrentSongInfo остается без изменений
+    $.ajax({
+        type: 'GET',
+        url: apiUrl,
+        async: true,
+        dataType: 'jsonp',
+        jsonpCallback: 'parseMusic',
+        success: function (response) {
+            if (response && Object.keys(response).length > 0) {
+                const titleAPI = response[Object.keys(response)[0]].title;
+                const decodedTitleAPI = decodeUtf8(titleAPI); // Декодируем текст
+                updateCurrentSong(decodedTitleAPI);
+            } else {
+                updateCurrentSong('No data');
+            }
+        },
+        error: function (error) {
+            console.error('An error occurred while receiving data: ', error);
+            updateCurrentSong('Error while receiving data');
         }
     });
+}
+
+function updateCurrentSong(titleAPI) {
+    const currentSongElement = document.getElementById('currentSong');
+    currentSongElement.textContent = 'Now playing: ' + titleAPI;
+}
+
+// Функция для декодирования строки UTF-8
+function decodeUtf8(encodedString) {
+    try {
+        const decoded = decodeURIComponent(escape(encodedString));
+        return decoded;
+    } catch (error) {
+        console.error('Error decoding UTF-8:', error);
+        return encodedString; // Вернуть исходную строку в случае ошибки
+    }
 }

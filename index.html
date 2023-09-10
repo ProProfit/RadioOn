@@ -29,11 +29,11 @@
 			<div id="text-controls">
 				<span id="playBtn" class="txt-btn">Play</span>
 				<span id="pauseBtn" class="txt-btn">Pause</span>
-				<span id="stopBtn" class="txt-btn">Stop</span>
+				<!-- <span id="stopBtn" class="txt-btn">Stop</span> -->
 			</div>
 			<div id="volumeControl">
 				<input type="range" id="volumeRange" min="0" max="100" step="1" value="50">
-				<div>Value: <span id="val_lvl"></span></div>
+				<div>Value: <span id="val_lvl">50</span></div>
 			</div>
 		</div>
 		<div class="Audio-Title">
@@ -54,7 +54,7 @@
 		<!-- PlayList -->
 
 		<div class="playList-container">
-			<div id="playlist">
+			<div class="more" id="playlist">
 				<h2>More FM</h2>
 				<ul>
 					<li>
@@ -89,35 +89,35 @@
 			</li> -->
 				</ul>
 			</div>
-			<div id="playlist">
+			<div class="hitfm" id="playlist">
 				<h2>Tavr media</h2>
 				<ul>
 					<li>
-						<a href="https://online.hitfm.ua/HitFM_HD" data-title="Hit-FM">Hit-FM</a>
+						<a href="https://online.hitfm.ua/HitFM_HD" data-title="Hit-FM" data-stream="hit">Hit-FM</a>
 					</li>
 					<li>
-						<a href="https://online.radioroks.ua/RadioROKS_HD" data-title="Radio ROKS">Radio ROKS</a>
+						<a href="https://online.radioroks.ua/RadioROKS_HD" data-title="Radio ROKS" data-stream="bayraktar">Radio ROKS</a>
 					</li>
 					<li>
-						<a href="https://cast.radiogroup.com.ua/avtoradio" data-title="Avtoradio">Avtoradio</a>
+						<a href="https://cast.radiogroup.com.ua/avtoradio" data-title="Avtoradio" data-stream="bayraktar">Avtoradio</a>
 					</li>
 					<li>
-						<a href="https://online.radiorelax.ua/RadioRelax_HD" data-title="Relax">Relax</a>
+						<a href="https://online.radiorelax.ua/RadioRelax_HD" data-title="Relax" data-stream="relaxchristmas">Relax</a>
 					</li>
 					<li>
-						<a href="https://online.radioplayer.ua/RadioGold_HD" data-title="Radio Gold">Radio Gold</a>
+						<a href="https://online.radioplayer.ua/RadioGold_HD" data-title="Radio Gold" data-stream="bayraktar">Radio Gold</a>
 					</li>
 					<li>
-						<a href="https://online.radioplayer.ua/GuliayRadio_HD" data-title="Guliay">Guliay</a>
+						<a href="https://online.radioplayer.ua/GuliayRadio_HD" data-title="Guliay" data-stream="guliay">Guliay</a>
 					</li>
 					<li>
-						<a href="https://online.radioplayer.ua/FlashRadio_HD" data-title="Flash Radio">Flash Radio</a>
+						<a href="https://online.radioplayer.ua/FlashRadio_HD" data-title="Flash Radio" data-stream="radio3flash">Flash Radio</a>
 					</li>
 					<li>
-						<a href="https://online.melodiafm.ua/MelodiaFM_HD" data-title="Melodia FM">Melodia FM</a>
+						<a href="https://online.melodiafm.ua/MelodiaFM_HD" data-title="Melodia FM" data-stream="melodia">Melodia FM</a>
 					</li>
 					<li>
-						<a href="https://online.radiobayraktar.ua/RadioBayraktar_HD" data-title="Bayraktar">Bayraktar</a>
+						<a href="https://online.radiobayraktar.ua/RadioBayraktar_HD" data-title="Bayraktar" data-stream="radio3bayraktar">Bayraktar</a>
 					</li>
 				</ul>
 			</div>

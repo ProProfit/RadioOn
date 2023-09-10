@@ -69,8 +69,24 @@ table {
 }
 
 @media (max-width: 720px) {
+  .control {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  #volumeControl {
+    margin: 20px 0;
+    width: 100% !important;
+  }
   #changeTheme {
     font-size: 10px;
+  }
+  .playList-container {
+    grid-template-columns: 1fr !important;
+  }
+  input[type=range]#volumeRange {
+    width: 80%;
   }
 }
 body {
@@ -153,9 +169,8 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -209,8 +224,11 @@ audio#audioPlayer {
 .playList-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  justify-items: start;
-  margin: 20px o;
+  grid-template-rows: repeat(3, 1fr);
+  justify-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 20px 0;
 }
 
 #playlist {

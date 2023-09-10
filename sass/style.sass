@@ -60,7 +60,7 @@ html
 #volumeControl
 	width: 60%
 	display: flex
-	justify-content: space-between
+	justify-content: space-around
 	align-items: center
 	#val_lvl
 		width: 60%
@@ -97,8 +97,10 @@ audio#audioPlayer
 .playList-container
 	display: grid
 	grid-template-columns: repeat(2, 1fr)
-	justify-items: start
-	margin: 20px o
+	grid-template-rows: repeat(3, 1fr)
+	justify-items: center
+	justify-content: space-around
+	margin: 20px 0
 
 #playlist
 	display: inline-block
