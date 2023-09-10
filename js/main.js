@@ -52,7 +52,6 @@ function getRadioDataAndUpdateTitleAPI(selectedStation) {
 
 function getCurrentSongInfo(selectedStation) {
   const apiUrl = `https://api.more.fm/api/get-icecast?stream=${selectedStation}`;
-
   $.ajax({
     type: 'GET',
     url: apiUrl,
@@ -86,42 +85,30 @@ $(document).ready(function () {
     var trackTitle = $(this).data('title');
     playTrack(trackSource, trackTitle);
   });
-
   $(document).on('click', '#playBtn', function () {
     if (!audioPlayer.paused) {
       audioPlayer.pause();
     }
     audioPlayer.play();
   });
-
   $(document).on('click', '#pauseBtn', function () {
     audioPlayer.pause();
   });
-
   $(document).on('input', '#volumeRange', function () {
     audioPlayer.volume = parseFloat(volumeRange.value) / 100;
     var output = document.getElementById('val_lvl');
     output.innerHTML = volumeRange.value;
   });
-
   audioElement.style.display = 'none';
 });
 
-// $('#playlist a').on('click', function () {
-//   const selectedStation = $(this).data('stream');
-//   getCurrentSongInfo(selectedStation);
-// });
-/////////////////////////////////////////////////////////////////////
 // Добавьте класс "playlist" ко всем ссылкам плейлиста
 $('.more a, .hitfm a').on('click', function () {
   const selectedStation = $(this).data('stream');
-  
   // Удаляем класс 'active' у всех ссылок внутри элемента с классом 'playlist'
   $('.more a, .hitfm a').removeClass('active');
-  
   // Добавляем класс 'active' к выбранной ссылке
   $(this).addClass('active');
-
   // Проверяем, к какому плейлисту относится выбранная ссылка, и выполняем соответствующие действия
   if ($(this).closest('.more').length) {
     getCurrentSongInfo(selectedStation);
@@ -129,13 +116,6 @@ $('.more a, .hitfm a').on('click', function () {
     getRadioDataAndUpdateTitleAPI(selectedStation);
   }
 });
-
-//////////////////////////////////////////////////////////////////////////////
-
-// setInterval(function () {
-// 	const selectedStationHIT = $('.hitfm a.active').data('stream'); // Предполагая, что у вас есть активная станция
-// 	getRadioDataAndUpdateTitleAPI(selectedStationHIT);
-// }, 30000);
 
 // Создаем функцию, которая будет обновлять данные для выбранной станции
 function updateStationData(selectedStation) {
@@ -154,7 +134,6 @@ function updateStationData(selectedStation) {
 setInterval(function () {
   // Получаем активную станцию
   const selectedStation = $('.more a.active, .hitfm a.active').data('stream');
-
   // Проверяем, к какому плейлисту относится выбранная ссылка, и выполняем соответствующие действия
   if ($('.more a.active').length) {
     getCurrentSongInfo(selectedStation);
