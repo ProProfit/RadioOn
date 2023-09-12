@@ -262,20 +262,20 @@ audio#audioPlayer {
 }
 
 input[type=range]#volumeRange {
-  -webkit-appearance: none;
+  appearance: none;
   width: 65%;
   background: none;
   margin-right: 10px;
 }
 input[type=range]#volumeRange::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
+  appearance: none;
   height: 2px;
   background: none;
   border: none;
   border-radius: 3px;
 }
 input[type=range]#volumeRange::-webkit-slider-thumb {
-  -webkit-appearance: none;
+  appearance: none;
   border: none;
   height: 14px;
   width: 8px;
