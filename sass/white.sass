@@ -76,6 +76,9 @@ html
 			content: '['
 		&::after
 			content: ']'
+.control_bloks
+	border: 1px solid $w
+	padding: 20px
 
 .Audio-Title
 	margin-top: 20px
@@ -120,19 +123,15 @@ audio#audioPlayer
 		margin: 10px auto
 		color: $w
 		text-decoration: none
-		&:focus
-			&:before
-				content: '• '
+		&:before
+			content: '[] '
 		&:hover
 			&:before
-				content: '• '
-				color: #d8dee9
-
-// &.activeTrack
-//  background-color: white
-//  color: black
-//   &:before 
-//     content: "♫ "
+				content: '[•] '
+				color: $w
+		&.active
+			&:before 
+				content: "[•] "
 
 
 input[type=range]#volumeRange

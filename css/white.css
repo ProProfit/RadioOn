@@ -82,9 +82,6 @@ table {
   #changeTheme {
     font-size: 10px;
   }
-  .playList-container {
-    grid-template-columns: 1fr !important;
-  }
   input[type=range]#volumeRange {
     width: 80%;
   }
@@ -196,6 +193,11 @@ html {
   content: "]";
 }
 
+.control_bloks {
+  border: 1px solid #2e3440;
+  padding: 20px;
+}
+
 .Audio-Title {
   margin-top: 20px;
   border: 1px solid #2e3440;
@@ -253,12 +255,15 @@ audio#audioPlayer {
   color: #2e3440;
   text-decoration: none;
 }
-#playlist a:focus:before {
-  content: "• ";
+#playlist a:before {
+  content: "[] ";
 }
 #playlist a:hover:before {
-  content: "• ";
-  color: #d8dee9;
+  content: "[•] ";
+  color: #2e3440;
+}
+#playlist a.active:before {
+  content: "[•] ";
 }
 
 input[type=range]#volumeRange {

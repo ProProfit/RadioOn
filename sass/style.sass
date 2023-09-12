@@ -77,6 +77,10 @@ html
 		&::after
 			content: ']'
 
+.control_bloks
+	border: 1px solid lemonchiffon
+	padding: 20px
+
 .Audio-Title
 	margin-top: 20px
 	border: 1px solid lemonchiffon
@@ -120,19 +124,18 @@ audio#audioPlayer
 		margin: 10px auto
 		color: white
 		text-decoration: none
-		&:focus
-			&:before
-				content: '• '
+		&:before
+			content: '[] '
 		&:hover
+			transition-duration: .5s
+			// background-color: white
+			// color: black
 			&:before
-				content: '• '
+				content: '[•] '
 				color: #d8dee9
-
-// &.activeTrack
-//  background-color: white
-//  color: black
-//   &:before 
-//     content: "♫ "
+		&.active
+			&:before 
+				content: "[•] "
 
 
 input[type=range]#volumeRange
