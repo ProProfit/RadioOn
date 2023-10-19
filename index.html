@@ -13,6 +13,8 @@
 	<link id="styleSheet" rel="stylesheet" href="css/style.css">
 	<link href="https://pvinis.github.io/iosevka-webfont/3.4.1/iosevka.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 </head>
 
 <body>
@@ -32,8 +34,8 @@
 				<!-- <span id="stopBtn" class="txt-btn">Stop</span> -->
 			</div>
 			<div id="volumeControl">
-				<input type="range" id="volumeRange" min="0" max="100" step="1" value="50">
-				<div>Value: <span id="val_lvl">50</span></div>
+				<input type="range" id="volumeRange" min="0" max="100" step="1" value="100">
+				<div>Value: <span id="val_lvl">100</span></div>
 			</div>
 		</div>
 		<div class="Audio-Title">
@@ -44,22 +46,25 @@
 			<!-- <div class="Audio-Title-Play">Play Now:</div> -->
 			<div id="Audio-Title-Play-title-API">
 				<div id="currentSong">Now playing: loading...</div>
-
 			</div>
-			<audio id="audioPlayer" controls src="" autoplay="false" preload="auto" controls="true"
-				contenteditable="true"></audio>
 
+			<div id="audioPlayerContainer">
+				<audio id="audioPlayer" controls="" autoplay="false"  contenteditable="true" type="application/x-mpegURL" controlslist="nodownload" style="display: none;"></audio>
+
+				</div>
 		</div>
 </div>
 
 <!-- CATEGORIES AND STATIONS -->
 
 <div class="category-selector">
-	<h2>Выберите категорию:</h2>
+	<h2>Select a category:</h2>
 	<ul>
 			<li><a href="#" data-category="all">All</a></li>
 			<li><a href="#" data-category="Pop">Pop</a></li>
 			<li><a href="#" data-category="Rok">Rok</a></li>
+			<li><a href="#" data-category="Relax">Relax</a></li>
+			<li><a href="#" data-category="Lofi">LoFi</a></li>
 			<!-- <li><a href="#" data-category="Категория 3">Категория 3</a></li> -->
 			<!-- Добавьте здесь дополнительные категории -->
 	</ul>
@@ -81,7 +86,7 @@
 						<a href="https://cast.more.fm/rock" data-title="Rock" data-stream="rock" data-category="Rok">Rock</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/acoustic" data-title="Acoustice" data-stream="acoustic">Acoustic</a>
+						<a href="https://cast.more.fm/acoustic" data-title="Acoustice" data-stream="acoustic" data-category="Relax">Acoustic</a>
 					</li>
 					<li>
 						<a href="https://cast.more.fm/classic" data-title="classic" data-stream="classic">Classic</a>
@@ -90,7 +95,7 @@
 						<a href="https://cast.more.fm/music" data-title="Music" data-stream="music" data-category="Pop">Music</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/lounge" data-title="Lounge" data-stream="lounge">Lounge</a>
+						<a href="https://cast.more.fm/lounge" data-title="Lounge" data-stream="lounge" data-category="Relax">Lounge</a>
 					</li>
 					<li>
 						<a href="https://cast.more.fm/jazz" data-title="Jazz" data-stream="jazz">Jazz</a>
@@ -120,7 +125,7 @@
 						<a href="https://cast.radiogroup.com.ua/avtoradio" data-title="Avtoradio" data-stream="bayraktar">Avtoradio</a>
 					</li>
 					<li>
-						<a href="https://online.radiorelax.ua/RadioRelax_HD" data-title="Relax" data-stream="relaxchristmas">Relax</a>
+						<a href="https://online.radiorelax.ua/RadioRelax_HD" data-title="Relax" data-stream="relaxchristmas" data-category="Relax">Relax</a>
 					</li>
 					<li>
 						<a href="https://online.radioplayer.ua/RadioGold_HD" data-title="Radio Gold" data-stream="bayraktar">Radio Gold</a>
@@ -135,24 +140,35 @@
 						<a href="https://online.melodiafm.ua/MelodiaFM_HD" data-title="Melodia FM" data-stream="melodia">Melodia FM</a>
 					</li>
 					<li>
-						<a href="https://online.melodiafm.ua/MelodiaFM_Romantic_HD" data-title="Melodia FM" data-stream="melodiar">Melodia Romantic</a>
+						<a href="https://online.melodiafm.ua/MelodiaFM_Romantic_HD" data-title="Melodia FM" data-stream="melodiar" data-category="Relax">Melodia Romantic</a>
 					</li>
 					<li>
 						<a href="https://online.radiobayraktar.ua/RadioBayraktar_HD" data-title="Bayraktar" data-stream="radio3bayraktar">Bayraktar</a>
 					</li>
 				</ul>
 			</div>
-			<!-- <div id="playlist">
-				<h2 class="playlist-title">Ukreine Mix</h2>
-				<ul>
+
+			<div id="playlist" class="M3U8" >
+				<h2 class="playlist-title">LoFi</h2>
+				<ul class="station-list">
 					<li>
-						<a href="https://cast.more.fm/more256" data-title="Lux fm" data-stream="radio3bayraktar"data-category="Pop">Lux fm</a>
+						<a href="/PlayList/music.m3u8" data-title="LoFi"  data-category="Lofi" class="play-m3u8">wwww</a>
+					</li>
+					<li> 
+						<a href="https://hlsyoufm.akamaized.net/hls/live/2016538/youfm/master.m3u8" data-title="LoFi 2" data-category="Lofi" class="play-m3u8">TdsadasdadasssEST2</a>
 					</li>
 
+					<li>
+						<a href="https://streamvideo.luxnet.ua/luxlviv/luxlviv.stream/playlist.m3u8" data-title="LoFi 3"  data-category="Lofi" class="play-m3u8">wwww</a>
+					</li>
+					<li>
+						<a href="https://stream.ram.radio/audio/ram.stream_aac/playlist.m3u8"  data-title="LoFi 4"  data-category="Lofi" class="play-m3u8">Ссылка на поток M3U8</a>
+					</li>
 				</ul>
-			</div> -->
+			</div>
 		</div>
-	</div>
+
+</div>
 	</div>
 	</div>
 	<script src="js/main.js"></script>
@@ -190,5 +206,6 @@
 
     // Скрыть элемент <audio>
     audioElement.style.display = 'none';
-</script> 
+
+</script>
 </html>

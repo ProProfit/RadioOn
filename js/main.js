@@ -2,6 +2,7 @@ var audioPlayer = document.getElementById('audioPlayer');
 var currentTitleElement = document.getElementById('currentTitle');
 var volumeRange = document.getElementById('volumeRange');
 var audioElement = document.getElementById('audioPlayer');
+var audioPlayer2 = document.getElementById('audioPlayer2');
 var isAudioReady = false;
 
 function playTrack(trackSource, trackTitle) {
@@ -77,13 +78,32 @@ function getCurrentSongInfo(selectedStation) {
 		return decodedText;
 	}
 }
-
 $(document).ready(function () {
+  // Определение функции playM3U8WithHLS здесь
+  function playM3U8WithHLS(url) {
+    var audioPlayer = document.getElementById('audioPlayer');
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(audioPlayer);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        audioPlayer.play();
+      });
+    } else {
+      alert('Ваш браузер не поддерживает воспроизведение M3U8-потоков с использованием Hls.js.');
+    }
+  }
+
   $(document).on('click', '#playlist a', function (e) {
     e.preventDefault();
     var trackSource = $(this).attr('href');
     var trackTitle = $(this).data('title');
-    playTrack(trackSource, trackTitle);
+    
+    if ($(this).hasClass('play-m3u8')) {
+      playM3U8WithHLS(trackSource, trackTitle);
+    } else {
+      playTrack(trackSource, trackTitle);
+    }
   });
   $(document).on('click', '#playBtn', function () {
     if (!audioPlayer.paused) {
@@ -99,7 +119,7 @@ $(document).ready(function () {
     var output = document.getElementById('val_lvl');
     output.innerHTML = volumeRange.value;
   });
-  audioElement.style.display = 'none';
+  // audioElement.style.display = 'none';
 });
 
 // Добавьте класс "playlist" ко всем ссылкам плейлиста
@@ -157,7 +177,7 @@ $(document).ready(function () {
 			const selectedCategory = $(this).data('category');
 
 			// Покажем или скроем станции в зависимости от выбранной категории
-			$('.hitfm ul li a, .more ul li a').each(function () {
+			$('.hitfm ul li a, .more ul li a,.M3U8 ul li a').each(function () {
 					const stationCategory = $(this).data('category');
 
 					if (selectedCategory === 'all' || selectedCategory === stationCategory) {
@@ -168,21 +188,22 @@ $(document).ready(function () {
 			});
 	});
 
-	// Обработчик клика для выбора станции
-	$('.hitfm ul li a, .more ul li a').on('click', function () {
-			// Удалим класс 'active' у всех ссылок внутри .category-selector
-			$('.hitfm ul li a, .more ul li a').removeClass('active');
+// Обработчик клика для выбора станции
+$('.hitfm ul li a, .more ul li a, .M3U8 ul li a').on('click', function () {
+	// Удалим класс 'active' у всех ссылок внутри .category-selector
+	$('.hitfm ul li a, .more ul li a, .M3U8 ul li a').removeClass('active');
 
-			// Добавим класс 'active' к выбранной ссылке
-			$(this).addClass('active');
+	// Добавим класс 'active' к выбранной ссылке
+	$(this).addClass('active');
 
-			// Получим выбранную станцию и категорию
-			const selectedStation = $(this).data('stream');
-			const selectedCategory = $(this).data('category');
+	// Получим выбранную станцию и категорию
+	const selectedStation = $(this).data('stream');
+	const selectedCategory = $(this).data('category');
 
-			// Здесь выполняйте действия в зависимости от выбранной станции и категории
-			// Например, выводите информацию о выбранной станции и категории
-			console.log(`Selected Station: ${selectedStation}`);
-			console.log(`Selected Category: ${selectedCategory}`);
-	});
+	// Здесь выполняйте действия в зависимости от выбранной станции и категории
+	// Например, выводите информацию о выбранной станции и категории
+	console.log(`Selected Station: ${selectedStation}`);
+	console.log(`Selected Category: ${selectedCategory}`);
+});
+
 });
