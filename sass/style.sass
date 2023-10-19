@@ -34,18 +34,6 @@ html
 .header
 	text-align: center
 
-.monogram
-	font-size: 24px
-	font-weight: bold
-
-.listHeading
-	font-size: 18px
-	font-weight: bold
-	margin-bottom: 5px
-
-.activeTrack
-	color: #007BFF
-	font-weight: bold
 
 .control
 	display: flex
@@ -106,18 +94,42 @@ audio#audioPlayer
 	justify-content: space-around
 	margin: 20px 0
 
-#playlist
-	display: inline-block
-	margin-top: 80px
-
+.category-selector
+	margin-top: 30px
 	h2
 		display: block
 		font-size: 1rem
 		margin: 10px auto
 		&:before
-			content: '['
+			content: '[ '
 		&:after
-			content: ']'
+			content: ' ]'
+	ul
+		display: flex
+		justify-content: space-between
+	a
+		display: block
+		font-size: 1rem
+		margin: 10px auto
+		color: white
+		text-decoration: none
+		&.active
+			&:before 
+				content: "[•] "
+
+
+#playlist
+	display: inline-block
+	margin-top: 80px
+	h2
+		display: block
+		font-size: 1rem
+		margin: 20px 0
+
+		&:before
+			content: '[ '
+		&:after
+			content: ' ]'
 	a
 		display: block
 		font-size: 1rem
@@ -165,7 +177,7 @@ input[type=range]#volumeRange
 			background: none
 	&:before
 		color: $w
-		content: '['
+		content: '[ '
 	&:after
 		color: $w
-		content: ']'
+		content: ' ]'

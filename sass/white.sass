@@ -101,9 +101,33 @@ audio#audioPlayer
 	display: grid
 	grid-template-columns: repeat(2, 1fr)
 	grid-template-rows: repeat(3, 1fr)
-	justify-items: center
+	justify-items: stretch
 	justify-content: space-around
 	margin: 20px 0
+
+.category-selector
+	margin-top: 30px
+	h2
+		display: block
+		font-size: 1rem
+		margin: 10px auto
+		&:before
+			content: '[ '
+		&:after
+			content: ' ]'
+	ul
+		display: flex
+		justify-content: space-between
+	a
+		display: block
+		font-size: 1rem
+		margin: 10px auto
+		color: $w
+		text-decoration: none
+		&.active
+			&:before 
+				content: "[•] "
+
 
 #playlist
 	display: inline-block

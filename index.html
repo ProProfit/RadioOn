@@ -51,20 +51,34 @@
 
 		</div>
 </div>
+
+<!-- CATEGORIES AND STATIONS -->
+
+<div class="category-selector">
+	<h2>Выберите категорию:</h2>
+	<ul>
+			<li><a href="#" data-category="all">All</a></li>
+			<li><a href="#" data-category="Pop">Pop</a></li>
+			<li><a href="#" data-category="Rok">Rok</a></li>
+			<!-- <li><a href="#" data-category="Категория 3">Категория 3</a></li> -->
+			<!-- Добавьте здесь дополнительные категории -->
+	</ul>
+</div>
+
 		<!-- PlayList -->
 
 		<div class="playList-container">
-			<div class="more" id="playlist">
-				<h2>More FM</h2>
-				<ul>
+			<div id="playlist" class="more">
+				<h2 class="playlist-title">More FM</h2>
+				<ul class="station-list">
 					<li>
-						<a href="https://cast.more.fm/more256" data-title="More FM" data-stream="more256" >More FM</a>
+						<a href="https://cast.more.fm/more256" data-title="More FM" data-stream="more256" data-category="Pop">More FM</a>
 					</li>
 					<li>
 						<a href="https://cast.more.fm/rnb" data-title="RnB" data-stream="rnb">RnB</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/rock" data-title="Rock" data-stream="rock">Rock</a>
+						<a href="https://cast.more.fm/rock" data-title="Rock" data-stream="rock" data-category="Rok">Rock</a>
 					</li>
 					<li>
 						<a href="https://cast.more.fm/acoustic" data-title="Acoustice" data-stream="acoustic">Acoustic</a>
@@ -73,7 +87,7 @@
 						<a href="https://cast.more.fm/classic" data-title="classic" data-stream="classic">Classic</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/music" data-title="Music" data-stream="music">Music</a>
+						<a href="https://cast.more.fm/music" data-title="Music" data-stream="music" data-category="Pop">Music</a>
 					</li>
 					<li>
 						<a href="https://cast.more.fm/lounge" data-title="Lounge" data-stream="lounge">Lounge</a>
@@ -82,21 +96,21 @@
 						<a href="https://cast.more.fm/jazz" data-title="Jazz" data-stream="jazz">Jazz</a>
 					</li>
 					<li>
-						<a href="https://cast.more.fm/oe" data-title="OE" data-stream="oe">OE</a>
+						<a href="https://cast.more.fm/oe" data-title="OE" data-stream="oe" data-category="Pop">OE</a>
 					</li>
 					<!-- <li>
 				<a href="https://cast.more.fm/depeche" data-title="Nebula-Sample-Astronaut-Ape">More depeche</a>
 			</li> -->
 				</ul>
 			</div>
-			<div class="hitfm" id="playlist">
-				<h2>Tavr media</h2>
-				<ul>
+			<div id="playlist" class="hitfm" >
+				<h2 class="playlist-title">Tavr media</h2>
+				<ul class="station-list">
 					<li>
-						<a href="https://online.hitfm.ua/HitFM_HD" data-title="Hit-FM" data-stream="hit">Hit-FM</a>
+						<a href="https://online.hitfm.ua/HitFM_HD" data-title="Hit-FM" data-stream="hit" data-category="Pop">Hit-FM</a>
 					</li>
 					<li>
-						<a href="https://online.radioroks.ua/RadioROKS_HD" data-title="Radio ROKS" data-stream="bayraktar">Radio ROKS</a>
+						<a href="https://online.radioroks.ua/RadioROKS_HD" data-title="Radio ROKS" data-stream="bayraktar" data-category="Rok">Radio ROKS</a>
 					</li>
 					<li>
 						<a href="https://online.kissfm.ua/KissFM_HD" data-title="Kiss FM" data-stream="kiss">Kiss FM</a>
@@ -128,15 +142,15 @@
 					</li>
 				</ul>
 			</div>
-			<div id="playlist">
-				<h2>Ukreine Mix</h2>
+			<!-- <div id="playlist">
+				<h2 class="playlist-title">Ukreine Mix</h2>
 				<ul>
 					<li>
-						<a href="https://cast.more.fm/more256" data-title="Lux fm">Lux fm</a>
+						<a href="https://cast.more.fm/more256" data-title="Lux fm" data-stream="radio3bayraktar"data-category="Pop">Lux fm</a>
 					</li>
 
 				</ul>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	</div>

@@ -227,10 +227,43 @@ audio#audioPlayer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  justify-items: center;
+  justify-items: stretch;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   margin: 20px 0;
+}
+
+.category-selector {
+  margin-top: 30px;
+}
+.category-selector h2 {
+  display: block;
+  font-size: 1rem;
+  margin: 10px auto;
+}
+.category-selector h2:before {
+  content: "[ ";
+}
+.category-selector h2:after {
+  content: " ]";
+}
+.category-selector ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.category-selector a {
+  display: block;
+  font-size: 1rem;
+  margin: 10px auto;
+  color: #2e3440;
+  text-decoration: none;
+}
+.category-selector a.active:before {
+  content: "[•] ";
 }
 
 #playlist {

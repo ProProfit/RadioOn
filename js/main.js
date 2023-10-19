@@ -141,3 +141,48 @@ setInterval(function () {
     getRadioDataAndUpdateTitleAPI(selectedStation);
   }
 }, 30000);
+
+
+
+$(document).ready(function () {
+	// Обработчик клика для выбора категории
+	$('.category-selector ul li a').on('click', function () {
+			// Удалим класс 'active' у всех ссылок внутри .category-selector
+			$('.category-selector ul li a').removeClass('active');
+
+			// Добавим класс 'active' к выбранной ссылке
+			$(this).addClass('active');
+
+			// Получим выбранную категорию
+			const selectedCategory = $(this).data('category');
+
+			// Покажем или скроем станции в зависимости от выбранной категории
+			$('.hitfm ul li a, .more ul li a').each(function () {
+					const stationCategory = $(this).data('category');
+
+					if (selectedCategory === 'all' || selectedCategory === stationCategory) {
+							$(this).show();
+					} else {
+							$(this).hide();
+					}
+			});
+	});
+
+	// Обработчик клика для выбора станции
+	$('.hitfm ul li a, .more ul li a').on('click', function () {
+			// Удалим класс 'active' у всех ссылок внутри .category-selector
+			$('.hitfm ul li a, .more ul li a').removeClass('active');
+
+			// Добавим класс 'active' к выбранной ссылке
+			$(this).addClass('active');
+
+			// Получим выбранную станцию и категорию
+			const selectedStation = $(this).data('stream');
+			const selectedCategory = $(this).data('category');
+
+			// Здесь выполняйте действия в зависимости от выбранной станции и категории
+			// Например, выводите информацию о выбранной станции и категории
+			console.log(`Selected Station: ${selectedStation}`);
+			console.log(`Selected Category: ${selectedCategory}`);
+	});
+});
