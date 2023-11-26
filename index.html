@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="textonome" content="text based audio player built with html5 css3 and javascript">
 	<meta name="author" content="ahmed noor">
-	<title>Audio Player</title>
+	<title>Radio On v 1.0.0.2</title>
 	<!-- <link rel="stylesheet" href="css/style.css"> -->
 	<!-- <link rel="stylesheet" href="css/white.css"> -->
 	<link id="styleSheet" rel="stylesheet" href="css/style.css">
@@ -30,8 +30,8 @@
 		<div class="control">
 			<div id="text-controls">
 				<span id="playBtn" class="txt-btn">Play</span>
-				<span id="pauseBtn" class="txt-btn">Pause</span>
-				<!-- <span id="stopBtn" class="txt-btn">Stop</span> -->
+				<!-- <span id="pauseBtn" class="txt-btn">Pause</span> -->
+				<span id="stopBtn" class="txt-btn">Stop</span>
 			</div>
 			<div id="volumeControl">
 				<input type="range" id="volumeRange" min="0" max="100" step="1" value="100">
@@ -73,7 +73,8 @@
 		<!-- PlayList -->
 
 		<div class="playList-container">
-			<div id="playlist" class="more">
+			
+			<div id="playlist" class="playlist more">
 				<h2 class="playlist-title">More FM</h2>
 				<ul class="station-list">
 					<li>
@@ -108,27 +109,26 @@
 			</li> -->
 				</ul>
 			</div>
-			<div id="playlist" class="hitfm" >
+			<div id="playlist" class="playlist hitfm" >
 				<h2 class="playlist-title">Tavr media</h2>
 				<ul class="station-list">
 					<li>
 						<a href="https://online.hitfm.ua/HitFM_HD" data-title="Hit-FM" data-stream="hit" data-category="Pop">Hit-FM</a>
 					</li>
 					<li>
-						<a href="https://online.radioroks.ua/RadioROKS_HD" data-title="Radio ROKS" data-stream="bayraktar" data-category="Rok">Radio ROKS</a>
+						<a href="https://online.radioroks.ua/RadioROKS_HD" data-title="Radio ROKS" data-stream="roks" data-category="Rok">Radio ROKS</a>
 					</li>
 					<li>
 						<a href="https://online.kissfm.ua/KissFM_HD" data-title="Kiss FM" data-stream="kiss">Kiss FM</a>
 					</li>
-
 					<li>
 						<a href="https://cast.radiogroup.com.ua/avtoradio" data-title="Avtoradio" data-stream="bayraktar">Avtoradio</a>
 					</li>
 					<li>
-						<a href="https://online.radiorelax.ua/RadioRelax_HD" data-title="Relax" data-stream="relaxchristmas" data-category="Relax">Relax</a>
+						<a href="https://online.radiorelax.ua/RadioRelax_HD" data-title="Relax" data-stream="relax" data-category="Relax">Relax</a>
 					</li>
 					<li>
-						<a href="https://online.radioplayer.ua/RadioGold_HD" data-title="Radio Gold" data-stream="bayraktar">Radio Gold</a>
+						<a href="https://online.radioplayer.ua/RadioGold_HD" data-title="Radio Gold" data-stream="radio3gold">Radio Gold</a>
 					</li>
 					<li>
 						<a href="https://online.radioplayer.ua/GuliayRadio_HD" data-title="Guliay" data-stream="guliay">Guliay</a>
@@ -148,24 +148,27 @@
 				</ul>
 			</div>
 
-			<div id="playlist" class="M3U8" >
+			<div id="playlist" class="playlist M3U8" >
 				<h2 class="playlist-title">LoFi</h2>
 				<ul class="station-list">
 					<li>
-						<a href="/PlayList/music.m3u8" data-title="LoFi"  data-category="Lofi" class="play-m3u8">wwww</a>
+						<a href="https://streamvideo.luxnet.ua/lux/smil:lux.stream.smil/chunklist.m3u8" data-title="lux fm"  data-stream="lux fm" data-category="Lofi" data-stream="m3u8" class="play-m3u8">lux fm</a>
+					</li>
+					<li>
+						<a href="/PlayList/music.m3u8" data-title="LoFi"  data-stream="LoFi" data-category="Lofi" data-stream="m3u8" class="play-m3u8">wwww</a>
 					</li>
 					<li> 
-						<a href="https://hlsyoufm.akamaized.net/hls/live/2016538/youfm/master.m3u8" data-title="LoFi 2" data-category="Lofi" class="play-m3u8">TdsadasdadasssEST2</a>
-					</li>
-
-					<li>
-						<a href="https://streamvideo.luxnet.ua/luxlviv/luxlviv.stream/playlist.m3u8" data-title="LoFi 3"  data-category="Lofi" class="play-m3u8">wwww</a>
+						<a href="https://hlsyoufm.akamaized.net/hls/live/2016538/youfm/master.m3u8" data-title="LoFi 2" data-category="Lofi" data-stream="m3u8"  class="play-m3u8">TdsadasdadasssEST2</a>
 					</li>
 					<li>
-						<a href="https://stream.ram.radio/audio/ram.stream_aac/playlist.m3u8"  data-title="LoFi 4"  data-category="Lofi" class="play-m3u8">Ссылка на поток M3U8</a>
+						<a href="https://streamvideo.luxnet.ua/luxlviv/luxlviv.stream/playlist.m3u8" data-title="LoFi 3"  data-category="Lofi" data-stream="m3u8"  class="play-m3u8">wwww</a>
+					</li>
+					<li>
+						<a href="https://stream.ram.radio/audio/ram.stream_aac/playlist.m3u8"  data-title="LoFi 4"  data-category="Lofi" data-stream="m3u8"  class="play-m3u8">Ссылка на поток M3U8</a>
 					</li>
 				</ul>
 			</div>
+
 		</div>
 
 </div>

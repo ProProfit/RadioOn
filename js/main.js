@@ -2,7 +2,6 @@ var audioPlayer = document.getElementById('audioPlayer');
 var currentTitleElement = document.getElementById('currentTitle');
 var volumeRange = document.getElementById('volumeRange');
 var audioElement = document.getElementById('audioPlayer');
-var audioPlayer2 = document.getElementById('audioPlayer2');
 var isAudioReady = false;
 
 function playTrack(trackSource, trackTitle) {
@@ -90,11 +89,11 @@ $(document).ready(function () {
         audioPlayer.play();
       });
     } else {
-      alert('Ваш браузер не поддерживает воспроизведение M3U8-потоков с использованием Hls.js.');
+      alert('Your browser does not support playing M3U8 streams using Hls.js.');
     }
   }
 
-  $(document).on('click', '#playlist a', function (e) {
+  $(document).on('click', '.playlist a', function (e) {
     e.preventDefault();
     var trackSource = $(this).attr('href');
     var trackTitle = $(this).data('title');
@@ -111,14 +110,19 @@ $(document).ready(function () {
     }
     audioPlayer.play();
   });
-  $(document).on('click', '#pauseBtn', function () {
-    audioPlayer.pause();
-  });
-  $(document).on('input', '#volumeRange', function () {
-    audioPlayer.volume = parseFloat(volumeRange.value) / 100;
-    var output = document.getElementById('val_lvl');
-    output.innerHTML = volumeRange.value;
-  });
+
+	$(document).on('click', '#stopBtn', function () {
+		audioPlayer.pause();
+	});
+
+  // $(document).on('click', '#pauseBtn', function () {
+  //   audioPlayer.pause();
+  // });
+  // $(document).on('input', '#volumeRange', function () {
+  //   audioPlayer.volume = parseFloat(volumeRange.value) / 100;
+  //   var output = document.getElementById('val_lvl');
+  //   output.innerHTML = volumeRange.value;
+  // });
   // audioElement.style.display = 'none';
 });
 
@@ -151,16 +155,16 @@ function updateStationData(selectedStation) {
 }
 
 // Устанавливаем интервал обновления каждые 30 секунд (30000 миллисекунд)
-setInterval(function () {
-  // Получаем активную станцию
-  const selectedStation = $('.more a.active, .hitfm a.active').data('stream');
-  // Проверяем, к какому плейлисту относится выбранная ссылка, и выполняем соответствующие действия
-  if ($('.more a.active').length) {
-    getCurrentSongInfo(selectedStation);
-  } else if ($('.hitfm a.active').length) {
-    getRadioDataAndUpdateTitleAPI(selectedStation);
-  }
-}, 30000);
+// setInterval(function () {
+//   // Получаем активную станцию
+//   const selectedStation = $('.more a.active, .hitfm a.active').data('stream');
+//   // Проверяем, к какому плейлисту относится выбранная ссылка, и выполняем соответствующие действия
+//   if ($('.more a.active').length) {
+//     getCurrentSongInfo(selectedStation);
+//   } else if ($('.hitfm a.active').length) {
+//     getRadioDataAndUpdateTitleAPI(selectedStation);
+//   }
+// }, 30000);
 
 
 
@@ -176,22 +180,45 @@ $(document).ready(function () {
 			// Получим выбранную категорию
 			const selectedCategory = $(this).data('category');
 
-			// Покажем или скроем станции в зависимости от выбранной категории
-			$('.hitfm ul li a, .more ul li a,.M3U8 ul li a').each(function () {
-					const stationCategory = $(this).data('category');
+			// // Покажем или скроем станции в зависимости от выбранной категории
+			// $('.hitfm ul li a, .more ul li a,.M3U8 ul li a').each(function () {
+			// 		const stationCategory = $(this).data('category');
 
-					if (selectedCategory === 'all' || selectedCategory === stationCategory) {
-							$(this).show();
-					} else {
-							$(this).hide();
-					}
-			});
+			// 		if (selectedCategory === 'all' || selectedCategory === stationCategory) {
+			// 				$(this).show();
+			// 		} else {
+			// 				$(this).hide();
+			// 		}
+			// });
+
+
+// TEST
+
+// Покажем или скроем плейлисты в зависимости от выбранной категории
+$('.playlist').each(function () {
+	const $playlist = $(this);
+	const $stations = $playlist.find('ul li a');
+
+	const isVisible = $stations.toArray().some(function (station) {
+			const stationCategory = $(station).data('category');
+			return selectedCategory === 'all' || selectedCategory === stationCategory;
+	});
+
+	$playlist.toggle(isVisible || selectedCategory === 'all');
+	$stations.each(function () {
+			const stationCategory = $(this).data('category');
+			$(this).toggle(selectedCategory === 'all' || selectedCategory === stationCategory);
+	});
+});
+
+
+// END TEST
 	});
 
 // Обработчик клика для выбора станции
-$('.hitfm ul li a, .more ul li a, .M3U8 ul li a').on('click', function () {
+$('.playlist ul li a').on('click', function () {
 	// Удалим класс 'active' у всех ссылок внутри .category-selector
-	$('.hitfm ul li a, .more ul li a, .M3U8 ul li a').removeClass('active');
+	$('.playlist ul li a').removeClass('active');
 
 	// Добавим класс 'active' к выбранной ссылке
 	$(this).addClass('active');
