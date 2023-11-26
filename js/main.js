@@ -155,18 +155,16 @@ function updateStationData(selectedStation) {
 }
 
 // Устанавливаем интервал обновления каждые 30 секунд (30000 миллисекунд)
-// setInterval(function () {
-//   // Получаем активную станцию
-//   const selectedStation = $('.more a.active, .hitfm a.active').data('stream');
-//   // Проверяем, к какому плейлисту относится выбранная ссылка, и выполняем соответствующие действия
-//   if ($('.more a.active').length) {
-//     getCurrentSongInfo(selectedStation);
-//   } else if ($('.hitfm a.active').length) {
-//     getRadioDataAndUpdateTitleAPI(selectedStation);
-//   }
-// }, 30000);
-
-
+setInterval(function () {
+  // Получаем активную станцию
+  const selectedStation = $('.more a.active, .hitfm a.active').data('stream');
+  // Проверяем, к какому плейлисту относится выбранная ссылка, и выполняем соответствующие действия
+  if ($('.more a.active').length) {
+    getCurrentSongInfo(selectedStation);
+  } else if ($('.hitfm a.active').length) {
+    getRadioDataAndUpdateTitleAPI(selectedStation);
+  }
+}, 30000);
 
 $(document).ready(function () {
 	// Обработчик клика для выбора категории
@@ -179,20 +177,6 @@ $(document).ready(function () {
 
 			// Получим выбранную категорию
 			const selectedCategory = $(this).data('category');
-
-			// // Покажем или скроем станции в зависимости от выбранной категории
-			// $('.hitfm ul li a, .more ul li a,.M3U8 ul li a').each(function () {
-			// 		const stationCategory = $(this).data('category');
-
-			// 		if (selectedCategory === 'all' || selectedCategory === stationCategory) {
-			// 				$(this).show();
-			// 		} else {
-			// 				$(this).hide();
-			// 		}
-			// });
-
-
-// TEST
 
 // Покажем или скроем плейлисты в зависимости от выбранной категории
 $('.playlist').each(function () {
@@ -210,9 +194,6 @@ $('.playlist').each(function () {
 			$(this).toggle(selectedCategory === 'all' || selectedCategory === stationCategory);
 	});
 });
-
-
-// END TEST
 	});
 
 // Обработчик клика для выбора станции
