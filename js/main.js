@@ -26,7 +26,6 @@ function updateCurrentSong(title) {
 
 function getRadioDataAndUpdateTitleAPI(selectedStation) {
   const apiUrl = `https://o.tavrmedia.ua/${selectedStation}`;
-
    $.ajax({
     type: 'GET',
     url: apiUrl,
@@ -77,6 +76,7 @@ function getCurrentSongInfo(selectedStation) {
 		return decodedText;
 	}
 }
+
 $(document).ready(function () {
   // Определение функции playM3U8WithHLS здесь
   function playM3U8WithHLS(url) {
@@ -89,11 +89,11 @@ $(document).ready(function () {
         audioPlayer.play();
       });
     } else {
-      alert('Your browser does not support playing M3U8 streams using Hls.js.');
+      console.log('Your browser does not support playing M3U8 streams using Hls.js.');
     }
   }
 
-  $(document).on('click', '.playlist a', function (e) {
+  $(document).on('click', '#playlist a', function (e) {
     e.preventDefault();
     var trackSource = $(this).attr('href');
     var trackTitle = $(this).data('title');
@@ -114,16 +114,6 @@ $(document).ready(function () {
 	$(document).on('click', '#stopBtn', function () {
 		audioPlayer.pause();
 	});
-
-  // $(document).on('click', '#pauseBtn', function () {
-  //   audioPlayer.pause();
-  // });
-  // $(document).on('input', '#volumeRange', function () {
-  //   audioPlayer.volume = parseFloat(volumeRange.value) / 100;
-  //   var output = document.getElementById('val_lvl');
-  //   output.innerHTML = volumeRange.value;
-  // });
-  // audioElement.style.display = 'none';
 });
 
 // Добавьте класс "playlist" ко всем ссылкам плейлиста
@@ -171,10 +161,8 @@ $(document).ready(function () {
 	$('.category-selector ul li a').on('click', function () {
 			// Удалим класс 'active' у всех ссылок внутри .category-selector
 			$('.category-selector ul li a').removeClass('active');
-
 			// Добавим класс 'active' к выбранной ссылке
 			$(this).addClass('active');
-
 			// Получим выбранную категорию
 			const selectedCategory = $(this).data('category');
 
@@ -195,7 +183,7 @@ $('.playlist').each(function () {
 	});
 });
 	});
-
+	
 // Обработчик клика для выбора станции
 $('.playlist ul li a').on('click', function () {
 	// Удалим класс 'active' у всех ссылок внутри .category-selector
