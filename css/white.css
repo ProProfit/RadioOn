@@ -85,6 +85,17 @@ table {
   input[type=range]#volumeRange {
     width: 80%;
   }
+  .category-selector {
+    margin-top: 30px;
+    position: relative !important;
+  }
+  .category-selector ul {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-pack: distribute !important;
+        justify-content: space-around !important;
+  }
 }
 body {
   position: relative;
