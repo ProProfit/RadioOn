@@ -19,8 +19,17 @@
 
 <body>
 	<div class="header">
+		
 		<div class="title-logo">Radio On</div>
-		<p id="changeTheme">[SWITCH-THEME]</p>
+		<div id="block_right">
+			<ul>
+				<li><div id="changeTheme">[SWITCH-THEME]</div></li>
+				<li><div>	<button id="sleepTimerBtn">Set Sleep Timer</button></div></li>
+			</ul>
+			
+			
+		</div>
+	
 	</div>
 
 	<!-- CONTROL -->
@@ -145,16 +154,14 @@
 				</ul>
 			</div>
 
-			<div id="playlist" class="playlist M3U8" >
+			<div id="TrackList" class="playlist M3U8" >
 				<h2 class="playlist-title">LoFi</h2>
 				<ul class="station-list">
 					<li>
-						<a href="https://185.187.81.226/loungefm" data-title="Lounge FM"  data-stream="loungefm320" data-category="LoFi" data-stream="m3u8" class="play-m3u8">Lounge FM</a>
+						<a href="https://cast.mediaonline.net.ua/loungefm" data-title="Lounge FM"  data-stream="loungefm320" data-category="LoFi" class="play-m3u8">Lounge FM</a>
 					</li>
-					<li>
-						<a href="https://radioclub.ua/upload/songs/file/2020/42/8b/5e27eda73f9c9_jamala_dzhamala_-_1944_zffm.mp3" data-title="Lounge FM"  data-stream="loungefm320" data-category="LoFi" data-stream="m3u8" class="play-m3u8">Lounge FM</a>
+								<a href="https://cast.mediaonline.net.ua/acoustic" data-title="Lounge FM"  data-stream="loungefm320" data-category="LoFi" data-stream="m3u8" class="play-m3u8">Lounge FM</a>
 					</li>
-				
 			</div>
 
 			<div id="playlist" class="playlist M3U8" >
@@ -163,34 +170,39 @@
 					<li>
 						<a href="https://streamvideo.luxnet.ua/lux/smil:lux.stream.smil/chunklist.m3u8" data-title="lux fm"  data-stream="lux fm" data-category="test" data-stream="m3u8" class="play-m3u8">lux fm</a>
 					</li>
-					<li>
-						<a href="PlayList/music.m3u8" data-title="LoFi"  data-stream="LoFi"  data-stream="m3u8" id="play-m3u8">wwww</a>
-					</li>
-					<li>
-						<a href="PlayList/test.m3u8" data-title="LoFi"  data-stream="LoFi" data-category="test" data-stream="m3u8" class="play-m3u8">TEST</a>
-					</li>
 					<li> 
 						<a href="https://hlsyoufm.akamaized.net/hls/live/2016538/youfm/master.m3u8" data-title="LoFi 2" data-category="test" data-stream="m3u8"  class="play-m3u8">TdsadasdadasssEST2</a>
 					</li>
 					<li>
 						<a href="https://streamvideo.luxnet.ua/luxlviv/luxlviv.stream/playlist.m3u8" data-title="luxl viv"  data-category="test" data-stream="m3u8"  class="play-m3u8">lux lviv</a>
 					</li>
-					<li>
-						<a href="https://stream.ram.radio/audio/ram.stream_aac/playlist.m3u8"  data-title="Ссылка на поток M3U8"  data-category="test" data-stream="m3u8dddddd"  class="play-m3u8">Ссылка на поток M3U8</a>
-					</li>
-					<li>
-						<a href="https://cast.radiogroup.com.ua/avtoradio" data-title="Avtoradio" data-stream="bayraktar">Avtoradio</a>
-					</li>
 				</ul>
 			</div>
 
-		</div>
+			<div id="TrackList" class="playlist" >
+				<h2 class="playlist-title">My PlayLists</h2>
+				<ul class="station-list">
+					<li><a href="#" LIst="РВВ" data-stream="Руки Вверх">Руки Вверх</a></li>
+					<li><a href="#" list="Tyrok" data-stream="Tyrok" data-title="Tyrk">Турк Music</a></li>
+				</ul>
+			</div>
 
+			<div id="playlist" class="playlist World" >
+				<h2 class="playlist-title">Radio World</h2>
+				<ul class="station-list">
+					<li>
+						<a href="	http://yayin.radyosirin.com:9570/mp3/1/"  data-category="Tyrok" data-stream="Radyo Şirin3">Radyo Şirin</a>
+					</li>
+				
+				</ul>
+			</div>
 </div>
 	</div>
 	</div>
 	<script src="js/main.js"></script>
-	<script src="js/metadataApisong.js"></script>
+	<script src="js/test.js"></script>
+	<!-- <script src="js/audioFunctions.js"></script> -->
+
 </body>
 <script>
 	(function() {

@@ -1,5 +1,4 @@
 #EXTM3U
-# created by Ferncast Aixtream Audio Engine skywalker (v3.3.2)
 #EXT-X-STREAM-INF:BANDWIDTH=96000,CODECS="mp4a.40.5"
 https://hlsyoufm.akamaized.net/hls/live/2016538/youfm/96/seg.m3u8
 #EXT-X-STREAM-INF:BANDWIDTH=96000,CODECS="mp4a.40.5"

@@ -11,11 +11,14 @@ body
 	overflow-y: scroll
 	color: $w
 
-#changeTheme
+#block_right
 	position: absolute
 	top: 0
-	right: 0
-	margin: 0 20px
+	right: 20px
+	li
+		padding: 10px
+
+#changeTheme
 	cursor: pointer
 
 html
@@ -123,7 +126,7 @@ audio#audioPlayer
 				content: "[•] "
 
 
-#playlist
+#playlist, #TrackList
 	display: inline-block
 	margin-top: 80px
 	h2
@@ -186,3 +189,14 @@ input[type=range]#volumeRange
 	&:after
 		color: $w
 		content: ' ]'
+
+// ТЕСЕ
+#searchInput
+	margin-left: 20px
+	padding: 5px
+
+
+#sleepTimerBtn 
+	margin-left: 10px
+	padding: 5px
+

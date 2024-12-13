@@ -106,11 +106,16 @@ body {
   color: #eceff4;
 }
 
-#changeTheme {
+#block_right {
   position: absolute;
   top: 0;
-  right: 0;
-  margin: 0 20px;
+  right: 20px;
+}
+#block_right li {
+  padding: 10px;
+}
+
+#changeTheme {
   cursor: pointer;
 }
 
@@ -262,40 +267,40 @@ audio#audioPlayer {
   content: "[•] ";
 }
 
-#playlist {
+#playlist, #TrackList {
   display: inline-block;
   margin-top: 80px;
 }
-#playlist h2 {
+#playlist h2, #TrackList h2 {
   display: block;
   font-size: 1rem;
   margin: 20px 0;
 }
-#playlist h2:before {
+#playlist h2:before, #TrackList h2:before {
   content: "[ ";
 }
-#playlist h2:after {
+#playlist h2:after, #TrackList h2:after {
   content: " ]";
 }
-#playlist a {
+#playlist a, #TrackList a {
   display: block;
   font-size: 1rem;
   margin: 10px auto;
   color: white;
   text-decoration: none;
 }
-#playlist a:before {
+#playlist a:before, #TrackList a:before {
   content: "[] ";
 }
-#playlist a:hover {
+#playlist a:hover, #TrackList a:hover {
   -webkit-transition-duration: 0.5s;
           transition-duration: 0.5s;
 }
-#playlist a:hover:before {
+#playlist a:hover:before, #TrackList a:hover:before {
   content: "[•] ";
   color: #d8dee9;
 }
-#playlist a.active:before {
+#playlist a.active:before, #TrackList a.active:before {
   content: "[•] ";
 }
 
@@ -334,4 +339,14 @@ input[type=range]#volumeRange:before {
 input[type=range]#volumeRange:after {
   color: #eceff4;
   content: " ]";
+}
+
+#searchInput {
+  margin-left: 20px;
+  padding: 5px;
+}
+
+#sleepTimerBtn {
+  margin-left: 10px;
+  padding: 5px;
 }

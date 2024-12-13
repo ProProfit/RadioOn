@@ -1,4 +1,11 @@
 #EXTM3U
-#EXT-X-STREAM-INF:BANDWIDTH=96000,CODECS="mp4a.40.5"
-https://fs.fex.net/download/4763183109?fs_id=16&storage_file_id=3907560867
-
+#EXTINF: -1, MiyaGi & Andy Panda - Minor
+https://cdn6.sefon.pro/prev/NPRJ_0zAo_xwIVOFFmAMCg/1704854286/191/MiyaGi%20%26%20Andy%20Panda%20-%20Minor%20%28192kbps%29.mp3
+#EXTINF: -1, Ruki Vverkh - Chernoe More
+https://cdn.drivemusic.club/dl/online/m-uAT_MOJV7IBBhIspybUQ/1704854604/download_music/2023/05/ruki-vverkh-chjornoe-more.mp3
+#EXTINF: -1, Kaaze - Electro Boy
+https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3
+#EXTINF: -1, Jordan Schor - Home
+https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3
+#EXTINF: -1, Martin Garrix - Proxy
+https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3

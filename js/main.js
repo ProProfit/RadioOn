@@ -1,7 +1,6 @@
 var audioPlayer = document.getElementById('audioPlayer');
 var currentTitleElement = document.getElementById('currentTitle');
 var volumeRange = document.getElementById('volumeRange');
-// var audioElement = document.getElementById('audioPlayer');
 var isAudioReady = false;
 
 function playTrack(trackSource, trackTitle) {
@@ -183,30 +182,8 @@ $('.playlist').each(function () {
 	});
 });
 	});
-	
-// Обработчик клика для выбора станции
-// $('.playlist ul li a').on('click', function () {
-// 	// Удалим класс 'active' у всех ссылок внутри .category-selector
-// 	$('.playlist ul li a').removeClass('active');
 
-// 	// Добавим класс 'active' к выбранной ссылке
-// 	$(this).addClass('active');
-
-// 	// Получим выбранную станцию и категорию
-// 	const selectedStation = $(this).data('stream');
-// 	const selectedCategory = $(this).data('category');
-
-// 	// Здесь выполняйте действия в зависимости от выбранной станции и категории
-// 	// Например, выводите информацию о выбранной станции и категории
-// 	console.log(`Selected Station: ${selectedStation}`);
-// 	console.log(`Selected Category: ${selectedCategory}`);
-// });
-
-// TEST
-
-
-
-// Обработчик клика для выбора станции
+	// Обработчик клика для выбора станции
 $('.playlist ul li a').on('click', function () {
 	// Удалим класс 'active' у всех ссылок внутри .category-selector
 	$('.playlist ul li a').removeClass('active');
@@ -222,11 +199,13 @@ $('.playlist ul li a').on('click', function () {
 	$('#currentTitle').text(`${selectedStation} (${selectedCategory})`);
 	$('#currentSong').text(`Now playing: loading...`);
 
+
 	// Здесь можно добавить дополнительные действия в зависимости от выбранной станции и категории
 	// Например, обновление данных о текущем треке или станции
 	updateStationData(selectedStation);
 });
+  // Обновляем название текущей проигрываемой песни
 
-
-// END TEST
 });
+
+
