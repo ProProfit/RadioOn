@@ -87,6 +87,7 @@ $(document).ready(function () {
       hls.on(Hls.Events.MANIFEST_PARSED, function () {
         audioPlayer.play();
       });
+      updateCurrentSong(trackTitle);
     } else {
       console.log('Your browser does not support playing M3U8 streams using Hls.js.');
     }
