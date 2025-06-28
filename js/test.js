@@ -94,15 +94,15 @@ document.getElementById('sleepTimerBtn').addEventListener('click', function() {
 
 // Поиск станций
 
-document.getElementById('searchInput').addEventListener('input', function() {
-  var filter = this.value.toLowerCase();
-  var stationList = document.querySelectorAll('.station-list li');
-  stationList.forEach(function(station) {
-    var stationTitle = station.querySelector('a').getAttribute('data-title').toLowerCase();
-    if (stationTitle.includes(filter)) {
-      station.style.display = '';
-    } else {
-      station.style.display = 'none';
-    }
-  });
-});
+// document.getElementById('searchInput').addEventListener('input', function() {
+//   var filter = this.value.toLowerCase();
+//   var stationList = document.querySelectorAll('.station-list li');
+//   stationList.forEach(function(station) {
+//     var stationTitle = station.querySelector('a').getAttribute('data-title').toLowerCase();
+//     if (stationTitle.includes(filter)) {
+//       station.style.display = '';
+//     } else {
+//       station.style.display = 'none';
+//     }
+//   });
+// });
