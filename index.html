@@ -25,6 +25,7 @@
 			<ul>
 				<li><div id="changeTheme">[SWITCH-THEME]</div></li>
 				<li><div>	<button id="sleepTimerBtn">Set Sleep Timer</button></div></li>
+				<!-- <input type="text" id="searchInput" placeholder="Поиск станции..." /> -->
 			</ul>
 			
 			
@@ -56,7 +57,7 @@
 			<div id="Audio-Title-Play-title-API">
 				<div id="currentSong">Now playing:</div>
 			</div>
-
+			<audio id="audioPlayer" controls style="width: 100%;"></audio>
 			<div id="audioPlayerContainer">
 				<audio id="audioPlayer" controls="" autoplay="false"  contenteditable="true" type="application/x-mpegURL" controlslist="nodownload" style="display: none;"></audio>
 
@@ -70,7 +71,7 @@
 	<h2>Select a category:</h2>
 	<ul>
 			<li><a href="#" data-category="all">All</a></li>
-			<li><a href="#" data-category="Pop">Pop</a></li>
+			<li><a href="#" data-category="pop">Pop</a></li>
 			<li><a href="#" data-category="Rok">Rok</a></li>
 			<li><a href="#" data-category="Relax">Relax</a></li>
 			<li><a href="#" data-category="Lofi">LoFi</a></li>
@@ -89,7 +90,7 @@
 				<h2 class="playlist-title">Tavr media</h2>
 				<ul class="station-list">
 					<li>
-						<a href="https://online.hitfm.ua/HitFM_HD" data-title="Hit-FM" data-stream="hit" data-category="Pop">Hit-FM</a>
+						<a href="https://online.hitfm.ua/HitFM_HD" data-title="Hit-FM" data-stream="hit" data-category="pop">Hit-FM</a>
 					</li>
 					<li>
 						<a href="https://online.radioroks.ua/RadioROKS_HD" data-title="Radio ROKS" data-stream="roks" data-category="Rok">Radio ROKS</a>
@@ -125,7 +126,7 @@
 				<h2 class="playlist-title">LoFi</h2>
 				<ul class="station-list">
 					<li>
-						<a href="https://cast.mediaonline.net.ua/loungefm" data-title="Lounge FM"  data-stream="loungefm320" data-category="LoFi" class="play-m3u8">Lounge FM</a>
+						<a href="https://cast.mediaonline.net.ua/loungefm320" data-title="Lounge FM"  data-stream="loungefm320" data-category="LoFi" class="play-m3u8">Lounge FM</a>
 					</li>
 								<a href="https://cast.mediaonline.net.ua/acoustic" data-title="Lounge FM"  data-stream="loungefm320" data-category="LoFi" data-stream="m3u8" class="play-m3u8">Lounge FM</a>
 					</li>
@@ -154,6 +155,14 @@
 				</ul>
 			</div>
 
+			<div id="TrackList" class="playlist" >
+				<h2 class="playlist-title">My Hits</h2>
+				<ul class="station-list">
+					
+					<li><a href="#" list="MyHit" data-stream="Tyrok" data-title="Tyrk">My Best</a></li>
+				</ul>
+			</div>
+
 			<div id="playlist" class="playlist World" >
 				<h2 class="playlist-title">Radio World</h2>
 				<ul class="station-list">
@@ -163,6 +172,17 @@
 				
 				</ul>
 			</div>
+			
+			<div id="playlist" class="playlist World" >
+				<h2 class="playlist-title">Radio</h2>
+				<ul class="station-list">
+					<li>
+						<a href="https://fs24.fex.net/play/5467959707.mp3"  data-category="2222" data-stream="Radyo 2222222">Radyo 22222</a>
+					</li>
+				
+				</ul>
+			</div>
+</div>
 </div>
 	</div>
 	</div>
@@ -203,7 +223,9 @@
     });
 
     // Скрыть элемент <audio>
-    audioElement.style.display = 'none';
+    // document.getElementById('audioPlayer').style.display = 'none'; // если нужно скрыть
+
 
 </script>
+
 </html>
