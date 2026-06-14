@@ -149,7 +149,9 @@
     document.getElementById('stationCategory').value = s.category || '';
     document.getElementById('stationGroup').value    = s.group    || '';
     document.getElementById('stationStream').value   = s.stream   || '';
-    document.querySelector('input[name="stationType"][value="' + (s.type || 'mp3') + '"]').checked = true;
+    document.querySelectorAll('input[name="stationType"]').forEach(function (radio) {
+      radio.checked = radio.value === (s.type || 'mp3');
+    });
     document.getElementById('stationForm').classList.remove('hidden');
   }
 
@@ -165,11 +167,13 @@
     };
     if (!s.title || !s.url) { showStatus('Название и URL обязательны', true); return; }
 
-    if (i >= 0) { state.stations[i] = s; } else { state.stations.push(s); }
+    var updated = state.stations.slice();
+    if (i >= 0) { updated[i] = s; } else { updated.push(s); }
 
-    putFile('stations.json', state.stations, state.stationsSHA,
+    putFile('stations.json', updated, state.stationsSHA,
       'admin: ' + (i >= 0 ? 'update' : 'add') + ' station "' + s.title + '"')
       .then(function (res) {
+        state.stations = updated;
         state.stationsSHA = res.content.sha;
         document.getElementById('stationForm').classList.add('hidden');
         renderStationsTable();
@@ -180,10 +184,12 @@
   function deleteStation(i) {
     if (!confirm('Удалить «' + state.stations[i].title + '»?')) return;
     var name = state.stations[i].title;
-    state.stations.splice(i, 1);
-    putFile('stations.json', state.stations, state.stationsSHA,
+    var updated = state.stations.slice();
+    updated.splice(i, 1);
+    putFile('stations.json', updated, state.stationsSHA,
       'admin: delete station "' + name + '"')
       .then(function (res) {
+        state.stations = updated;
         state.stationsSHA = res.content.sha;
         renderStationsTable();
         showStatus('Удалено');
@@ -260,11 +266,13 @@
     };
     if (!t.title || !t.url) { showStatus('Название и URL обязательны', true); return; }
 
-    if (i >= 0) { state.playlist[i] = t; } else { state.playlist.push(t); }
+    var updated = state.playlist.slice();
+    if (i >= 0) { updated[i] = t; } else { updated.push(t); }
 
-    putFile('PlayList/playlist.json', state.playlist, state.playlistSHA,
+    putFile('PlayList/playlist.json', updated, state.playlistSHA,
       'admin: ' + (i >= 0 ? 'update' : 'add') + ' track "' + t.title + '" in ' + cat)
       .then(function (res) {
+        state.playlist = updated;
         state.playlistSHA = res.content.sha;
         document.getElementById('trackForm').classList.add('hidden');
         renderTracksTable();
@@ -275,10 +283,12 @@
   function deleteTrack(i) {
     if (!confirm('Удалить «' + state.playlist[i].title + '»?')) return;
     var name = state.playlist[i].title;
-    state.playlist.splice(i, 1);
-    putFile('PlayList/playlist.json', state.playlist, state.playlistSHA,
+    var updated = state.playlist.slice();
+    updated.splice(i, 1);
+    putFile('PlayList/playlist.json', updated, state.playlistSHA,
       'admin: delete track "' + name + '"')
       .then(function (res) {
+        state.playlist = updated;
         state.playlistSHA = res.content.sha;
         renderTracksTable();
         renderCategories();
