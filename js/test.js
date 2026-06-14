@@ -1,7 +1,5 @@
-// Глобальная переменная для хранения текущей выбранной категории
 var currentCategory = '';
 
-// Функция для загрузки и проигрывания случайной песни из списка
 function playRandomTrackFromPlaylist(category) {
   fetch('/PlayList/playlist.json')
     .then(function(response) {
@@ -25,84 +23,44 @@ function playRandomTrackFromPlaylist(category) {
       if (!randomTrack.hasOwnProperty('title') || !randomTrack.hasOwnProperty('url')) {
         throw new Error('Invalid track format in playlist.json');
       }
-      playTrack(randomTrack.url, randomTrack.title); // передаем название песни в функцию playTrack
+      playlistTrack(randomTrack.url, randomTrack.title);
     })
     .catch(function(error) {
       console.error(error);
     });
 }
 
-// Функция для проигрывания песни
-function playTrack(url, title) {
+function playlistTrack(url, title) {
+  if (typeof activeHls !== 'undefined' && activeHls) {
+    activeHls.destroy();
+    activeHls = null;
+  }
   var audioPlayer = document.getElementById('audioPlayer');
   audioPlayer.src = url;
-  audioPlayer.play();
-
-  // Обновляем название текущей проигрываемой песни
+  audioPlayer.play().catch(function(err) { console.error('Playback failed:', err); });
   document.getElementById('currentSong').textContent = 'Now playing: ' + title;
-
-  // Событие, которое вызывается, когда песня завершается
-  audioPlayer.addEventListener('ended', function() {
-    // После завершения текущей песни проигрываем следующую из той же категории
+  document.getElementById('currentTitle').textContent = title;
+  audioPlayer.onended = function() {
     playRandomTrackFromPlaylist(currentCategory);
-  });
+  };
 }
 
-// Обработчики событий для кликов по ссылкам категорий
-document.querySelectorAll('.category-selector a').forEach(function(link) {
-  link.addEventListener('click', function(event) {
-    event.preventDefault();
-    currentCategory = this.getAttribute('data-category'); // Обновляем текущую категорию
-    playRandomTrackFromPlaylist(currentCategory);
-  });
-});
-
-// Обработчики событий для кликов по станциям
-document.querySelectorAll('.playlist a').forEach(function(station) {
+// Only handles custom playlist links (href="#") — real stream links are handled by main.js
+document.querySelectorAll('.playlist a[href="#"]').forEach(function(station) {
   station.addEventListener('click', function(event) {
     event.preventDefault();
     var category = this.getAttribute('list');
-    currentCategory = category; // Обновляем текущую категорию
+    currentCategory = category;
     playRandomTrackFromPlaylist(category);
   });
 });
 
-// Обработчик событий для ссылок с классом play-m3u8
-document.querySelectorAll('.play-m3u8').forEach(function(link) {
-  link.addEventListener('click', function(event) {
-    event.preventDefault();
-    var url = this.getAttribute('href');
-    var title = this.getAttribute('data-title');
-    var category = this.getAttribute('data-category');
-    currentCategory = category; // Обновляем текущую категорию
-    playTrack(url, title);
-  });
-});
-//////////////////////////////
-
-// Таймер сна
-
+// Sleep timer
 document.getElementById('sleepTimerBtn').addEventListener('click', function() {
-  var minutes = prompt('Enter sleep timer in minutes:');
-  if (minutes) {
+  var minutes = parseFloat(prompt('Enter sleep timer in minutes:'));
+  if (!isNaN(minutes) && minutes > 0) {
     setTimeout(function() {
       document.getElementById('audioPlayer').pause();
-    }, minutes * 60000); // Умножаем на 60000, чтобы получить миллисекунды
+    }, minutes * 60000);
   }
 });
-
-
-// Поиск станций
-
-// document.getElementById('searchInput').addEventListener('input', function() {
-//   var filter = this.value.toLowerCase();
-//   var stationList = document.querySelectorAll('.station-list li');
-//   stationList.forEach(function(station) {
-//     var stationTitle = station.querySelector('a').getAttribute('data-title').toLowerCase();
-//     if (stationTitle.includes(filter)) {
-//       station.style.display = '';
-//     } else {
-//       station.style.display = 'none';
-//     }
-//   });
-// });

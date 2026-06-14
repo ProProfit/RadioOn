@@ -1,21 +1,14 @@
 var audioPlayer = document.getElementById('audioPlayer');
 var currentTitleElement = document.getElementById('currentTitle');
 var volumeRange = document.getElementById('volumeRange');
-var isAudioReady = false;
+var activeHls = null;
 
 function playTrack(trackSource, trackTitle) {
   audioPlayer.pause();
-  audioPlayer.setAttribute('src', trackSource);
-  currentTitleElement.innerHTML = trackTitle;
-
-  if (isAudioReady) {
-    audioPlayer.play();
-  } else {
-    audioPlayer.addEventListener('canplay', function () {
-      isAudioReady = true;
-      audioPlayer.play();
-    }, { once: true });
-  }
+  audioPlayer.src = trackSource;
+  currentTitleElement.textContent = trackTitle;
+  audioPlayer.load();
+  audioPlayer.play().catch(function (err) { console.error('Playback failed:', err); });
 }
 
 function updateCurrentSong(title) {
@@ -49,21 +42,26 @@ function getRadioDataAndUpdateTitleAPI(selectedStation) {
 }
 
 $(document).ready(function () {
-  function playM3U8WithHLS(url) {
-    var audioPlayer = document.getElementById('audioPlayer');
+  function playM3U8WithHLS(url, title) {
+    if (activeHls) {
+      activeHls.destroy();
+      activeHls = null;
+    }
     if (Hls.isSupported()) {
       var hls = new Hls();
+      activeHls = hls;
       hls.loadSource(url);
       hls.attachMedia(audioPlayer);
       hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        audioPlayer.play();
+        audioPlayer.play().catch(function (err) { console.error('Playback failed:', err); });
+        if (title) currentTitleElement.textContent = title;
       });
     } else {
       console.log('Your browser does not support playing M3U8 streams using Hls.js.');
     }
   }
 
-  $(document).on('click', '#playlist a', function (e) {
+  $(document).on('click', '.playlist a:not([href="#"])', function (e) {
     e.preventDefault();
     var trackSource = $(this).attr('href');
     var trackTitle = $(this).data('title');
@@ -76,10 +74,11 @@ $(document).ready(function () {
   });
 
   $(document).on('click', '#playBtn', function () {
-    if (!audioPlayer.paused) {
+    if (audioPlayer.paused) {
+      audioPlayer.play();
+    } else {
       audioPlayer.pause();
     }
-    audioPlayer.play();
   });
 
   $(document).on('click', '#stopBtn', function () {
@@ -94,9 +93,8 @@ $(document).ready(function () {
   });
 
   function updateStationData(selectedStation) {
-    if (selectedStation === 'hitfm') {
-      const selectedStationHIT = $('.hitfm a.active').data('stream');
-      getRadioDataAndUpdateTitleAPI(selectedStationHIT);
+    if ($('.hitfm a[data-stream="' + selectedStation + '"]').length) {
+      getRadioDataAndUpdateTitleAPI(selectedStation);
     }
   }
 
@@ -105,7 +103,7 @@ $(document).ready(function () {
     if ($('.hitfm a.active').length) {
       getRadioDataAndUpdateTitleAPI(selectedStation);
     }
-  }, 300);
+  }, 30000);
 
   $('.category-selector ul li a').on('click', function () {
     $('.category-selector ul li a').removeClass('active');
