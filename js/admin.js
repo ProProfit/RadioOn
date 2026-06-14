@@ -320,10 +320,11 @@
     if (!cat) return;
     var count = state.playlist.filter(function (t) { return t.category === cat; }).length;
     if (!confirm('Удалить категорию «' + cat + '» и все треки (' + count + ')?')) return;
-    state.playlist = state.playlist.filter(function (t) { return t.category !== cat; });
-    putFile('PlayList/playlist.json', state.playlist, state.playlistSHA,
+    var updated = state.playlist.filter(function (t) { return t.category !== cat; });
+    putFile('PlayList/playlist.json', updated, state.playlistSHA,
       'admin: delete category "' + cat + '"')
       .then(function (res) {
+        state.playlist = updated;
         state.playlistSHA = res.content.sha;
         renderCategories();
         showStatus('Категория удалена');
