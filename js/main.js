@@ -125,7 +125,7 @@ function fetchAndRenderPlaylists() {
     })
     .then(function(tracks) {
       var $container = $('.playList-container');
-      $container.find('.custom-playlist').remove();
+      $container.find('.custom-playlist:not(.private-playlist)').remove();
 
       var groupNames = [];
       var groups = {};
