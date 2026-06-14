@@ -1,0 +1,206 @@
+/* ── Mobile / Tablet responsive overrides ──────────────────────────────────
+   Loaded on top of every theme. Uses !important only where theme CSS sets
+   layout-critical values that need unconditional override on small screens.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 720px) {
+
+  /* ── Header ── */
+  .header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-bottom: 8px;
+  }
+
+  .title-logo {
+    font-size: 28px;
+    margin: 12px 10px 6px;
+  }
+
+  #block_right {
+    position: static !important;
+    width: 100%;
+  }
+  #block_right ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    gap: 6px;
+  }
+  #block_right li {
+    padding: 4px 8px;
+  }
+
+  #changeTheme {
+    font-size: 0.85rem !important;
+  }
+
+  #sleepTimerBtn {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+
+  /* ── Container ── */
+  .container {
+    padding: 10px;
+  }
+
+  /* ── Controls ── */
+  .control {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 10px;
+  }
+
+  #text-controls {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 16px;
+  }
+
+  .txt-btn {
+    font-size: 1.1rem;
+    padding: 6px 2px;
+  }
+
+  #volumeControl {
+    width: 100% !important;
+    margin: 0;
+  }
+
+  input[type=range]#volumeRange {
+    width: 75%;
+  }
+
+  /* ── Audio info block ── */
+  .Audio_TItle_Station {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  #currentTitle {
+    font-size: 0.9rem;
+    margin-left: 8px;
+  }
+
+  #currentSong {
+    font-size: 0.85rem;
+  }
+
+  /* ── Category selector ── */
+  .category-selector {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100%;
+    margin: 14px 0 4px;
+  }
+
+  .category-selector h2 {
+    text-align: center;
+    margin: 6px auto;
+  }
+
+  .category-selector ul {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-wrap: wrap !important;
+        flex-wrap: wrap !important;
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+    gap: 4px;
+    margin-top: 8px !important;
+  }
+
+  .category-selector a {
+    margin: 4px 6px;
+    font-size: 0.9rem;
+  }
+
+  /* ── Playlist grid → single column ── */
+  .playList-container {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
+    margin: 10px 0;
+  }
+
+  .playlist,
+  #playlist,
+  #TrackList {
+    display: block !important;
+    margin-top: 20px !important;
+    width: 100%;
+  }
+
+  .playlist-title,
+  #playlist h2,
+  #TrackList h2 {
+    margin: 12px 0;
+  }
+
+  .station-list a,
+  #playlist a,
+  #TrackList a {
+    font-size: 0.95rem;
+    margin: 8px 0;
+    padding: 4px 0;
+    min-height: 36px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+/* ── Small phones (≤ 420px) ── */
+@media (max-width: 420px) {
+
+  .title-logo {
+    font-size: 22px;
+  }
+
+  .control_bloks,
+  .Audio-Title {
+    padding: 12px 8px;
+  }
+
+  .category-selector a {
+    font-size: 0.8rem;
+  }
+
+  .station-list a,
+  #playlist a,
+  #TrackList a {
+    font-size: 0.85rem;
+  }
+
+  #volumeControl #val_lvl {
+    font-size: 0.85rem;
+  }
+}
