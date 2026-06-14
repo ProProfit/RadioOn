@@ -209,7 +209,10 @@ function fetchAndRenderPrivatePlaylists(pat) {
     })
     .catch(function(err) {
       console.error('Private playlists:', err.message);
-      document.getElementById('privateBtn').classList.remove('hidden');
+      if (/401|403|denied/i.test(err.message)) {
+        localStorage.removeItem('admin_pat');
+        document.getElementById('privateBtn').classList.remove('hidden');
+      }
     });
 }
 
