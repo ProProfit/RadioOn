@@ -49,12 +49,14 @@
 
   // ── Status ──────────────────────────────────────────────────────────────────
 
+  var statusTimer = null;
   function showStatus(msg, isError) {
     var el = document.getElementById('statusMsg');
     el.textContent = msg;
     el.className = 'status ' + (isError ? 'err' : 'ok');
-    if (isError) return;
-    setTimeout(function () { el.textContent = ''; el.className = 'status'; }, 3000);
+    if (isError) { if (statusTimer) { clearTimeout(statusTimer); statusTimer = null; } return; }
+    if (statusTimer) clearTimeout(statusTimer);
+    statusTimer = setTimeout(function () { el.textContent = ''; el.className = 'status'; statusTimer = null; }, 3000);
   }
 
   // ── Auth ────────────────────────────────────────────────────────────────────
@@ -351,7 +353,16 @@
       document.getElementById('pat').value   = state.pat;
       document.getElementById('owner').value = state.owner;
       document.getElementById('repo').value  = state.repo;
-      enterAdmin();
+      fetch('https://api.github.com/repos/' + state.owner + '/' + state.repo, {
+        headers: { 'Authorization': 'token ' + state.pat }
+      }).then(function (r) {
+        if (!r.ok) throw new Error('Сессия истекла (' + r.status + ') — введите токен заново');
+        enterAdmin();
+      }).catch(function (err) {
+        var errEl = document.getElementById('loginError');
+        errEl.textContent = err.message;
+        errEl.classList.remove('hidden');
+      });
     }
 
     document.getElementById('loginBtn').addEventListener('click', tryLogin);

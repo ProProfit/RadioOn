@@ -4,6 +4,10 @@ var volumeRange = document.getElementById('volumeRange');
 var activeHls = null;
 
 function playTrack(trackSource, trackTitle) {
+  if (activeHls) {
+    activeHls.destroy();
+    activeHls = null;
+  }
   audioPlayer.pause();
   audioPlayer.src = trackSource;
   currentTitleElement.textContent = trackTitle;
@@ -164,6 +168,7 @@ $(document).ready(function () {
 
     $('.playlist').each(function () {
       const $playlist = $(this);
+      if ($playlist.hasClass('custom-playlist')) return;
       const $stations = $playlist.find('ul li a');
 
       const isVisible = $stations.toArray().some(function (station) {
@@ -182,10 +187,8 @@ $(document).ready(function () {
   $(document).on('click', '.playlist ul li a', function () {
     $('.playlist ul li a').removeClass('active');
     $(this).addClass('active');
-    const selectedStation = $(this).data('stream');
-    const selectedCategory = $(this).data('category');
-    $('#currentTitle').text(`${selectedStation} (${selectedCategory})`);
-    $('#currentSong').text(`Now playing: loading...`);
-    updateStationData(selectedStation);
+    const selectedTitle = $(this).data('title');
+    $('#currentTitle').text(selectedTitle || '');
+    $('#currentSong').text('Now playing: loading...');
   });
 });
