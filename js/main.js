@@ -329,7 +329,7 @@ $(document).ready(function () {
     }
   }, 30000);
 
-  $('.category-selector ul li a').on('click', function () {
+  $(document).on('click', '.category-selector ul li a', function () {
     $('.category-selector ul li a').removeClass('active');
     $(this).addClass('active');
     const selectedCategory = $(this).data('category');
