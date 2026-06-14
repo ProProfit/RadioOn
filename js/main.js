@@ -199,7 +199,8 @@ function fetchAndRenderPrivatePlaylists(pat) {
       );
     })
     .then(function(r) {
-      if (!r.ok) throw new Error('Access denied or playlist-private.json not found');
+      if (r.status === 401 || r.status === 403) throw new Error('AUTH_FAIL');
+      if (!r.ok) throw new Error('NOT_FOUND');
       return r.json();
     })
     .then(function(data) {
@@ -209,7 +210,7 @@ function fetchAndRenderPrivatePlaylists(pat) {
     })
     .catch(function(err) {
       console.error('Private playlists:', err.message);
-      if (/401|403|denied/i.test(err.message)) {
+      if (err.message === 'AUTH_FAIL') {
         localStorage.removeItem('admin_pat');
         document.getElementById('privateBtn').classList.remove('hidden');
       }
