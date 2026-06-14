@@ -46,6 +46,35 @@
     .status.err { color: #bf616a; }
 
     td.url-cell { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+#catFilterList li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid #4c566a;
+  font-size: 0.85rem;
+}
+#catFilterList li span { flex: 1; }
+#catFilterList li button {
+  background: none;
+  border: none;
+  color: #eceff4;
+  cursor: pointer;
+  font-family: monospace;
+  padding: 2px 6px;
+}
+#catFilterList li button.del:hover { color: #bf616a; }
+#catFilterList li button:disabled { opacity: 0.3; cursor: default; }
+#catFilterInput { display: flex; gap: 10px; margin-bottom: 10px; }
+#catFilterInput input {
+  padding: 6px;
+  background: #3b4252;
+  color: #eceff4;
+  border: 1px solid #4c566a;
+  font-family: monospace;
+  width: 200px;
+}
   </style>
 </head>
 <body>
@@ -69,6 +98,7 @@
   <div id="tabs">
     <button id="tabStations" class="active">[ Станции ]</button>
     <button id="tabPlaylists">[ Плейлисты ]</button>
+    <button id="tabCategories">[ Категории ]</button>
     <button id="logoutBtn">[ Выход ]</button>
   </div>
   <div id="statusMsg" class="status"></div>
@@ -132,6 +162,20 @@
         <button id="cancelTrackBtn">[ Отмена ]</button>
       </div>
     </div>
+  </div>
+
+  <!-- CATEGORIES TAB -->
+  <div id="sectionCategories" class="hidden">
+    <div class="section-header">
+      <strong>Категории фильтра</strong>
+      <button class="btn-add" id="addCatFilterBtn">[ + Добавить ]</button>
+    </div>
+    <div id="catFilterInput" class="hidden">
+      <input type="text" id="newCatFilterInput" placeholder="Название категории">
+      <button class="btn-add" id="saveCatFilterBtn">[ OK ]</button>
+      <button id="cancelCatFilterBtn" style="background:none;border:1px solid #4c566a;color:#eceff4;padding:4px 12px;cursor:pointer;font-family:monospace;">[ Отмена ]</button>
+    </div>
+    <ul id="catFilterList"></ul>
   </div>
 </div>
 

@@ -2,7 +2,9 @@
   var state = {
     pat: '', owner: '', repo: '',
     stations: [], stationsSHA: '',
-    playlist: [], playlistSHA: ''
+    playlist: [], playlistSHA: '',
+    categories: [], categoriesSHA: '',
+    config: {}, configSHA: ''
   };
 
   // ── GitHub API ──────────────────────────────────────────────────────────────
@@ -105,12 +107,17 @@
   // ── Tabs ────────────────────────────────────────────────────────────────────
 
   function switchTab(tab) {
-    document.getElementById('sectionStations').classList.toggle('hidden', tab !== 'stations');
-    document.getElementById('sectionPlaylists').classList.toggle('hidden', tab !== 'playlists');
-    document.getElementById('tabStations').classList.toggle('active', tab === 'stations');
-    document.getElementById('tabPlaylists').classList.toggle('active', tab === 'playlists');
-    if (tab === 'stations') loadStations();
-    if (tab === 'playlists') loadPlaylist();
+    ['stations', 'playlists', 'categories', 'settings'].forEach(function(t) {
+      var capT = t.charAt(0).toUpperCase() + t.slice(1);
+      var sec = document.getElementById('section' + capT);
+      var btn = document.getElementById('tab' + capT);
+      if (sec) sec.classList.toggle('hidden', tab !== t);
+      if (btn) btn.classList.toggle('active', tab === t);
+    });
+    if (tab === 'stations')   loadStations();
+    if (tab === 'playlists')  loadPlaylist();
+    if (tab === 'categories') loadCategories();
+    if (tab === 'settings')   loadSettings();
   }
 
   // ── Stations ─────────────────────────────────────────────────────────────────
@@ -333,13 +340,95 @@
       }).catch(function (err) { showStatus(err.message, true); });
   }
 
+  // ── Filter Categories ────────────────────────────────────────────────────────
+
+  function loadCategories() {
+    getFile('categories.json').then(function(data) {
+      state.categories = decodeFile(data.content);
+      state.categoriesSHA = data.sha;
+      renderCategoryFilterList();
+      updateCategoriesDatalist();
+    }).catch(function(err) { showStatus(err.message, true); });
+  }
+
+  function renderCategoryFilterList() {
+    var ul = document.getElementById('catFilterList');
+    ul.innerHTML = '';
+    var last = state.categories.length - 1;
+    state.categories.forEach(function(cat, i) {
+      var isAll = cat === 'all';
+      var li = document.createElement('li');
+      li.innerHTML =
+        '<span>' + esc(cat) + '</span>' +
+        '<button onclick="Admin.moveCat(' + i + ',-1)"' + (isAll || i <= 1 ? ' disabled' : '') + '>↑</button>' +
+        '<button onclick="Admin.moveCat(' + i + ',1)"'  + (isAll || i === last ? ' disabled' : '') + '>↓</button>' +
+        '<button class="del" onclick="Admin.deleteCat(' + i + ')"' + (isAll ? ' disabled' : '') + '>🗑</button>';
+      ul.appendChild(li);
+    });
+  }
+
+  function saveCategoriesFile(msg) {
+    putFile('categories.json', state.categories, state.categoriesSHA, msg)
+      .then(function(res) {
+        state.categoriesSHA = res.content.sha;
+        renderCategoryFilterList();
+        updateCategoriesDatalist();
+        showStatus('Сохранено');
+      }).catch(function(err) { showStatus(err.message, true); });
+  }
+
+  function addCategoryFilter() {
+    var name = document.getElementById('newCatFilterInput').value.trim();
+    if (!name) return;
+    if (state.categories.indexOf(name) >= 0) { showStatus('Уже существует', true); return; }
+    var updated = state.categories.slice();
+    updated.push(name);
+    state.categories = updated;
+    document.getElementById('newCatFilterInput').value = '';
+    document.getElementById('catFilterInput').classList.add('hidden');
+    saveCategoriesFile('admin: add category "' + name + '"');
+  }
+
+  function deleteCategoryFilter(i) {
+    var cat = state.categories[i];
+    if (cat === 'all') return;
+    if (!confirm('Удалить «' + cat + '»? Станции с этой категорией останутся.')) return;
+    var updated = state.categories.slice();
+    updated.splice(i, 1);
+    state.categories = updated;
+    saveCategoriesFile('admin: delete category "' + cat + '"');
+  }
+
+  function moveCategoryFilter(i, dir) {
+    var cats = state.categories.slice();
+    var j = i + dir;
+    if (j < 1 || j >= cats.length) return;
+    var tmp = cats[i]; cats[i] = cats[j]; cats[j] = tmp;
+    state.categories = cats;
+    saveCategoriesFile('admin: reorder categories');
+  }
+
+  function updateCategoriesDatalist() {
+    var dl = document.getElementById('categoriesList');
+    if (!dl) return;
+    dl.innerHTML = '';
+    state.categories.forEach(function(cat) {
+      if (cat === 'all') return;
+      var opt = document.createElement('option');
+      opt.value = cat;
+      dl.appendChild(opt);
+    });
+  }
+
   // ── Public (called from onclick in rendered HTML) ─────────────────────────────
 
   window.Admin = {
-    editStation:   function (i) { openStationForm(i); },
-    deleteStation: function (i) { deleteStation(i); },
-    editTrack:     function (i) { openTrackForm(i); },
-    deleteTrack:   function (i) { deleteTrack(i); }
+    editStation:   function(i) { openStationForm(i); },
+    deleteStation: function(i) { deleteStation(i); },
+    editTrack:     function(i) { openTrackForm(i); },
+    deleteTrack:   function(i) { deleteTrack(i); },
+    moveCat:       function(i, dir) { moveCategoryFilter(i, dir); },
+    deleteCat:     function(i) { deleteCategoryFilter(i); }
   };
 
   // ── Init ─────────────────────────────────────────────────────────────────────
@@ -369,6 +458,17 @@
     document.getElementById('logoutBtn').addEventListener('click', logout);
     document.getElementById('tabStations').addEventListener('click', function () { switchTab('stations'); });
     document.getElementById('tabPlaylists').addEventListener('click', function () { switchTab('playlists'); });
+    document.getElementById('tabCategories').addEventListener('click', function () { switchTab('categories'); });
+
+    document.getElementById('addCatFilterBtn').addEventListener('click', function () {
+      document.getElementById('catFilterInput').classList.remove('hidden');
+      document.getElementById('newCatFilterInput').focus();
+    });
+    document.getElementById('saveCatFilterBtn').addEventListener('click', addCategoryFilter);
+    document.getElementById('cancelCatFilterBtn').addEventListener('click', function () {
+      document.getElementById('catFilterInput').classList.add('hidden');
+      document.getElementById('newCatFilterInput').value = '';
+    });
 
     document.getElementById('addStationBtn').addEventListener('click', function () { openStationForm(-1); });
     document.getElementById('saveStationBtn').addEventListener('click', saveStation);
