@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RadioOn Admin</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: monospace; background: #2e3440; color: #eceff4; padding: 20px; }
+    h1 { margin-bottom: 20px; }
+    .hidden { display: none !important; }
+
+    #loginForm label { display: block; margin: 10px 0 4px; }
+    #loginForm input { width: 300px; padding: 6px; background: #3b4252; color: #eceff4; border: 1px solid #4c566a; font-family: monospace; }
+    #loginError { color: #bf616a; margin-top: 10px; }
+
+    #tabs { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; }
+    #tabs button, #logoutBtn { background: none; border: 1px solid #4c566a; color: #eceff4; padding: 6px 14px; cursor: pointer; font-family: monospace; }
+    #tabs button.active { border-color: #eceff4; }
+    #logoutBtn { margin-left: auto; border-color: #bf616a; color: #bf616a; }
+
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { text-align: left; padding: 8px; border-bottom: 1px solid #4c566a; font-size: 0.85rem; }
+    th { color: #88c0d0; }
+    td button { background: none; border: none; color: #eceff4; cursor: pointer; font-family: monospace; padding: 2px 6px; }
+    td button.del:hover { color: #bf616a; }
+
+    .form-group { margin: 10px 0; }
+    .form-group label { display: block; margin-bottom: 4px; font-size: 0.85rem; color: #88c0d0; }
+    .form-group input, .form-group select { width: 100%; padding: 6px; background: #3b4252; color: #eceff4; border: 1px solid #4c566a; font-family: monospace; }
+    .radio-group { display: flex; gap: 20px; }
+    .form-actions { display: flex; gap: 10px; margin-top: 16px; }
+    .form-actions button { padding: 6px 16px; background: none; border: 1px solid #4c566a; color: #eceff4; cursor: pointer; font-family: monospace; }
+    .form-actions button.primary { border-color: #a3be8c; color: #a3be8c; }
+
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .btn-add { background: none; border: 1px solid #a3be8c; color: #a3be8c; padding: 4px 12px; cursor: pointer; font-family: monospace; }
+    .btn-del { background: none; border: 1px solid #bf616a; color: #bf616a; padding: 4px 12px; cursor: pointer; font-family: monospace; }
+
+    #categoryRow { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    #categoryRow select { padding: 6px; background: #3b4252; color: #eceff4; border: 1px solid #4c566a; font-family: monospace; }
+    #newCategoryInput { padding: 6px; background: #3b4252; color: #eceff4; border: 1px solid #4c566a; font-family: monospace; width: 160px; }
+
+    .status { margin: 10px 0; font-size: 0.85rem; min-height: 1.2em; }
+    .status.ok { color: #a3be8c; }
+    .status.err { color: #bf616a; }
+
+    td.url-cell { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginSection">
+  <h1>RadioOn Admin</h1>
+  <div id="loginForm">
+    <label>GitHub PAT<input type="password" id="pat" placeholder="ghp_…"></label>
+    <label>Owner (username)<input type="text" id="owner" placeholder="ProProfit"></label>
+    <label>Repo<input type="text" id="repo" placeholder="RaqdioON"></label>
+    <div class="form-actions">
+      <button type="button" id="loginBtn" class="primary">[ Войти ]</button>
+    </div>
+    <div id="loginError" class="hidden"></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="mainSection" class="hidden">
+  <div id="tabs">
+    <button id="tabStations" class="active">[ Станции ]</button>
+    <button id="tabPlaylists">[ Плейлисты ]</button>
+    <button id="logoutBtn">[ Выход ]</button>
+  </div>
+  <div id="statusMsg" class="status"></div>
+
+  <!-- STATIONS TAB -->
+  <div id="sectionStations">
+    <div class="section-header">
+      <strong>Станции</strong>
+      <button class="btn-add" id="addStationBtn">[ + Добавить ]</button>
+    </div>
+    <table id="stationsTable">
+      <thead><tr><th>Название</th><th>URL</th><th>Категория</th><th>Тип</th><th>Группа</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div id="stationForm" class="hidden">
+      <strong id="stationFormTitle">Добавить станцию</strong>
+      <input type="hidden" id="stationIndex" value="-1">
+      <div class="form-group"><label>Название</label><input type="text" id="stationTitle"></div>
+      <div class="form-group"><label>URL потока</label><input type="text" id="stationUrl"></div>
+      <div class="form-group"><label>Категория</label><input type="text" id="stationCategory" placeholder="pop, Rok, Relax…"></div>
+      <div class="form-group"><label>Группа (плейлист)</label><input type="text" id="stationGroup" placeholder="Tavr media, LoFi…"></div>
+      <div class="form-group"><label>data-stream (tavrmedia, пусто если не нужен)</label><input type="text" id="stationStream" placeholder="hit, roks, kiss…"></div>
+      <div class="form-group">
+        <label>Тип потока</label>
+        <div class="radio-group">
+          <label><input type="radio" name="stationType" value="mp3" checked> MP3</label>
+          <label><input type="radio" name="stationType" value="hls"> HLS</label>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button id="saveStationBtn" class="primary">[ Сохранить ]</button>
+        <button id="cancelStationBtn">[ Отмена ]</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYLISTS TAB -->
+  <div id="sectionPlaylists" class="hidden">
+    <div id="categoryRow">
+      <select id="categorySelect"></select>
+      <button class="btn-add" id="addCategoryBtn">[ + Новая ]</button>
+      <input type="text" id="newCategoryInput" class="hidden" placeholder="Название категории">
+      <button id="saveCategoryBtn" class="btn-add hidden">[ OK ]</button>
+      <button id="deleteCategoryBtn" class="btn-del">[ Удалить категорию ]</button>
+    </div>
+    <div class="section-header">
+      <strong id="trackListTitle">Треки</strong>
+      <button class="btn-add" id="addTrackBtn">[ + Трек ]</button>
+    </div>
+    <table id="tracksTable">
+      <thead><tr><th>Название</th><th>URL</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div id="trackForm" class="hidden">
+      <strong id="trackFormTitle">Добавить трек</strong>
+      <input type="hidden" id="trackIndex" value="-1">
+      <div class="form-group"><label>Название</label><input type="text" id="trackTitle"></div>
+      <div class="form-group"><label>URL</label><input type="text" id="trackUrl"></div>
+      <div class="form-actions">
+        <button id="saveTrackBtn" class="primary">[ Сохранить ]</button>
+        <button id="cancelTrackBtn">[ Отмена ]</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
