@@ -117,9 +117,49 @@ function fetchAndRenderCategories() {
     });
 }
 
+function fetchAndRenderPlaylists() {
+  fetch('PlayList/playlist.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('playlist.json not found');
+      return r.json();
+    })
+    .then(function(tracks) {
+      var $container = $('.playList-container');
+      $container.find('.custom-playlist').remove();
+
+      var groupNames = [];
+      var groups = {};
+      tracks.forEach(function(track) {
+        var g = track.category || 'My Playlist';
+        if (!groups[g]) { groups[g] = []; groupNames.push(g); }
+        groups[g].push(track);
+      });
+
+      groupNames.forEach(function(groupName) {
+        var $div = $('<div>').addClass('playlist custom-playlist');
+        $('<h2>').addClass('playlist-title').text(groupName).appendTo($div);
+        var $ul = $('<ul>').addClass('station-list').appendTo($div);
+
+        groups[groupName].forEach(function(track) {
+          var $a = $('<a>')
+            .attr('href', track.url)
+            .attr('data-title', track.title)
+            .text(track.title);
+          $('<li>').append($a).appendTo($ul);
+        });
+
+        $container.append($div);
+      });
+    })
+    .catch(function(err) {
+      console.error('Could not load playlists:', err);
+    });
+}
+
 $(document).ready(function () {
   fetchAndRenderStations();
   fetchAndRenderCategories();
+  fetchAndRenderPlaylists();
   function playM3U8WithHLS(url, title) {
     if (activeHls) {
       activeHls.destroy();
