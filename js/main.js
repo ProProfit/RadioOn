@@ -137,7 +137,7 @@ $(document).ready(function () {
     audioPlayer.pause();
   });
 
-  $('.hitfm a').on('click', function () {
+  $(document).on('click', '.hitfm a', function () {
     const selectedStation = $(this).data('stream');
     $('.hitfm a').removeClass('active');
     $(this).addClass('active');
