@@ -152,7 +152,7 @@ $(document).ready(function () {
 
   setInterval(function () {
     const selectedStation = $('.hitfm a.active').data('stream');
-    if ($('.hitfm a.active').length) {
+    if ($('.hitfm a.active').length && selectedStation) {
       getRadioDataAndUpdateTitleAPI(selectedStation);
     }
   }, 30000);
@@ -179,7 +179,7 @@ $(document).ready(function () {
     });
   });
 
-  $('.playlist ul li a').on('click', function () {
+  $(document).on('click', '.playlist ul li a', function () {
     $('.playlist ul li a').removeClass('active');
     $(this).addClass('active');
     const selectedStation = $(this).data('stream');
