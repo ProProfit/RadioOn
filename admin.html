@@ -99,6 +99,7 @@
     <button id="tabStations" class="active">[ Станции ]</button>
     <button id="tabPlaylists">[ Плейлисты ]</button>
     <button id="tabCategories">[ Категории ]</button>
+    <button id="tabSettings">[ Настройки ]</button>
     <button id="logoutBtn">[ Выход ]</button>
   </div>
   <div id="statusMsg" class="status"></div>
@@ -118,7 +119,11 @@
       <input type="hidden" id="stationIndex" value="-1">
       <div class="form-group"><label>Название</label><input type="text" id="stationTitle"></div>
       <div class="form-group"><label>URL потока</label><input type="text" id="stationUrl"></div>
-      <div class="form-group"><label>Категория</label><input type="text" id="stationCategory" placeholder="pop, Rok, Relax…"></div>
+      <div class="form-group">
+        <label>Категория</label>
+        <input type="text" id="stationCategory" placeholder="pop, Rok, Relax…" list="categoriesList">
+        <datalist id="categoriesList"></datalist>
+      </div>
       <div class="form-group"><label>Группа (плейлист)</label><input type="text" id="stationGroup" placeholder="Tavr media, LoFi…"></div>
       <div class="form-group"><label>data-stream (tavrmedia, пусто если не нужен)</label><input type="text" id="stationStream" placeholder="hit, roks, kiss…"></div>
       <div class="form-group">
@@ -176,6 +181,22 @@
       <button id="cancelCatFilterBtn" style="background:none;border:1px solid #4c566a;color:#eceff4;padding:4px 12px;cursor:pointer;font-family:monospace;">[ Отмена ]</button>
     </div>
     <ul id="catFilterList"></ul>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div id="sectionSettings" class="hidden">
+    <h3 style="margin-bottom:16px;color:#88c0d0;">Приватные плейлисты</h3>
+    <div class="form-group">
+      <label>GitHub Owner (username)</label>
+      <input type="text" id="privateOwnerInput" placeholder="ProProfit">
+    </div>
+    <div class="form-group">
+      <label>Приватный репозиторий (имя)</label>
+      <input type="text" id="privateRepoInput" placeholder="RaqdioON-private">
+    </div>
+    <div class="form-actions">
+      <button id="saveSettingsBtn" class="primary">[ Сохранить ]</button>
+    </div>
   </div>
 </div>
 

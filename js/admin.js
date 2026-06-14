@@ -420,6 +420,45 @@
     });
   }
 
+  // ── Settings ─────────────────────────────────────────────────────────────────
+
+  function loadSettings() {
+    getFile('config.json').then(function(data) {
+      state.config = decodeFile(data.content);
+      state.configSHA = data.sha;
+      document.getElementById('privateOwnerInput').value = state.config.owner || '';
+      document.getElementById('privateRepoInput').value  = state.config.private_repo || '';
+    }).catch(function() {
+      state.config = {};
+      state.configSHA = '';
+    });
+  }
+
+  function saveSettings() {
+    var updated = {
+      owner:        document.getElementById('privateOwnerInput').value.trim(),
+      private_repo: document.getElementById('privateRepoInput').value.trim()
+    };
+    var body = {
+      message: 'admin: update config',
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(updated, null, 2))))
+    };
+    if (state.configSHA) body.sha = state.configSHA;
+
+    fetch('https://api.github.com/repos/' + state.owner + '/' + state.repo + '/contents/config.json', {
+      method: 'PUT',
+      headers: apiHeaders(),
+      body: JSON.stringify(body)
+    }).then(function(r) {
+      if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'PUT failed'); });
+      return r.json();
+    }).then(function(res) {
+      state.config = updated;
+      state.configSHA = res.content.sha;
+      showStatus('Настройки сохранены');
+    }).catch(function(err) { showStatus(err.message, true); });
+  }
+
   // ── Public (called from onclick in rendered HTML) ─────────────────────────────
 
   window.Admin = {
@@ -469,6 +508,8 @@
       document.getElementById('catFilterInput').classList.add('hidden');
       document.getElementById('newCatFilterInput').value = '';
     });
+    document.getElementById('tabSettings').addEventListener('click', function () { switchTab('settings'); });
+    document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
 
     document.getElementById('addStationBtn').addEventListener('click', function () { openStationForm(-1); });
     document.getElementById('saveStationBtn').addEventListener('click', saveStation);
