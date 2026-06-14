@@ -304,6 +304,43 @@ audio#audioPlayer {
   content: "[•] ";
 }
 
+.playlist {
+  display: inline-block;
+  margin-top: 80px;
+}
+.playlist-title {
+  display: block;
+  font-size: 1rem;
+  margin: 20px 0;
+}
+.playlist-title:before {
+  content: "[ ";
+}
+.playlist-title:after {
+  content: " ]";
+}
+.station-list a {
+  display: block;
+  font-size: 1rem;
+  margin: 10px auto;
+  color: #eceff4;
+  text-decoration: none;
+}
+.station-list a:before {
+  content: "[] ";
+}
+.station-list a:hover {
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+}
+.station-list a:hover:before {
+  content: "[•] ";
+  color: #d8dee9;
+}
+.station-list a.active:before {
+  content: "[•] ";
+}
+
 input[type=range]#volumeRange {
   -webkit-appearance: none;
   width: 65%;

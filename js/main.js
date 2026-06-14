@@ -168,7 +168,6 @@ $(document).ready(function () {
 
     $('.playlist').each(function () {
       const $playlist = $(this);
-      if ($playlist.hasClass('custom-playlist')) return;
       const $stations = $playlist.find('ul li a');
 
       const isVisible = $stations.toArray().some(function (station) {
