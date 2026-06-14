@@ -335,4 +335,68 @@ $(document).ready(function () {
     $('#currentTitle').text(selectedTitle || '');
     $('#currentSong').text('Now playing: loading...');
   });
+
+  // Sleep timer
+  var sleepTimeout = null;
+  var sleepInterval = null;
+
+  function startSleep(minutes) {
+    clearTimeout(sleepTimeout);
+    clearInterval(sleepInterval);
+    var endsAt = Date.now() + minutes * 60 * 1000;
+
+    function tick() {
+      var left = endsAt - Date.now();
+      if (left <= 0) return;
+      var m = Math.floor(left / 60000);
+      var s = Math.floor((left % 60000) / 1000);
+      $('#sleepTimerBtn').text('[' + m + ':' + (s < 10 ? '0' : '') + s + ']');
+    }
+    tick();
+    sleepInterval = setInterval(tick, 1000);
+
+    sleepTimeout = setTimeout(function() {
+      clearInterval(sleepInterval);
+      audioPlayer.pause();
+      $('#sleepTimerBtn').text('[clock]');
+      $('#sleepCancelBtn').addClass('hidden');
+    }, minutes * 60 * 1000);
+
+    $('#sleepCancelBtn').removeClass('hidden');
+    $('#sleepModal').addClass('hidden');
+  }
+
+  function cancelSleep() {
+    clearTimeout(sleepTimeout);
+    clearInterval(sleepInterval);
+    sleepTimeout = null;
+    $('#sleepTimerBtn').text('[clock]');
+    $('#sleepCancelBtn').addClass('hidden');
+  }
+
+  $('#sleepTimerBtn').on('click', function() {
+    $('#sleepModal').removeClass('hidden');
+  });
+
+  $(document).on('click', '.sleep-opt', function() {
+    startSleep(parseInt($(this).data('min')));
+  });
+
+  $('#sleepCustomBtn').on('click', function() {
+    var val = parseInt($('#sleepMinInput').val());
+    if (val > 0) startSleep(val);
+  });
+
+  $('#sleepCancelBtn').on('click', function() {
+    cancelSleep();
+    $('#sleepModal').addClass('hidden');
+  });
+
+  $('#sleepCloseBtn').on('click', function() {
+    $('#sleepModal').addClass('hidden');
+  });
+
+  $('#sleepModal').on('click', function(e) {
+    if (e.target === this) $('#sleepModal').addClass('hidden');
+  });
 });

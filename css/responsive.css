@@ -207,6 +207,7 @@
 /* Utility — нужен для #privateBtn и #privateModal */
 .hidden { display: none !important; }
 
+#sleepModal,
 #privateModal {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -216,10 +217,50 @@
   justify-content: center;
   z-index: 1000;
 }
+#sleepModalInner,
 #privateModalInner {
   padding: 30px;
   min-width: 300px;
   border: 1px solid;
+}
+
+#sleepOptions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+#sleepOptions button {
+  background: none;
+  border: 1px solid;
+  cursor: pointer;
+  font-family: "Iosevka Web", monospace;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  color: inherit;
+}
+#sleepCustom {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+#sleepMinInput {
+  width: 70px;
+  padding: 6px;
+  font-family: "Iosevka Web", monospace;
+  font-size: 0.9rem;
+  background: none;
+  border: 1px solid;
+  color: inherit;
+}
+#sleepCustomBtn {
+  background: none;
+  border: 1px solid;
+  cursor: pointer;
+  font-family: "Iosevka Web", monospace;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  color: inherit;
 }
 #privateModalInner h3 { margin-bottom: 16px; font-size: 1rem; }
 #privatePat {

@@ -81,6 +81,25 @@
 	</div>
 	<script src="js/main.js"></script>
 
+<div id="sleepModal" class="hidden">
+  <div id="sleepModalInner">
+    <h3>Sleep Timer</h3>
+    <div id="sleepOptions">
+      <button class="sleep-opt" data-min="15">[ 15 мин ]</button>
+      <button class="sleep-opt" data-min="30">[ 30 мин ]</button>
+      <button class="sleep-opt" data-min="60">[ 60 мин ]</button>
+    </div>
+    <div id="sleepCustom">
+      <input type="number" id="sleepMinInput" min="1" max="999" placeholder="мин">
+      <button id="sleepCustomBtn">[ ОК ]</button>
+    </div>
+    <div class="modal-actions" style="margin-top:14px;">
+      <button id="sleepCancelBtn" class="hidden">[ Отменить ]</button>
+      <button id="sleepCloseBtn">[ Закрыть ]</button>
+    </div>
+  </div>
+</div>
+
 <div id="privateModal" class="hidden">
   <div id="privateModalInner">
     <h3>Private Playlists</h3>

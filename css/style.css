@@ -371,6 +371,7 @@ input[type=range]#volumeRange:after {
 }
 
 
+#sleepModalInner,
 #privateModalInner {
   background: #2e3440;
   border-color: #4c566a;

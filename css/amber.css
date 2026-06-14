@@ -403,6 +403,7 @@ input[type=range]#volumeRange:after {
   filter: drop-shadow(0 0 4px #ffb000);
 }
 
+#sleepModalInner,
 #privateModalInner {
   background: #0a0a0a;
   border-color: #cc8800;
