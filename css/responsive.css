@@ -49,7 +49,6 @@
   }
 
   #sleepTimerBtn {
-    font-size: 0.85rem;
     padding: 6px 10px;
   }
 
@@ -239,13 +238,3 @@
   font-family: "Iosevka Web", monospace;
   font-size: 0.85rem;
 }
-#privateBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.4rem;
-  padding: 0;
-  line-height: 1;
-  opacity: 0.75;
-}
-#privateBtn:hover { opacity: 1; }

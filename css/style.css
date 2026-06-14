@@ -86,8 +86,24 @@ body {
   padding: 10px;
 }
 
-#changeTheme {
+#changeTheme,
+#sleepTimerBtn,
+#privateBtn {
+  background: none;
+  border: none;
   cursor: pointer;
+  font-family: "Iosevka Web", monospace;
+  font-size: 0.9rem;
+  color: inherit;
+  opacity: 0.75;
+  padding: 0;
+  line-height: 1;
+}
+#changeTheme:hover,
+#sleepTimerBtn:hover,
+#privateBtn:hover {
+  opacity: 1;
+  font-weight: 700;
 }
 
 html {
@@ -200,7 +216,7 @@ audio#audioPlayer {
 
 .playList-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 5fr);
   grid-template-rows: repeat(3, 1fr);
   justify-items: start;
   -ms-flex-pack: distribute;
@@ -354,19 +370,6 @@ input[type=range]#volumeRange:after {
   padding: 5px;
 }
 
-#sleepTimerBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.4rem;
-  padding: 0;
-  line-height: 1;
-  color: #eceff4;
-  opacity: 0.75;
-}
-#sleepTimerBtn:hover {
-  opacity: 1;
-}
 
 #privateModalInner {
   background: #2e3440;
