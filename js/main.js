@@ -96,8 +96,30 @@ function renderStations(stations) {
   });
 }
 
+function fetchAndRenderCategories() {
+  fetch('categories.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('categories.json not found');
+      return r.json();
+    })
+    .then(function(categories) {
+      var $ul = $('.category-selector ul');
+      $ul.empty();
+      categories.forEach(function(cat) {
+        var label = cat === 'all' ? 'All' : cat;
+        var $a = $('<a>').attr('href', '#').attr('data-category', cat).text(label);
+        if (cat === 'all') $a.addClass('active');
+        $('<li>').append($a).appendTo($ul);
+      });
+    })
+    .catch(function(err) {
+      console.error('Could not load categories:', err);
+    });
+}
+
 $(document).ready(function () {
   fetchAndRenderStations();
+  fetchAndRenderCategories();
   function playM3U8WithHLS(url, title) {
     if (activeHls) {
       activeHls.destroy();
