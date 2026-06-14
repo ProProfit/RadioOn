@@ -41,7 +41,59 @@ function getRadioDataAndUpdateTitleAPI(selectedStation) {
   });
 }
 
+function fetchAndRenderStations() {
+  fetch('stations.json')
+    .then(function (response) {
+      if (!response.ok) throw new Error('Failed to load stations.json');
+      return response.json();
+    })
+    .then(function (stations) {
+      renderStations(stations);
+    })
+    .catch(function (err) {
+      console.error('Could not load stations:', err);
+    });
+}
+
+function renderStations(stations) {
+  var $container = $('.playList-container');
+  $container.find('.playlist:not(.custom-playlist)').remove();
+
+  var groupNames = [];
+  var groups = {};
+  stations.forEach(function (station) {
+    var g = station.group || 'Other';
+    if (!groups[g]) { groups[g] = []; groupNames.push(g); }
+    groups[g].push(station);
+  });
+
+  var $anchor = $container.find('.custom-playlist').first();
+  groupNames.forEach(function (groupName) {
+    var groupStations = groups[groupName];
+    var hasTavr = groupStations.some(function (s) { return s.stream; });
+
+    var $div = $('<div>').addClass('playlist');
+    if (hasTavr) $div.addClass('hitfm');
+    $('<h2>').addClass('playlist-title').text(groupName).appendTo($div);
+    var $ul = $('<ul>').addClass('station-list').appendTo($div);
+
+    groupStations.forEach(function (station) {
+      var $a = $('<a>')
+        .attr('href', station.url)
+        .attr('data-title', station.title)
+        .attr('data-stream', station.stream || '')
+        .attr('data-category', station.category || '')
+        .text(station.title);
+      if (station.type === 'hls') $a.addClass('play-m3u8');
+      $('<li>').append($a).appendTo($ul);
+    });
+
+    if ($anchor.length) { $anchor.before($div); } else { $container.append($div); }
+  });
+}
+
 $(document).ready(function () {
+  fetchAndRenderStations();
   function playM3U8WithHLS(url, title) {
     if (activeHls) {
       activeHls.destroy();
