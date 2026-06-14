@@ -117,6 +117,27 @@ function fetchAndRenderCategories() {
     });
 }
 
+function renderPlaylistGroups(tracks, extraClass, titlePrefix, defaultGroup) {
+  var $container = $('.playList-container');
+  var groupNames = [];
+  var groups = {};
+  tracks.forEach(function(track) {
+    var g = track.category || defaultGroup;
+    if (!groups[g]) { groups[g] = []; groupNames.push(g); }
+    groups[g].push(track);
+  });
+  groupNames.forEach(function(groupName) {
+    var $div = $('<div>').addClass('playlist custom-playlist' + (extraClass ? ' ' + extraClass : ''));
+    $('<h2>').addClass('playlist-title').text(titlePrefix + groupName).appendTo($div);
+    var $ul = $('<ul>').addClass('station-list').appendTo($div);
+    groups[groupName].forEach(function(track) {
+      var $a = $('<a>').attr('href', track.url).attr('data-title', track.title).text(track.title);
+      $('<li>').append($a).appendTo($ul);
+    });
+    $container.append($div);
+  });
+}
+
 function fetchAndRenderPlaylists() {
   fetch('PlayList/playlist.json')
     .then(function(r) {
@@ -124,32 +145,8 @@ function fetchAndRenderPlaylists() {
       return r.json();
     })
     .then(function(tracks) {
-      var $container = $('.playList-container');
-      $container.find('.custom-playlist:not(.private-playlist)').remove();
-
-      var groupNames = [];
-      var groups = {};
-      tracks.forEach(function(track) {
-        var g = track.category || 'My Playlist';
-        if (!groups[g]) { groups[g] = []; groupNames.push(g); }
-        groups[g].push(track);
-      });
-
-      groupNames.forEach(function(groupName) {
-        var $div = $('<div>').addClass('playlist custom-playlist');
-        $('<h2>').addClass('playlist-title').text(groupName).appendTo($div);
-        var $ul = $('<ul>').addClass('station-list').appendTo($div);
-
-        groups[groupName].forEach(function(track) {
-          var $a = $('<a>')
-            .attr('href', track.url)
-            .attr('data-title', track.title)
-            .text(track.title);
-          $('<li>').append($a).appendTo($ul);
-        });
-
-        $container.append($div);
-      });
+      $('.playList-container').find('.custom-playlist:not(.private-playlist)').remove();
+      renderPlaylistGroups(tracks, '', '', 'My Playlist');
     })
     .catch(function(err) {
       console.error('Could not load playlists:', err);
@@ -157,32 +154,8 @@ function fetchAndRenderPlaylists() {
 }
 
 function renderPrivatePlaylists(tracks) {
-  var $container = $('.playList-container');
-  $container.find('.private-playlist').remove();
-
-  var groupNames = [];
-  var groups = {};
-  tracks.forEach(function(track) {
-    var g = track.category || 'Private';
-    if (!groups[g]) { groups[g] = []; groupNames.push(g); }
-    groups[g].push(track);
-  });
-
-  groupNames.forEach(function(groupName) {
-    var $div = $('<div>').addClass('playlist custom-playlist private-playlist');
-    $('<h2>').addClass('playlist-title').text('🔒 ' + groupName).appendTo($div);
-    var $ul = $('<ul>').addClass('station-list').appendTo($div);
-
-    groups[groupName].forEach(function(track) {
-      var $a = $('<a>')
-        .attr('href', track.url)
-        .attr('data-title', track.title)
-        .text(track.title);
-      $('<li>').append($a).appendTo($ul);
-    });
-
-    $container.append($div);
-  });
+  $('.playList-container').find('.private-playlist').remove();
+  renderPlaylistGroups(tracks, 'private-playlist', '🔒 ', 'Private');
 }
 
 function fetchAndRenderPrivatePlaylists(pat) {
