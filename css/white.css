@@ -356,6 +356,30 @@ input[type=range]#volumeRange:after {
 }
 
 #sleepTimerBtn {
-  margin-left: 10px;
-  padding: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 0;
+  line-height: 1;
+  color: #2e3440;
+  opacity: 0.75;
 }
+#sleepTimerBtn:hover {
+  opacity: 1;
+}
+
+#privateModalInner {
+  background: #eceff4;
+  border-color: #4c566a;
+}
+#privatePat {
+  background: #ffffff;
+  color: #2e3440;
+  border: 1px solid #4c566a;
+}
+.modal-actions button {
+  border: 1px solid #4c566a;
+  color: #2e3440;
+}
+.modal-actions button:hover { border-color: #2e3440; }

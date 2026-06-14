@@ -379,15 +379,30 @@ input[type=range]#volumeRange:after {
 }
 
 #sleepTimerBtn {
-  margin-left: 10px;
-  padding: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 0;
+  line-height: 1;
+  color: #ebdbb2;
+  opacity: 0.75;
+}
+#sleepTimerBtn:hover {
+  opacity: 1;
+}
+
+#privateModalInner {
+  background: #282828;
+  border-color: #504945;
+}
+#privatePat {
   background: #3c3836;
   color: #ebdbb2;
   border: 1px solid #504945;
-  cursor: pointer;
-  font-family: "Iosevka Web", sans-serif;
 }
-#sleepTimerBtn:hover {
-  border-color: #d79921;
-  color: #fabd2f;
+.modal-actions button {
+  border: 1px solid #504945;
+  color: #ebdbb2;
 }
+.modal-actions button:hover { border-color: #d79921; color: #fabd2f; }

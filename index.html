@@ -27,6 +27,7 @@
 			<ul>
 				<li><div id="changeTheme">[THEME]</div></li>
 				<li><div>	<button id="sleepTimerBtn" title="Set Sleep Timer"><i class="fi fi-rr-moon-stars"></i></button></div></li>
+				<li><div><button id="privateBtn" title="Private playlists" class="hidden">🔒</button></div></li>
 				<!-- <input type="text" id="searchInput" placeholder="Поиск станции..." /> -->
 			</ul>
 			
@@ -83,6 +84,23 @@
 	<script src="js/test.js"></script>
 	<!-- <script src="js/audioFunctions.js"></script> -->
 
+<div id="privateModal" class="hidden">
+  <div id="privateModalInner">
+    <h3>Private Playlists</h3>
+    <div id="privateLoginForm">
+      <input type="password" id="privatePat" placeholder="GitHub PAT (ghp_…)">
+      <div class="modal-actions">
+        <button id="privateLoginBtn">[ Войти ]</button>
+      </div>
+    </div>
+    <div class="modal-actions hidden" id="privateLogoutRow">
+      <button id="privateLogoutBtn">[ Выйти ]</button>
+    </div>
+    <div class="modal-actions" style="margin-top:10px;">
+      <button id="privateCloseBtn">[ Закрыть ]</button>
+    </div>
+  </div>
+</div>
 </body>
 <script>
 	(function() {

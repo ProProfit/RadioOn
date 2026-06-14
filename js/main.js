@@ -156,10 +156,116 @@ function fetchAndRenderPlaylists() {
     });
 }
 
+function renderPrivatePlaylists(tracks) {
+  var $container = $('.playList-container');
+  $container.find('.private-playlist').remove();
+
+  var groupNames = [];
+  var groups = {};
+  tracks.forEach(function(track) {
+    var g = track.category || 'Private';
+    if (!groups[g]) { groups[g] = []; groupNames.push(g); }
+    groups[g].push(track);
+  });
+
+  groupNames.forEach(function(groupName) {
+    var $div = $('<div>').addClass('playlist custom-playlist private-playlist');
+    $('<h2>').addClass('playlist-title').text('🔒 ' + groupName).appendTo($div);
+    var $ul = $('<ul>').addClass('station-list').appendTo($div);
+
+    groups[groupName].forEach(function(track) {
+      var $a = $('<a>')
+        .attr('href', track.url)
+        .attr('data-title', track.title)
+        .text(track.title);
+      $('<li>').append($a).appendTo($ul);
+    });
+
+    $container.append($div);
+  });
+}
+
+function fetchAndRenderPrivatePlaylists(pat) {
+  fetch('config.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('config.json not found');
+      return r.json();
+    })
+    .then(function(config) {
+      if (!config.owner || !config.private_repo) throw new Error('Private repo not configured in admin settings');
+      return fetch(
+        'https://api.github.com/repos/' + config.owner + '/' + config.private_repo + '/contents/playlist-private.json',
+        { headers: { 'Authorization': 'token ' + pat, 'Accept': 'application/vnd.github.v3+json' } }
+      );
+    })
+    .then(function(r) {
+      if (!r.ok) throw new Error('Access denied or playlist-private.json not found');
+      return r.json();
+    })
+    .then(function(data) {
+      var tracks = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
+      renderPrivatePlaylists(tracks);
+      document.getElementById('privateBtn').classList.add('hidden');
+    })
+    .catch(function(err) {
+      console.error('Private playlists:', err.message);
+      document.getElementById('privateBtn').classList.remove('hidden');
+    });
+}
+
+function initPrivateAuth() {
+  var pat = localStorage.getItem('admin_pat');
+
+  var $btn    = $('#privateBtn');
+  var $modal  = $('#privateModal');
+  var $loginForm  = $('#privateLoginForm');
+  var $logoutRow  = $('#privateLogoutRow');
+
+  function updateModalState() {
+    var hasPat = !!localStorage.getItem('admin_pat');
+    $loginForm.toggleClass('hidden', hasPat);
+    $logoutRow.toggleClass('hidden', !hasPat);
+  }
+
+  if (pat) {
+    fetchAndRenderPrivatePlaylists(pat);
+  } else {
+    $btn.removeClass('hidden');
+  }
+
+  $btn.on('click', function() {
+    updateModalState();
+    $modal.removeClass('hidden');
+  });
+
+  $('#privateLoginBtn').on('click', function() {
+    var newPat = $('#privatePat').val().trim();
+    if (!newPat) return;
+    localStorage.setItem('admin_pat', newPat);
+    $modal.addClass('hidden');
+    $('#privatePat').val('');
+    fetchAndRenderPrivatePlaylists(newPat);
+  });
+
+  $('#privateLogoutBtn').on('click', function() {
+    localStorage.removeItem('admin_pat');
+    localStorage.removeItem('admin_owner');
+    $('.private-playlist').remove();
+    $btn.removeClass('hidden');
+    $modal.addClass('hidden');
+  });
+
+  $('#privateCloseBtn').on('click', function() { $modal.addClass('hidden'); });
+  $modal.on('click', function(e) {
+    if (e.target === this) $modal.addClass('hidden');
+  });
+}
+
 $(document).ready(function () {
   fetchAndRenderStations();
   fetchAndRenderCategories();
   fetchAndRenderPlaylists();
+  initPrivateAuth();
   function playM3U8WithHLS(url, title) {
     if (activeHls) {
       activeHls.destroy();

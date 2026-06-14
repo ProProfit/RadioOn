@@ -204,3 +204,48 @@
     font-size: 0.85rem;
   }
 }
+
+/* Utility — нужен для #privateBtn и #privateModal */
+.hidden { display: none !important; }
+
+#privateModal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+#privateModalInner {
+  padding: 30px;
+  min-width: 300px;
+  border: 1px solid;
+}
+#privateModalInner h3 { margin-bottom: 16px; font-size: 1rem; }
+#privatePat {
+  width: 100%;
+  padding: 6px;
+  font-family: "Iosevka Web", monospace;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.modal-actions { display: flex; gap: 10px; margin-top: 8px; }
+.modal-actions button {
+  background: none;
+  cursor: pointer;
+  padding: 6px 14px;
+  font-family: "Iosevka Web", monospace;
+  font-size: 0.85rem;
+}
+#privateBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 0;
+  line-height: 1;
+  opacity: 0.75;
+}
+#privateBtn:hover { opacity: 1; }
