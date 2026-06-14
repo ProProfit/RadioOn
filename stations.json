@@ -142,5 +142,13 @@
     "group": "Radio",
     "stream": "",
     "type": "mp3"
+  },
+  {
+    "title": "test3",
+    "url": "https://fs24.fex.net/play/5467959707.mp3",
+    "category": "pop",
+    "group": "newTest",
+    "stream": "",
+    "type": "mp3"
   }
 ]
