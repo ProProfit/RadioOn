@@ -155,7 +155,7 @@ function fetchAndRenderPlaylists() {
 
 function renderPrivatePlaylists(tracks) {
   $('.playList-container').find('.private-playlist').remove();
-  renderPlaylistGroups(tracks, 'private-playlist', '🔒 ', 'Private');
+  renderPlaylistGroups(tracks, 'private-playlist', '🔒︎ ', 'Private');
 }
 
 function fetchAndRenderPrivatePlaylists(pat) {
