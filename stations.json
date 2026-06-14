@@ -1,19 +1,146 @@
 [
-  { "title": "Hit-FM",            "url": "https://online.hitfm.ua/HitFM_HD",                                       "category": "pop",   "stream": "hit",             "type": "mp3", "group": "Tavr media" },
-  { "title": "Radio ROKS",        "url": "https://online.radioroks.ua/RadioROKS_HD",                                "category": "Rok",   "stream": "roks",            "type": "mp3", "group": "Tavr media" },
-  { "title": "Kiss FM",           "url": "https://online.kissfm.ua/KissFM_HD",                                     "category": "pop",   "stream": "kiss",            "type": "mp3", "group": "Tavr media" },
-  { "title": "Relax",             "url": "https://online.radiorelax.ua/RadioRelax_HD",                              "category": "Relax", "stream": "relax",           "type": "mp3", "group": "Tavr media" },
-  { "title": "Radio Gold",        "url": "https://online.radioplayer.ua/RadioGold_HD",                              "category": "",      "stream": "radio3gold",      "type": "mp3", "group": "Tavr media" },
-  { "title": "Guliay",            "url": "https://online.radioplayer.ua/GuliayRadio_HD",                            "category": "",      "stream": "guliay",          "type": "mp3", "group": "Tavr media" },
-  { "title": "Flash Radio",       "url": "https://online.radioplayer.ua/FlashRadio_HD",                             "category": "",      "stream": "radio3flash",     "type": "mp3", "group": "Tavr media" },
-  { "title": "Melodia FM",        "url": "https://online.melodiafm.ua/MelodiaFM_HD",                               "category": "",      "stream": "melodia",         "type": "mp3", "group": "Tavr media" },
-  { "title": "Melodia Romantic",  "url": "https://online.melodiafm.ua/MelodiaFM_Romantic_HD",                      "category": "Relax", "stream": "melodiar",        "type": "mp3", "group": "Tavr media" },
-  { "title": "Bayraktar",         "url": "https://tavr.tvstitch.com/RadioBayraktar_HD",                      "category": "",      "stream": "bayraktar",       "type": "mp3", "group": "Tavr media" },
-  { "title": "Lounge FM",         "url": "https://cast.mediaonline.net.ua/loungefm320",                            "category": "LoFi",  "stream": "",                "type": "mp3", "group": "LoFi" },
-  { "title": "Lounge FM Acoustic","url": "https://cast.mediaonline.net.ua/acoustic",                               "category": "LoFi",  "stream": "",                "type": "mp3", "group": "LoFi" },
-  { "title": "lux fm",            "url": "https://streamvideo.luxnet.ua/lux/smil:lux.stream.smil/chunklist.m3u8",  "category": "test",  "stream": "",                "type": "hls", "group": "TEST m3u8" },
-  { "title": "TEST2",             "url": "https://hlsyoufm.akamaized.net/hls/live/2016538/youfm/master.m3u8",      "category": "test",  "stream": "",                "type": "hls", "group": "TEST m3u8" },
-  { "title": "lux lviv",          "url": "https://streamvideo.luxnet.ua/luxlviv/luxlviv.stream/playlist.m3u8",      "category": "test",  "stream": "",                "type": "hls", "group": "TEST m3u8" },
-  { "title": "Radyo Şirin",       "url": "http://154.53.167.66:9570/stream",                                        "category": "Tyrok", "stream": "",                "type": "mp3", "group": "Radio World" },
-  { "title": "Radyo 22222",       "url": "https://fs24.fex.net/play/5467959707.mp3",                               "category": "2222",  "stream": "",                "type": "mp3", "group": "Radio" }
+  {
+    "title": "Hit-FM",
+    "url": "https://online.hitfm.ua/HitFM_HD",
+    "category": "pop",
+    "stream": "hit",
+    "type": "mp3",
+    "group": "Tavr media"
+  },
+  {
+    "title": "Radio ROKS",
+    "url": "https://online.radioroks.ua/RadioROKS_HD",
+    "category": "Rok",
+    "stream": "roks",
+    "type": "mp3",
+    "group": "Tavr media"
+  },
+  {
+    "title": "Kiss FM",
+    "url": "https://online.kissfm.ua/KissFM_HD",
+    "category": "pop",
+    "stream": "kiss",
+    "type": "mp3",
+    "group": "Tavr media"
+  },
+  {
+    "title": "Relax",
+    "url": "https://online.radiorelax.ua/RadioRelax_HD",
+    "category": "Relax",
+    "stream": "relax",
+    "type": "mp3",
+    "group": "Tavr media"
+  },
+  {
+    "title": "Radio Gold",
+    "url": "https://online.radioplayer.ua/RadioGold_HD",
+    "category": "",
+    "stream": "radio3gold",
+    "type": "mp3",
+    "group": "Tavr media"
+  },
+  {
+    "title": "Guliay",
+    "url": "https://online.radioplayer.ua/GuliayRadio_HD",
+    "category": "",
+    "stream": "guliay",
+    "type": "mp3",
+    "group": "Tavr media"
+  },
+  {
+    "title": "Flash Radio",
+    "url": "https://online.radioplayer.ua/FlashRadio_HD",
+    "category": "",
+    "stream": "radio3flash",
+    "type": "mp3",
+    "group": "Tavr media"
+  },
+  {
+    "title": "Melodia FM",
+    "url": "https://online.melodiafm.ua/MelodiaFM_HD",
+    "category": "",
+    "stream": "melodia",
+    "type": "mp3",
+    "group": "Tavr media"
+  },
+  {
+    "title": "Melodia Romantic",
+    "url": "https://online.melodiafm.ua/MelodiaFM_Romantic_HD",
+    "category": "Relax",
+    "stream": "melodiar",
+    "type": "mp3",
+    "group": "Tavr media"
+  },
+  {
+    "title": "Bayraktar",
+    "url": "https://tavr.tvstitch.com/RadioBayraktar_HD",
+    "category": "",
+    "stream": "bayraktar",
+    "type": "mp3",
+    "group": "Tavr media"
+  },
+  {
+    "title": "Lounge FM",
+    "url": "https://cast.mediaonline.net.ua/loungefm320",
+    "category": "LoFi",
+    "stream": "",
+    "type": "mp3",
+    "group": "LoFi"
+  },
+  {
+    "title": "Lounge FM Acoustic",
+    "url": "https://cast.mediaonline.net.ua/acoustic",
+    "category": "LoFi",
+    "stream": "",
+    "type": "mp3",
+    "group": "LoFi"
+  },
+  {
+    "title": "lux fm",
+    "url": "https://streamvideo.luxnet.ua/lux/smil:lux.stream.smil/chunklist.m3u8",
+    "category": "test",
+    "stream": "",
+    "type": "hls",
+    "group": "TEST m3u8"
+  },
+  {
+    "title": "TEST2",
+    "url": "https://hlsyoufm.akamaized.net/hls/live/2016538/youfm/master.m3u8",
+    "category": "test",
+    "stream": "",
+    "type": "hls",
+    "group": "TEST m3u8"
+  },
+  {
+    "title": "lux lviv",
+    "url": "https://streamvideo.luxnet.ua/luxlviv/luxlviv.stream/playlist.m3u8",
+    "category": "test",
+    "stream": "",
+    "type": "hls",
+    "group": "TEST m3u8"
+  },
+  {
+    "title": "Radyo Şirin",
+    "url": "http://154.53.167.66:9570/stream",
+    "category": "Tyrok",
+    "stream": "",
+    "type": "mp3",
+    "group": "Radio World"
+  },
+  {
+    "title": "Radyo 22222",
+    "url": "https://fs24.fex.net/play/5467959707.mp3",
+    "category": "2222",
+    "stream": "",
+    "type": "mp3",
+    "group": "Radio"
+  },
+  {
+    "title": "Radio NOSTALGIE",
+    "url": "https://icecast.luxnet.ua/nostalgie_mp3",
+    "category": "pop",
+    "group": "Radio",
+    "stream": "",
+    "type": "mp3"
+  }
 ]
