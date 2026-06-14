@@ -8,7 +8,7 @@
   { "title": "Flash Radio",       "url": "https://online.radioplayer.ua/FlashRadio_HD",                             "category": "",      "stream": "radio3flash",     "type": "mp3", "group": "Tavr media" },
   { "title": "Melodia FM",        "url": "https://online.melodiafm.ua/MelodiaFM_HD",                               "category": "",      "stream": "melodia",         "type": "mp3", "group": "Tavr media" },
   { "title": "Melodia Romantic",  "url": "https://online.melodiafm.ua/MelodiaFM_Romantic_HD",                      "category": "Relax", "stream": "melodiar",        "type": "mp3", "group": "Tavr media" },
-  { "title": "Bayraktar",         "url": "https://online.radiobayraktar.ua/RadioBayraktar_HD",                      "category": "",      "stream": "radio3bayraktar", "type": "mp3", "group": "Tavr media" },
+  { "title": "Bayraktar",         "url": "https://tavr.tvstitch.com/RadioBayraktar_HD",                      "category": "",      "stream": "bayraktar",       "type": "mp3", "group": "Tavr media" },
   { "title": "Lounge FM",         "url": "https://cast.mediaonline.net.ua/loungefm320",                            "category": "LoFi",  "stream": "",                "type": "mp3", "group": "LoFi" },
   { "title": "Lounge FM Acoustic","url": "https://cast.mediaonline.net.ua/acoustic",                               "category": "LoFi",  "stream": "",                "type": "mp3", "group": "LoFi" },
   { "title": "lux fm",            "url": "https://streamvideo.luxnet.ua/lux/smil:lux.stream.smil/chunklist.m3u8",  "category": "test",  "stream": "",                "type": "hls", "group": "TEST m3u8" },

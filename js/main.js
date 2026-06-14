@@ -21,7 +21,7 @@ function updateCurrentSong(title) {
 }
 
 function getRadioDataAndUpdateTitleAPI(selectedStation) {
-  const apiUrl = `https://o.tavrmedia.ua/${selectedStation}`;
+  const apiUrl = `https://o.tavr.media/${selectedStation}`;
   $.ajax({
     type: 'GET',
     url: apiUrl,
