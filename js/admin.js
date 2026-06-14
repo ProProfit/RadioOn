@@ -439,20 +439,8 @@
       owner:        document.getElementById('privateOwnerInput').value.trim(),
       private_repo: document.getElementById('privateRepoInput').value.trim()
     };
-    var body = {
-      message: 'admin: update config',
-      content: btoa(unescape(encodeURIComponent(JSON.stringify(updated, null, 2))))
-    };
-    if (state.configSHA) body.sha = state.configSHA;
-
-    fetch('https://api.github.com/repos/' + state.owner + '/' + state.repo + '/contents/config.json', {
-      method: 'PUT',
-      headers: apiHeaders(),
-      body: JSON.stringify(body)
-    }).then(function(r) {
-      if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'PUT failed'); });
-      return r.json();
-    }).then(function(res) {
+    putFile('config.json', updated, state.configSHA, 'admin: update config')
+      .then(function(res) {
       state.config = updated;
       state.configSHA = res.content.sha;
       showStatus('Настройки сохранены');
