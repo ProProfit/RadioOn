@@ -150,6 +150,6 @@
     "group": "LoFi",
     "stream": "",
     "nowplaying_url": "https://somafm.com/songs/groovesalad.json",
-    "type": "hls"
+    "type": "mp3"
   }
 ]
