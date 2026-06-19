@@ -3,7 +3,7 @@
     "title": "Hit-FM",
     "url": "https://online.hitfm.ua/HitFM_HD",
     "category": "pop",
-    "stream": "hit",
+    "nowplaying_url": "https://o.tavr.media/hit",
     "type": "mp3",
     "group": "Tavr media"
   },
@@ -11,7 +11,7 @@
     "title": "Radio ROKS",
     "url": "https://online.radioroks.ua/RadioROKS_HD",
     "category": "Rok",
-    "stream": "roks",
+    "nowplaying_url": "https://o.tavr.media/roks",
     "type": "mp3",
     "group": "Tavr media"
   },
@@ -19,7 +19,7 @@
     "title": "Kiss FM",
     "url": "https://online.kissfm.ua/KissFM_HD",
     "category": "pop",
-    "stream": "kiss",
+    "nowplaying_url": "https://o.tavr.media/kiss",
     "type": "mp3",
     "group": "Tavr media"
   },
@@ -27,7 +27,7 @@
     "title": "Relax",
     "url": "https://online.radiorelax.ua/RadioRelax_HD",
     "category": "Relax",
-    "stream": "relax",
+    "nowplaying_url": "https://o.tavr.media/relax",
     "type": "mp3",
     "group": "Tavr media"
   },
@@ -35,7 +35,7 @@
     "title": "Radio Gold",
     "url": "https://online.radioplayer.ua/RadioGold_HD",
     "category": "",
-    "stream": "radio3gold",
+    "nowplaying_url": "https://o.tavr.media/radio3gold",
     "type": "mp3",
     "group": "Tavr media"
   },
@@ -43,7 +43,7 @@
     "title": "Guliay",
     "url": "https://online.radioplayer.ua/GuliayRadio_HD",
     "category": "",
-    "stream": "guliay",
+    "nowplaying_url": "https://o.tavr.media/guliay",
     "type": "mp3",
     "group": "Tavr media"
   },
@@ -51,7 +51,7 @@
     "title": "Flash Radio",
     "url": "https://online.radioplayer.ua/FlashRadio_HD",
     "category": "",
-    "stream": "radio3flash",
+    "nowplaying_url": "https://o.tavr.media/radio3flash",
     "type": "mp3",
     "group": "Tavr media"
   },
@@ -59,7 +59,7 @@
     "title": "Melodia FM",
     "url": "https://online.melodiafm.ua/MelodiaFM_HD",
     "category": "",
-    "stream": "melodia",
+    "nowplaying_url": "https://o.tavr.media/melodia",
     "type": "mp3",
     "group": "Tavr media"
   },
@@ -67,7 +67,7 @@
     "title": "Melodia Romantic",
     "url": "https://online.melodiafm.ua/MelodiaFM_Romantic_HD",
     "category": "Relax",
-    "stream": "melodiar",
+    "nowplaying_url": "https://o.tavr.media/melodiar",
     "type": "mp3",
     "group": "Tavr media"
   },
@@ -75,7 +75,7 @@
     "title": "Bayraktar",
     "url": "https://tavr.tvstitch.com/RadioBayraktar_HD",
     "category": "",
-    "stream": "bayraktar",
+    "nowplaying_url": "https://o.tavr.media/bayraktar",
     "type": "mp3",
     "group": "Tavr media"
   },
@@ -83,7 +83,6 @@
     "title": "Lounge FM",
     "url": "https://cast.mediaonline.net.ua/loungefm320",
     "category": "LoFi",
-    "stream": "",
     "type": "mp3",
     "group": "LoFi"
   },
@@ -91,7 +90,6 @@
     "title": "Lounge FM Acoustic",
     "url": "https://cast.mediaonline.net.ua/acoustic",
     "category": "LoFi",
-    "stream": "",
     "type": "mp3",
     "group": "LoFi"
   },
@@ -99,7 +97,6 @@
     "title": "lux fm",
     "url": "https://streamvideo.luxnet.ua/lux/smil:lux.stream.smil/chunklist.m3u8",
     "category": "test",
-    "stream": "",
     "type": "hls",
     "group": "TEST m3u8"
   },
@@ -107,7 +104,6 @@
     "title": "lux lviv",
     "url": "https://streamvideo.luxnet.ua/luxlviv/luxlviv.stream/playlist.m3u8",
     "category": "test",
-    "stream": "",
     "type": "hls",
     "group": "TEST m3u8"
   },
@@ -115,7 +111,6 @@
     "title": "Radyo Şirin",
     "url": "http://154.53.167.66:9570/stream",
     "category": "Tyrok",
-    "stream": "",
     "type": "mp3",
     "group": "Radio World"
   },
@@ -124,7 +119,6 @@
     "url": "https://icecast.luxnet.ua/nostalgie_mp3",
     "category": "pop",
     "group": "Radio",
-    "stream": "",
     "type": "mp3"
   },
   {
@@ -132,7 +126,6 @@
     "url": "https://cast.brg.ua/shanson_main_public_mp3_hq",
     "category": "pop",
     "group": "Radio",
-    "stream": "",
     "type": "mp3"
   },
   {
@@ -140,7 +133,6 @@
     "url": "https://cast.brg.ua/djfmdance_main_public_mp3_hq",
     "category": "DJ",
     "group": "DJ radio",
-    "stream": "",
     "type": "mp3"
   },
   {
@@ -148,7 +140,7 @@
     "url": "https://ice4.somafm.com/groovesalad-64-aac",
     "category": "Relax",
     "group": "LoFi",
-    "stream": "https://somafm.com/songs/groovesalad.json",
-    "type": "hls"
+    "nowplaying_url": "https://somafm.com/songs/groovesalad.json",
+    "type": "mp3"
   }
 ]
