@@ -150,5 +150,13 @@
     "group": "newTest",
     "stream": "",
     "type": "mp3"
+  },
+  {
+    "title": "Шлягер FM",
+    "url": "https://cast.brg.ua/shanson_main_public_mp3_hq",
+    "category": "pop",
+    "group": "Radio",
+    "stream": "",
+    "type": "mp3"
   }
 ]
