@@ -27,7 +27,7 @@ function fetchNowPlaying(url) {
     success: function(response) {
       var title = 'No data';
       if (Array.isArray(response) && response[0] && response[0].singer) {
-        title = response[0].singer + ' - ' + response[0].song;
+        title = [response[0].singer, response[0].song].filter(Boolean).join(' - ');
       } else if (response.songs && response.songs[0]) {
         var s = response.songs[0];
         title = [s.artist, s.title].filter(Boolean).join(' - ');

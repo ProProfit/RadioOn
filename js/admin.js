@@ -170,13 +170,13 @@
     var nowplayingEl = document.getElementById('stationNowplaying');
     var nowplaying = nowplayingEl ? nowplayingEl.value.trim() : '';
     var s = {
-      title:         document.getElementById('stationTitle').value.trim(),
-      url:           document.getElementById('stationUrl').value.trim(),
-      category:      document.getElementById('stationCategory').value.trim(),
-      group:         document.getElementById('stationGroup').value.trim(),
-      nowplaying_url: nowplaying,
-      type:          document.querySelector('input[name="stationType"]:checked').value
+      title:    document.getElementById('stationTitle').value.trim(),
+      url:      document.getElementById('stationUrl').value.trim(),
+      category: document.getElementById('stationCategory').value.trim(),
+      group:    document.getElementById('stationGroup').value.trim(),
+      type:     document.querySelector('input[name="stationType"]:checked').value
     };
+    if (nowplaying) s.nowplaying_url = nowplaying;
     if (!s.title || !s.url) { showStatus('Название и URL обязательны', true); return; }
 
     var updated = state.stations.slice();
