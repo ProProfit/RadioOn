@@ -40,30 +40,6 @@ function fetchNowPlaying(url) {
   });
 }
 
-function getRadioDataAndUpdateTitleAPI(selectedStation) {
-  const apiUrl = `https://o.tavr.media/${selectedStation}`;
-  $.ajax({
-    type: 'GET',
-    url: apiUrl,
-    async: true,
-    dataType: 'json',
-    success: function (response) {
-      if (response && Array.isArray(response) && response.length > 0) {
-        const radioData = response[0];
-        const singer = radioData.singer;
-        const song = radioData.song;
-        const title = `${singer} - ${song}`;
-        updateCurrentSong(title);
-      } else {
-        updateCurrentSong('No data');
-      }
-    },
-    error: function (error) {
-      console.error('An error occurred while receiving data: ', error);
-      updateCurrentSong('Error while receiving data');
-    }
-  });
-}
 
 function fetchAndRenderStations() {
   fetch('stations.json')
@@ -94,11 +70,10 @@ function renderStations(stations) {
   var $anchor = $container.find('.custom-playlist').first();
   groupNames.forEach(function (groupName) {
     var groupStations = groups[groupName];
-    var hasTavr = groupStations.some(function (s) { return s.stream; });
     var hasNowPlaying = groupStations.some(function (s) { return s.nowplaying_url; });
 
     var $div = $('<div>').addClass('playlist');
-    if (hasTavr || hasNowPlaying) $div.addClass('hitfm');
+    if (hasNowPlaying) $div.addClass('hitfm');
     $('<h2>').addClass('playlist-title').text(groupName).appendTo($div);
     var $ul = $('<ul>').addClass('station-list').appendTo($div);
 
@@ -106,7 +81,6 @@ function renderStations(stations) {
       var $a = $('<a>')
         .attr('href', station.url)
         .attr('data-title', station.title)
-        .attr('data-stream', station.stream || '')
         .attr('data-category', station.category || '')
         .text(station.title);
       if (station.nowplaying_url) $a.attr('data-nowplaying', station.nowplaying_url);
@@ -318,13 +292,10 @@ $(document).ready(function () {
   });
 
   $(document).on('click', '.hitfm a', function () {
-    var selectedStation = $(this).data('stream');
     var nowplayingUrl = $(this).data('nowplaying');
     $('.hitfm a').removeClass('active');
     $(this).addClass('active');
-    if (selectedStation) {
-      getRadioDataAndUpdateTitleAPI(selectedStation);
-    } else if (nowplayingUrl) {
+    if (nowplayingUrl) {
       fetchNowPlaying(nowplayingUrl);
     }
   });
@@ -332,11 +303,8 @@ $(document).ready(function () {
   setInterval(function () {
     var $active = $('.hitfm a.active');
     if (!$active.length) return;
-    var selectedStation = $active.data('stream');
     var nowplayingUrl = $active.data('nowplaying');
-    if (selectedStation) {
-      getRadioDataAndUpdateTitleAPI(selectedStation);
-    } else if (nowplayingUrl) {
+    if (nowplayingUrl) {
       fetchNowPlaying(nowplayingUrl);
     }
   }, 30000);
