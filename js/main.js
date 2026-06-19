@@ -375,7 +375,9 @@ $(document).ready(function () {
     if (playlistQueue.length === 0) return;
     var current = audioPlayer.src;
     var candidates = playlistQueue.filter(function(t) {
-      return new URL(t.url, location.href).href !== current;
+      if (!t.url) return false;
+      try { return new URL(t.url, location.href).href !== current; }
+      catch(e) { return t.url !== current; }
     });
     var pool = candidates.length > 0 ? candidates : playlistQueue;
     var next = pool[Math.floor(Math.random() * pool.length)];
@@ -385,7 +387,7 @@ $(document).ready(function () {
     }).addClass('active');
     playTrack(next.url, next.title);
     $('#currentTitle').text(next.title);
-    $('#currentSong').text('Now playing: loading...');
+    $('#currentSong').text('Now playing:');
   });
 
   // Sleep timer

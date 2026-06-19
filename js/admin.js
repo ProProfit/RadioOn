@@ -158,7 +158,8 @@
     document.getElementById('stationCategory').value   = s.category      || '';
     document.getElementById('stationGroup').value      = s.group         || '';
     document.getElementById('stationStream').value     = s.stream        || '';
-    document.getElementById('stationNowplaying').value = s.nowplaying_url || '';
+    var nowplayingEl2 = document.getElementById('stationNowplaying');
+    if (nowplayingEl2) nowplayingEl2.value = s.nowplaying_url || '';
     document.querySelectorAll('input[name="stationType"]').forEach(function (radio) {
       radio.checked = radio.value === (s.type || 'mp3');
     });
@@ -167,7 +168,8 @@
 
   function saveStation() {
     var i = parseInt(document.getElementById('stationIndex').value, 10);
-    var nowplaying = document.getElementById('stationNowplaying').value.trim();
+    var nowplayingEl = document.getElementById('stationNowplaying');
+    var nowplaying = nowplayingEl ? nowplayingEl.value.trim() : '';
     var s = {
       title:         document.getElementById('stationTitle').value.trim(),
       url:           document.getElementById('stationUrl').value.trim(),
