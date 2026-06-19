@@ -104,14 +104,6 @@
     "group": "TEST m3u8"
   },
   {
-    "title": "TEST2",
-    "url": "https://hlsyoufm.akamaized.net/hls/live/2016538/youfm/master.m3u8",
-    "category": "test",
-    "stream": "",
-    "type": "hls",
-    "group": "TEST m3u8"
-  },
-  {
     "title": "lux lviv",
     "url": "https://streamvideo.luxnet.ua/luxlviv/luxlviv.stream/playlist.m3u8",
     "category": "test",
