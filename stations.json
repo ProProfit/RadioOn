@@ -134,5 +134,13 @@
     "group": "Radio",
     "stream": "",
     "type": "mp3"
+  },
+  {
+    "title": "DJ FM Dance",
+    "url": "https://cast.brg.ua/djfmdance_main_public_mp3_hq",
+    "category": "DJ",
+    "group": "DJ radio",
+    "stream": "",
+    "type": "mp3"
   }
 ]
