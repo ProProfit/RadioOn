@@ -2,6 +2,7 @@ var audioPlayer = document.getElementById('audioPlayer');
 var currentTitleElement = document.getElementById('currentTitle');
 var volumeRange = document.getElementById('volumeRange');
 var activeHls = null;
+var playlistQueue = [];
 
 function playTrack(trackSource, trackTitle) {
   if (activeHls) {
@@ -267,6 +268,15 @@ $(document).ready(function () {
     var trackSource = $(this).attr('href');
     var trackTitle = $(this).data('title');
 
+    if ($(this).closest('.custom-playlist').length) {
+      playlistQueue = [];
+      $(this).closest('.custom-playlist').find('ul li a').each(function() {
+        playlistQueue.push({ url: $(this).attr('href'), title: $(this).data('title') });
+      });
+    } else {
+      playlistQueue = [];
+    }
+
     if ($(this).hasClass('play-m3u8')) {
       playM3U8WithHLS(trackSource, trackTitle);
     } else {
@@ -333,6 +343,23 @@ $(document).ready(function () {
     $(this).addClass('active');
     const selectedTitle = $(this).data('title');
     $('#currentTitle').text(selectedTitle || '');
+    $('#currentSong').text('Now playing: loading...');
+  });
+
+  audioPlayer.addEventListener('ended', function() {
+    if (playlistQueue.length === 0) return;
+    var current = audioPlayer.src;
+    var candidates = playlistQueue.filter(function(t) {
+      return new URL(t.url, location.href).href !== current;
+    });
+    var pool = candidates.length > 0 ? candidates : playlistQueue;
+    var next = pool[Math.floor(Math.random() * pool.length)];
+    $('.playlist ul li a').removeClass('active');
+    $('.custom-playlist ul li a').filter(function() {
+      return $(this).attr('href') === next.url;
+    }).addClass('active');
+    playTrack(next.url, next.title);
+    $('#currentTitle').text(next.title);
     $('#currentSong').text('Now playing: loading...');
   });
 
