@@ -152,12 +152,11 @@
   function openStationForm(i) {
     document.getElementById('stationFormTitle').textContent = i >= 0 ? 'Редактировать станцию' : 'Добавить станцию';
     document.getElementById('stationIndex').value = i;
-    var s = i >= 0 ? state.stations[i] : { title: '', url: '', category: '', group: '', stream: '', nowplaying_url: '', type: 'mp3' };
+    var s = i >= 0 ? state.stations[i] : { title: '', url: '', category: '', group: '', nowplaying_url: '', type: 'mp3' };
     document.getElementById('stationTitle').value      = s.title         || '';
     document.getElementById('stationUrl').value        = s.url           || '';
     document.getElementById('stationCategory').value   = s.category      || '';
     document.getElementById('stationGroup').value      = s.group         || '';
-    document.getElementById('stationStream').value     = s.stream        || '';
     var nowplayingEl2 = document.getElementById('stationNowplaying');
     if (nowplayingEl2) nowplayingEl2.value = s.nowplaying_url || '';
     document.querySelectorAll('input[name="stationType"]').forEach(function (radio) {
@@ -175,7 +174,6 @@
       url:           document.getElementById('stationUrl').value.trim(),
       category:      document.getElementById('stationCategory').value.trim(),
       group:         document.getElementById('stationGroup').value.trim(),
-      stream:        document.getElementById('stationStream').value.trim(),
       nowplaying_url: nowplaying,
       type:          document.querySelector('input[name="stationType"]:checked').value
     };
