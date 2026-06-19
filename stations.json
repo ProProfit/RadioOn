@@ -148,7 +148,8 @@
     "url": "https://ice4.somafm.com/groovesalad-64-aac",
     "category": "Relax",
     "group": "LoFi",
-    "stream": "https://somafm.com/songs/groovesalad.json",
+    "stream": "",
+    "nowplaying_url": "https://somafm.com/songs/groovesalad.json",
     "type": "hls"
   }
 ]
