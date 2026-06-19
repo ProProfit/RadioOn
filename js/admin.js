@@ -152,12 +152,13 @@
   function openStationForm(i) {
     document.getElementById('stationFormTitle').textContent = i >= 0 ? 'Редактировать станцию' : 'Добавить станцию';
     document.getElementById('stationIndex').value = i;
-    var s = i >= 0 ? state.stations[i] : { title: '', url: '', category: '', group: '', stream: '', type: 'mp3' };
-    document.getElementById('stationTitle').value    = s.title    || '';
-    document.getElementById('stationUrl').value      = s.url      || '';
-    document.getElementById('stationCategory').value = s.category || '';
-    document.getElementById('stationGroup').value    = s.group    || '';
-    document.getElementById('stationStream').value   = s.stream   || '';
+    var s = i >= 0 ? state.stations[i] : { title: '', url: '', category: '', group: '', stream: '', nowplaying_url: '', type: 'mp3' };
+    document.getElementById('stationTitle').value      = s.title         || '';
+    document.getElementById('stationUrl').value        = s.url           || '';
+    document.getElementById('stationCategory').value   = s.category      || '';
+    document.getElementById('stationGroup').value      = s.group         || '';
+    document.getElementById('stationStream').value     = s.stream        || '';
+    document.getElementById('stationNowplaying').value = s.nowplaying_url || '';
     document.querySelectorAll('input[name="stationType"]').forEach(function (radio) {
       radio.checked = radio.value === (s.type || 'mp3');
     });
@@ -166,13 +167,15 @@
 
   function saveStation() {
     var i = parseInt(document.getElementById('stationIndex').value, 10);
+    var nowplaying = document.getElementById('stationNowplaying').value.trim();
     var s = {
-      title:    document.getElementById('stationTitle').value.trim(),
-      url:      document.getElementById('stationUrl').value.trim(),
-      category: document.getElementById('stationCategory').value.trim(),
-      group:    document.getElementById('stationGroup').value.trim(),
-      stream:   document.getElementById('stationStream').value.trim(),
-      type:     document.querySelector('input[name="stationType"]:checked').value
+      title:         document.getElementById('stationTitle').value.trim(),
+      url:           document.getElementById('stationUrl').value.trim(),
+      category:      document.getElementById('stationCategory').value.trim(),
+      group:         document.getElementById('stationGroup').value.trim(),
+      stream:        document.getElementById('stationStream').value.trim(),
+      nowplaying_url: nowplaying,
+      type:          document.querySelector('input[name="stationType"]:checked').value
     };
     if (!s.title || !s.url) { showStatus('Название и URL обязательны', true); return; }
 

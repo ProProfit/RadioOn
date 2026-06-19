@@ -21,6 +21,25 @@ function updateCurrentSong(title) {
   currentSongElement.textContent = 'Now playing: ' + title;
 }
 
+function fetchNowPlaying(url) {
+  $.ajax({
+    type: 'GET', url: url, async: true, dataType: 'json',
+    success: function(response) {
+      var title = 'No data';
+      if (Array.isArray(response) && response[0] && response[0].singer) {
+        title = response[0].singer + ' - ' + response[0].song;
+      } else if (response.songs && response.songs[0]) {
+        var s = response.songs[0];
+        title = [s.artist, s.title].filter(Boolean).join(' - ');
+      } else if (response.artist || response.title) {
+        title = [response.artist, response.title].filter(Boolean).join(' - ');
+      }
+      updateCurrentSong(title);
+    },
+    error: function() { updateCurrentSong('No data'); }
+  });
+}
+
 function getRadioDataAndUpdateTitleAPI(selectedStation) {
   const apiUrl = `https://o.tavr.media/${selectedStation}`;
   $.ajax({
@@ -76,9 +95,10 @@ function renderStations(stations) {
   groupNames.forEach(function (groupName) {
     var groupStations = groups[groupName];
     var hasTavr = groupStations.some(function (s) { return s.stream; });
+    var hasNowPlaying = groupStations.some(function (s) { return s.nowplaying_url; });
 
     var $div = $('<div>').addClass('playlist');
-    if (hasTavr) $div.addClass('hitfm');
+    if (hasTavr || hasNowPlaying) $div.addClass('hitfm');
     $('<h2>').addClass('playlist-title').text(groupName).appendTo($div);
     var $ul = $('<ul>').addClass('station-list').appendTo($div);
 
@@ -89,6 +109,7 @@ function renderStations(stations) {
         .attr('data-stream', station.stream || '')
         .attr('data-category', station.category || '')
         .text(station.title);
+      if (station.nowplaying_url) $a.attr('data-nowplaying', station.nowplaying_url);
       if (station.type === 'hls') $a.addClass('play-m3u8');
       $('<li>').append($a).appendTo($ul);
     });
@@ -297,22 +318,26 @@ $(document).ready(function () {
   });
 
   $(document).on('click', '.hitfm a', function () {
-    const selectedStation = $(this).data('stream');
+    var selectedStation = $(this).data('stream');
+    var nowplayingUrl = $(this).data('nowplaying');
     $('.hitfm a').removeClass('active');
     $(this).addClass('active');
-    getRadioDataAndUpdateTitleAPI(selectedStation);
+    if (selectedStation) {
+      getRadioDataAndUpdateTitleAPI(selectedStation);
+    } else if (nowplayingUrl) {
+      fetchNowPlaying(nowplayingUrl);
+    }
   });
 
-  function updateStationData(selectedStation) {
-    if ($('.hitfm a[data-stream="' + selectedStation + '"]').length) {
-      getRadioDataAndUpdateTitleAPI(selectedStation);
-    }
-  }
-
   setInterval(function () {
-    const selectedStation = $('.hitfm a.active').data('stream');
-    if ($('.hitfm a.active').length && selectedStation) {
+    var $active = $('.hitfm a.active');
+    if (!$active.length) return;
+    var selectedStation = $active.data('stream');
+    var nowplayingUrl = $active.data('nowplaying');
+    if (selectedStation) {
       getRadioDataAndUpdateTitleAPI(selectedStation);
+    } else if (nowplayingUrl) {
+      fetchNowPlaying(nowplayingUrl);
     }
   }, 30000);
 
