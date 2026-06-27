@@ -176,8 +176,8 @@
         '<td>' + esc(s.type) + '</td>' +
         '<td>' + esc(s.group) + '</td>' +
         '<td>' +
-          '<button onclick="Admin.editStation(' + i + ')">✏</button>' +
-          '<button class="del" onclick="Admin.deleteStation(' + i + ')">🗑</button>' +
+          '<button onclick="Admin.editStation(' + i + ')">[edit]</button>' +
+          '<button class="del" onclick="Admin.deleteStation(' + i + ')">[del]</button>' +
         '</td>';
       tbody.appendChild(tr);
     });
@@ -417,7 +417,7 @@
         '<span>' + esc(cat) + '</span>' +
         '<button onclick="Admin.moveCat(' + i + ',-1)"' + (isAll || i <= 1 ? ' disabled' : '') + '>↑</button>' +
         '<button onclick="Admin.moveCat(' + i + ',1)"'  + (isAll || i === last ? ' disabled' : '') + '>↓</button>' +
-        '<button class="del" onclick="Admin.deleteCat(' + i + ')"' + (isAll ? ' disabled' : '') + '>🗑</button>';
+        '<button class="del" onclick="Admin.deleteCat(' + i + ')"' + (isAll ? ' disabled' : '') + '>[del]</button>';
       ul.appendChild(li);
     });
   }
