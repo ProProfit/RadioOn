@@ -50,10 +50,10 @@
   {
     "title": "Flash Radio",
     "url": "https://online.radioplayer.ua/FlashRadio_HD",
-    "category": "",
-    "nowplaying_url": "https://o.tavr.media/radio3flash",
+    "category": "pop",
+    "group": "Tavr media",
     "type": "mp3",
-    "group": "Tavr media"
+    "nowplaying_url": "https://o.tavr.media/radio3flash"
   },
   {
     "title": "Melodia FM",
