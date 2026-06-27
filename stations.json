@@ -34,10 +34,10 @@
   {
     "title": "Radio Gold",
     "url": "https://online.radioplayer.ua/RadioGold_HD",
-    "category": "",
-    "nowplaying_url": "https://o.tavr.media/radio3gold",
+    "category": "pop",
+    "group": "Tavr media",
     "type": "mp3",
-    "group": "Tavr media"
+    "nowplaying_url": "https://o.tavr.media/radio3gold"
   },
   {
     "title": "Guliay",
