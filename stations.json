@@ -58,10 +58,10 @@
   {
     "title": "Melodia FM",
     "url": "https://online.melodiafm.ua/MelodiaFM_HD",
-    "category": "",
-    "nowplaying_url": "https://o.tavr.media/melodia",
+    "category": "pop",
+    "group": "Tavr media",
     "type": "mp3",
-    "group": "Tavr media"
+    "nowplaying_url": "https://o.tavr.media/melodia"
   },
   {
     "title": "Melodia Romantic",
