@@ -304,8 +304,8 @@
         '<td>' + esc(t.title) + '</td>' +
         '<td class="url-cell">' + esc(t.url) + '</td>' +
         '<td>' +
-          '<button onclick="Admin.editTrack(' + globalIdx + ')">✏</button>' +
-          '<button class="del" onclick="Admin.deleteTrack(' + globalIdx + ')">🗑</button>' +
+          '<button onclick="Admin.editTrack(' + globalIdx + ')">[ edit ]</button>' +
+          '<button class="del" onclick="Admin.deleteTrack(' + globalIdx + ')">[ del ]</button>' +
         '</td>';
       tbody.appendChild(tr);
     });
