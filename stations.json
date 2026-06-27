@@ -18,10 +18,10 @@
   {
     "title": "Kiss FM",
     "url": "https://online.kissfm.ua/KissFM_HD",
-    "category": "pop",
-    "nowplaying_url": "https://o.tavr.media/kiss",
+    "category": "DJ",
+    "group": "Tavr media",
     "type": "mp3",
-    "group": "Tavr media"
+    "nowplaying_url": "https://o.tavr.media/kiss"
   },
   {
     "title": "Relax",
