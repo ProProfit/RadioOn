@@ -126,8 +126,6 @@
   function enterAdmin() {
     document.getElementById('loginSection').classList.add('hidden');
     document.getElementById('mainSection').classList.remove('hidden');
-    var repoLabel = document.getElementById('repoLabel');
-    if (repoLabel) repoLabel.textContent = state.owner + '/' + state.repo;
     getFile('config.json').then(function(data) {
       state.config = decodeFile(data.content);
       state.configSHA = data.sha;
