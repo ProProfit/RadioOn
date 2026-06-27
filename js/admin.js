@@ -256,6 +256,8 @@
         state.playlist = [];
         state.playlistSHA = '';
         renderCategories();
+      } else if (err.message.includes('401') || err.message.includes('403')) {
+        showStatus('Нет доступа к «' + state.config.private_repo + '». Проверьте PAT-токен — он должен иметь доступ к приватному репозиторию.', true);
       } else {
         showStatus(err.message, true);
       }
@@ -286,9 +288,13 @@
 
   function renderTracksTable() {
     var cat = document.getElementById('categorySelect').value;
-    document.getElementById('trackListTitle').textContent = 'Треки в «' + cat + '»';
     var tbody = document.querySelector('#tracksTable tbody');
     tbody.innerHTML = '';
+    if (!cat) {
+      document.getElementById('trackListTitle').textContent = 'Нет категорий — нажмите [ + Новая ] чтобы начать';
+      return;
+    }
+    document.getElementById('trackListTitle').textContent = 'Треки в «' + cat + '»';
     state.playlist.forEach(function (t, globalIdx) {
       if (t.category !== cat) return;
       var tr = document.createElement('tr');
