@@ -41,6 +41,31 @@
     });
   }
 
+  function getPrivateFile(path) {
+    return fetch('https://api.github.com/repos/' + state.config.owner + '/' + state.config.private_repo + '/contents/' + path, {
+      headers: apiHeaders()
+    }).then(function (r) {
+      if (!r.ok) throw new Error('GET ' + path + ' failed: ' + r.status);
+      return r.json();
+    });
+  }
+
+  function putPrivateFile(path, content, sha, message) {
+    var body = {
+      message: message,
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))))
+    };
+    if (sha) body.sha = sha;
+    return fetch('https://api.github.com/repos/' + state.config.owner + '/' + state.config.private_repo + '/contents/' + path, {
+      method: 'PUT',
+      headers: apiHeaders(),
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      if (!r.ok) return r.json().then(function (e) { throw new Error(e.message || 'PUT failed: ' + r.status); });
+      return r.json();
+    });
+  }
+
   function decodeFile(b64) {
     return JSON.parse(decodeURIComponent(escape(atob(b64.replace(/\n/g, '')))));
   }
@@ -101,7 +126,14 @@
   function enterAdmin() {
     document.getElementById('loginSection').classList.add('hidden');
     document.getElementById('mainSection').classList.remove('hidden');
-    switchTab('stations');
+    getFile('config.json').then(function(data) {
+      state.config = decodeFile(data.content);
+      state.configSHA = data.sha;
+    }).catch(function() {
+      state.config = {};
+    }).then(function() {
+      switchTab('stations');
+    });
   }
 
   // ── Tabs ────────────────────────────────────────────────────────────────────
@@ -211,11 +243,23 @@
   // ── Playlists ─────────────────────────────────────────────────────────────────
 
   function loadPlaylist() {
-    getFile('PlayList/playlist.json').then(function (data) {
+    if (!state.config.owner || !state.config.private_repo) {
+      showStatus('Настройте приватный репозиторий в разделе Настройки', true);
+      return;
+    }
+    getPrivateFile('playlist-private.json').then(function (data) {
       state.playlist = decodeFile(data.content);
       state.playlistSHA = data.sha;
       renderCategories();
-    }).catch(function (err) { showStatus(err.message, true); });
+    }).catch(function (err) {
+      if (err.message.includes('404')) {
+        state.playlist = [];
+        state.playlistSHA = '';
+        renderCategories();
+      } else {
+        showStatus(err.message, true);
+      }
+    });
   }
 
   function getCategories() {
@@ -281,7 +325,7 @@
     var updated = state.playlist.slice();
     if (i >= 0) { updated[i] = t; } else { updated.push(t); }
 
-    putFile('PlayList/playlist.json', updated, state.playlistSHA,
+    putPrivateFile('playlist-private.json', updated, state.playlistSHA,
       'admin: ' + (i >= 0 ? 'update' : 'add') + ' track "' + t.title + '" in ' + cat)
       .then(function (res) {
         state.playlist = updated;
@@ -297,7 +341,7 @@
     var name = state.playlist[i].title;
     var updated = state.playlist.slice();
     updated.splice(i, 1);
-    putFile('PlayList/playlist.json', updated, state.playlistSHA,
+    putPrivateFile('playlist-private.json', updated, state.playlistSHA,
       'admin: delete track "' + name + '"')
       .then(function (res) {
         state.playlist = updated;
@@ -333,7 +377,7 @@
     var count = state.playlist.filter(function (t) { return t.category === cat; }).length;
     if (!confirm('Удалить категорию «' + cat + '» и все треки (' + count + ')?')) return;
     var updated = state.playlist.filter(function (t) { return t.category !== cat; });
-    putFile('PlayList/playlist.json', updated, state.playlistSHA,
+    putPrivateFile('playlist-private.json', updated, state.playlistSHA,
       'admin: delete category "' + cat + '"')
       .then(function (res) {
         state.playlist = updated;

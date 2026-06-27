@@ -237,7 +237,6 @@ function initPrivateAuth() {
 $(document).ready(function () {
   fetchAndRenderStations();
   fetchAndRenderCategories();
-  fetchAndRenderPlaylists();
   initPrivateAuth();
   function playM3U8WithHLS(url, title) {
     if (activeHls) {
