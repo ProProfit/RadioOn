@@ -75,6 +75,32 @@
   font-family: monospace;
   width: 200px;
 }
+
+@media (max-width: 720px) {
+  body { padding: 12px; }
+
+  #loginForm input {
+    width: 100%;
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  #tabs { flex-wrap: wrap; }
+  #tabs button { flex: 1; min-width: 70px; font-size: 0.75rem; padding: 6px 8px; }
+
+  .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  .form-group input,
+  .form-group select,
+  #catFilterInput input,
+  #newCategoryInput,
+  #categoryRow select {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  #categoryRow { flex-direction: column; align-items: flex-start; }
+}
   </style>
 </head>
 <body>
@@ -110,10 +136,12 @@
       <strong>Станции</strong>
       <button class="btn-add" id="addStationBtn">[ + Добавить ]</button>
     </div>
-    <table id="stationsTable">
-      <thead><tr><th>Название</th><th>URL</th><th>Категория</th><th>Тип</th><th>Группа</th><th></th></tr></thead>
-      <tbody></tbody>
-    </table>
+    <div class="table-wrapper">
+      <table id="stationsTable">
+        <thead><tr><th>Название</th><th>URL</th><th>Категория</th><th>Тип</th><th>Группа</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
     <div id="stationForm" class="hidden">
       <strong id="stationFormTitle">Добавить станцию</strong>
       <input type="hidden" id="stationIndex" value="-1">
@@ -153,10 +181,12 @@
       <strong id="trackListTitle">Треки</strong>
       <button class="btn-add" id="addTrackBtn">[ + Трек ]</button>
     </div>
-    <table id="tracksTable">
-      <thead><tr><th>Название</th><th>URL</th><th></th></tr></thead>
-      <tbody></tbody>
-    </table>
+    <div class="table-wrapper">
+      <table id="tracksTable">
+        <thead><tr><th>Название</th><th>URL</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
     <div id="trackForm" class="hidden">
       <strong id="trackFormTitle">Добавить трек</strong>
       <input type="hidden" id="trackIndex" value="-1">

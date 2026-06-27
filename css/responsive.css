@@ -175,6 +175,55 @@
         -ms-flex-align: center;
             align-items: center;
   }
+
+  /* ── Touch UX ── */
+  button,
+  .txt-btn,
+  .station-list a,
+  #playlist a,
+  #TrackList a,
+  .category-selector a,
+  input[type=range] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Ползунок громкости — увеличенный thumb для пальца */
+  input[type=range]#volumeRange::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+    margin-top: -11px;
+  }
+  input[type=range]#volumeRange::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 3px;
+  }
+  input[type=range]#volumeRange::-webkit-slider-runnable-track {
+    height: 3px;
+  }
+
+  /* Предотвращение автозума iOS (input < 16px вызывает зум) */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Визуальный отклик при тапе */
+  .station-list a:active::before,
+  #playlist a:active::before,
+  #TrackList a:active::before {
+    content: "[•] ";
+  }
+  .category-selector a:active {
+    opacity: 0.7;
+  }
+
+  /* Плавный скролл iOS и блокировка overscroll */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
 }
 
 /* ── Small phones (≤ 420px) ── */
@@ -219,8 +268,9 @@
 }
 #sleepModalInner,
 #privateModalInner {
-  padding: 30px;
-  min-width: 300px;
+  padding: 20px;
+  width: calc(100% - 32px);
+  max-width: 340px;
   border: 1px solid;
 }
 
