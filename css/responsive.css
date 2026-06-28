@@ -115,6 +115,12 @@
   .category-selector h2 {
     text-align: center;
     margin: 6px auto;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .category-selector ul.cat-collapsed {
+    display: none !important;
   }
 
   .category-selector ul {
