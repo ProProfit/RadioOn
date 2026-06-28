@@ -84,7 +84,8 @@
     "url": "https://cast.mediaonline.net.ua/loungefm320",
     "category": "Chillout",
     "group": "Chillout",
-    "type": "mp3"
+    "type": "mp3",
+    "nowplaying_url": "https://radioclub.ua/export/playlist?stream=loungefm"
   },
   {
     "title": "Lounge FM Acoustic",
