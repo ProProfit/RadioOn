@@ -40,6 +40,9 @@ function fetchNowPlaying(url) {
       } else if (response.songs && response.songs[0]) {
         var s = response.songs[0];
         title = [s.artist, s.title].filter(Boolean).join(' - ');
+      } else if (response.icestats && response.icestats.source) {
+        var src = Array.isArray(response.icestats.source) ? response.icestats.source[0] : response.icestats.source;
+        if (src && src.title) title = src.title;
       } else if (response.artist || response.title) {
         title = [response.artist, response.title].filter(Boolean).join(' - ');
       }
