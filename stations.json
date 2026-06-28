@@ -150,5 +150,13 @@
     "group": "Radio World",
     "nowplaying_url": "https://kathy.torontocast.com:1825/status-json.xsl",
     "type": "mp3"
+  },
+  {
+    "title": "Drone Zone",
+    "url": "https://ice2.somafm.com/dronezone-64-aac",
+    "category": "Chillout",
+    "group": "SomaFM",
+    "type": "mp3",
+    "nowplaying_url": "https://somafm.com/songs/dronezone.json"
   }
 ]
