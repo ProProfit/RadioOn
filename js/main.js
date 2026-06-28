@@ -308,21 +308,17 @@ $(document).ready(function () {
     }
   }, 30000);
 
-  $(document).on('click', '.category-selector h2', function () {
-    if (window.innerWidth <= 720) {
-      $('.category-selector ul').toggleClass('cat-collapsed');
-    }
-  });
-
   $(document).on('click', '.category-selector ul li a', function () {
     $('.category-selector ul li a').removeClass('active');
     $(this).addClass('active');
     const selectedCategory = $(this).data('category');
 
     if (window.innerWidth <= 720) {
-      var label = $(this).text();
-      $('.category-selector h2').text('[ ' + label + ' ▾ ]');
-      $('.category-selector ul').addClass('cat-collapsed');
+      if (selectedCategory === 'all') {
+        $('.category-selector').show();
+      } else {
+        $('.category-selector').hide();
+      }
     }
 
     $('.playlist').each(function () {
