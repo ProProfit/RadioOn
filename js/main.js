@@ -3,6 +3,15 @@ var currentTitleElement = document.getElementById('currentTitle');
 var volumeRange = document.getElementById('volumeRange');
 var activeHls = null;
 var playlistQueue = [];
+var MOBILE_BP = 720;
+
+function updateCategorySelector(selectedCategory) {
+  if (window.innerWidth <= MOBILE_BP) {
+    $('.category-selector').toggleClass('collapsed', selectedCategory !== 'all');
+  } else {
+    $('.category-selector').removeClass('collapsed');
+  }
+}
 
 function playTrack(trackSource, trackTitle) {
   if (activeHls) {
@@ -309,17 +318,11 @@ $(document).ready(function () {
   }, 30000);
 
   $(document).on('click', '.category-selector ul li a', function () {
-    $('.category-selector ul li a').removeClass('active');
+    $(this).closest('.category-selector').find('ul li a').removeClass('active');
     $(this).addClass('active');
     const selectedCategory = $(this).data('category');
 
-    if (window.innerWidth <= 720) {
-      if (selectedCategory === 'all') {
-        $('.category-selector').show();
-      } else {
-        $('.category-selector').hide();
-      }
-    }
+    updateCategorySelector(selectedCategory);
 
     $('.playlist').each(function () {
       const $playlist = $(this);
@@ -330,7 +333,7 @@ $(document).ready(function () {
         return selectedCategory === 'all' || selectedCategory === stationCategory;
       });
 
-      $playlist.toggle(isVisible || selectedCategory === 'all');
+      $playlist.toggle(isVisible);
       $stations.each(function () {
         const stationCategory = $(this).data('category');
         $(this).toggle(selectedCategory === 'all' || selectedCategory === stationCategory);
@@ -338,9 +341,20 @@ $(document).ready(function () {
     });
   });
 
+  $(document).on('click', '.category-selector.collapsed h2', function () {
+    $('.category-selector').removeClass('collapsed');
+  });
+
+  $(window).on('resize', function () {
+    var activeCategory = $('.category-selector ul li a.active').data('category') || 'all';
+    updateCategorySelector(activeCategory);
+  });
+
+  var $activeStation = null;
+
   $(document).on('click', '.playlist ul li a', function () {
-    $('.playlist ul li a').removeClass('active');
-    $(this).addClass('active');
+    if ($activeStation) $activeStation.removeClass('active');
+    $activeStation = $(this).addClass('active');
     const selectedTitle = $(this).data('title');
     $('#currentTitle').text(selectedTitle || '');
     $('#currentSong').text('Now playing: loading...');
