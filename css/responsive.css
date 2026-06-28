@@ -133,14 +133,6 @@
     margin-top: 8px !important;
   }
 
-  .category-selector.collapsed ul {
-    display: none !important;
-  }
-
-  .category-selector.collapsed h2 {
-    cursor: pointer;
-  }
-
   .category-selector a {
     margin: 4px 6px;
     font-size: 0.9rem;

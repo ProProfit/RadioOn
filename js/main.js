@@ -3,15 +3,6 @@ var currentTitleElement = document.getElementById('currentTitle');
 var volumeRange = document.getElementById('volumeRange');
 var activeHls = null;
 var playlistQueue = [];
-var MOBILE_BP = 720;
-
-function updateCategorySelector(selectedCategory) {
-  if (window.innerWidth <= MOBILE_BP) {
-    $('.category-selector').toggleClass('collapsed', selectedCategory !== 'all');
-  } else {
-    $('.category-selector').removeClass('collapsed');
-  }
-}
 
 function playTrack(trackSource, trackTitle) {
   if (activeHls) {
@@ -40,6 +31,9 @@ function fetchNowPlaying(url) {
       } else if (response.songs && response.songs[0]) {
         var s = response.songs[0];
         title = [s.artist, s.title].filter(Boolean).join(' - ');
+      } else if (response.icestats && response.icestats.source) {
+        var src = Array.isArray(response.icestats.source) ? response.icestats.source[0] : response.icestats.source;
+        if (src && src.title) title = src.title;
       } else if (response.artist || response.title) {
         title = [response.artist, response.title].filter(Boolean).join(' - ');
       }
@@ -322,8 +316,6 @@ $(document).ready(function () {
     $(this).addClass('active');
     const selectedCategory = $(this).data('category');
 
-    updateCategorySelector(selectedCategory);
-
     $('.playlist').each(function () {
       const $playlist = $(this);
       const $stations = $playlist.find('ul li a');
@@ -333,21 +325,12 @@ $(document).ready(function () {
         return selectedCategory === 'all' || selectedCategory === stationCategory;
       });
 
-      $playlist.toggle(isVisible);
+      $playlist.toggleClass('hidden', !isVisible);
       $stations.each(function () {
         const stationCategory = $(this).data('category');
-        $(this).toggle(selectedCategory === 'all' || selectedCategory === stationCategory);
+        $(this).toggleClass('hidden', !(selectedCategory === 'all' || selectedCategory === stationCategory));
       });
     });
-  });
-
-  $(document).on('click', '.category-selector.collapsed h2', function () {
-    $('.category-selector').removeClass('collapsed');
-  });
-
-  $(window).on('resize', function () {
-    var activeCategory = $('.category-selector ul li a.active').data('category') || 'all';
-    updateCategorySelector(activeCategory);
   });
 
   var $activeStation = null;
