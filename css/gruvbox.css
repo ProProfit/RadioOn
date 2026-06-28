@@ -382,7 +382,7 @@ input[type=range]#volumeRange:after {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.4rem;
+  font-size: 0.85rem;
   padding: 0;
   line-height: 1;
   color: #ebdbb2;
