@@ -14,11 +14,38 @@ function playTrack(trackSource, trackTitle) {
   currentTitleElement.textContent = trackTitle;
   audioPlayer.load();
   audioPlayer.play().catch(function (err) { console.error('Playback failed:', err); });
+  updateMediaSession(trackTitle, '');
 }
 
 function updateCurrentSong(title) {
   const currentSongElement = document.getElementById('currentSong');
   currentSongElement.textContent = 'Now playing: ' + title;
+  updateMediaSession(currentTitleElement.textContent, title);
+}
+
+function updateMediaSession(stationName, trackTitle) {
+  if (!('mediaSession' in navigator)) return;
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: trackTitle || stationName || '',
+    artist: stationName || '',
+    album: 'RadioOn'
+  });
+}
+
+function setupMediaSessionHandlers() {
+  if (!('mediaSession' in navigator)) return;
+  navigator.mediaSession.setActionHandler('play', function() {
+    audioPlayer.play();
+    navigator.mediaSession.playbackState = 'playing';
+  });
+  navigator.mediaSession.setActionHandler('pause', function() {
+    audioPlayer.pause();
+    navigator.mediaSession.playbackState = 'paused';
+  });
+  navigator.mediaSession.setActionHandler('stop', function() {
+    audioPlayer.pause();
+    navigator.mediaSession.playbackState = 'paused';
+  });
 }
 
 function fetchNowPlaying(url) {
@@ -241,6 +268,13 @@ $(document).ready(function () {
   fetchAndRenderStations();
   fetchAndRenderCategories();
   initPrivateAuth();
+  setupMediaSessionHandlers();
+  audioPlayer.addEventListener('play', function() {
+    if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+  });
+  audioPlayer.addEventListener('pause', function() {
+    if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+  });
   function playM3U8WithHLS(url, title) {
     if (activeHls) {
       activeHls.destroy();
@@ -254,6 +288,7 @@ $(document).ready(function () {
       hls.on(Hls.Events.MANIFEST_PARSED, function () {
         audioPlayer.play().catch(function (err) { console.error('Playback failed:', err); });
         if (title) currentTitleElement.textContent = title;
+        updateMediaSession(title, '');
       });
     } else {
       console.log('Your browser does not support playing M3U8 streams using Hls.js.');
